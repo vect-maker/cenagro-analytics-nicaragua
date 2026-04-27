@@ -1,0 +1,5 @@
+/var/home/ocelot/Repositories/integrador-III/target/debug/deps/atomic_waker-9cb0ab229d6fee61.d: /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atomic-waker-1.1.2/src/lib.rs
+
+/var/home/ocelot/Repositories/integrador-III/target/debug/deps/libatomic_waker-9cb0ab229d6fee61.rmeta: /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atomic-waker-1.1.2/src/lib.rs
+
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atomic-waker-1.1.2/src/lib.rs:

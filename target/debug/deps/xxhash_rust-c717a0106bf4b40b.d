@@ -1,0 +1,10 @@
+/var/home/ocelot/Repositories/integrador-III/target/debug/deps/xxhash_rust-c717a0106bf4b40b.d: /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/lib.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/utils.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh32_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh64_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3.rs
+
+/var/home/ocelot/Repositories/integrador-III/target/debug/deps/libxxhash_rust-c717a0106bf4b40b.rmeta: /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/lib.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/utils.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh32_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh64_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3_common.rs /home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3.rs
+
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/lib.rs:
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/utils.rs:
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh32_common.rs:
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh64_common.rs:
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3_common.rs:
+/home/ocelot/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xxhash-rust-0.8.15/src/xxh3.rs:
