@@ -1,35 +1,40 @@
 # Proyecto Integrador III: Pipeline de Datos CENAGRO 2011
 
-Pipeline de datos de alto rendimiento para el procesamiento y análisis del censo agrícola CENAGRO 2011. Implementa una arquitectura ETL desacoplada utilizando **Rust (Polars)** para transformación vectorial, **Python** para ingesta, **DuckDB** como motor OLAP y **Evidence.dev** para la capa de presentación. Orquestado localmente mediante **Podman** y **Just**.
+Pipeline de datos de alto rendimiento para el procesamiento y análisis del censo agrícola CENAGRO 2011. Implementa una arquitectura ETL desacoplada utilizando **Rust (Apache DataFusion)** para transformación, **DuckDB** como motor OLAP y **Evidence.dev** para la capa de presentación. Orquestado localmente mediante **Podman** y **Just**.
 
 ## Arquitectura y Patrones de Diseño
-* **Separación de Inquietudes (SoC):** Desacoplamiento estricto entre extracción (`/pipes`), transformación pesada (`/etl`), almacenamiento (`/sql`) y visualización (`/analytics`).
-* **Procesamiento Vectorizado en Memoria:** Implementación de **Polars** (Rust) para transformaciones de datos (`DataFrames` / `LazyFrames`), maximizando la eficiencia de la caché de la CPU y minimizando copias en memoria.
-* **Infraestructura como Código (IaC):** Entornos de ejecución aislados e inmutables definidos en `infra/*.Containerfile`, ejecutados vía **Podman** (arquitectura *daemonless*).
-* **Almacenamiento Analítico (OLAP):** Uso de **DuckDB** para proveer un motor SQL columnar de alto rendimiento embebido directamente en la capa analítica.
+* **Motor de Consultas Distribuidas:** Implementación de **Apache DataFusion** sobre **Tokio** para la ejecución asíncrona y multihilo de planes de consulta físicos utilizando el estándar de memoria columnar Arrow.
+* **Separación de Inquietudes (SoC):** Desacoplamiento estricto entre transformación pesada (`/etl`), almacenamiento analítico (`/sql`) y visualización (`/analytics`).
+* **Patrón de Extensión (Extension Trait):** Uso de `DataFrameExt` en Rust para inyectar mutaciones dinámicas de columnas (`with_columns`) directamente en el plan lógico de DataFusion, manteniendo la inmutabilidad y el tipado estricto.
+* **Infraestructura Inmutable (IaC):** Entornos aislados definidos en `infra/*.Containerfile`, ejecutados vía **Podman** (arquitectura *daemonless* sin privilegios de root).
 
 ## Stack Tecnológico
-* **Motor ETL:** Rust, Polars.
-* **Ingesta de Datos:** Python.
+* **Motor ETL:** Rust, Apache DataFusion, Tokio, snmalloc (asignador de memoria optimizado).
 * **Data Warehouse:** DuckDB (SQL).
 * **Frontend Analytics:** Evidence.dev (Markdown-as-Code + SQL).
-* **Orquestación y Contenedores:** Just (command runner), Podman.
+* **Orquestación y Entorno:** Just, Podman, Zellij.
 
-## Estructura del Repositorio
-* **`/etl/`**: Core del procesamiento en Rust. Incluye validación de esquemas (`src/schema/`), mapeo de catálogos (`src/mappings/`) y ejecución de grafos de transformación (`src/pipelines/`).
-* **`/pipes/`**: Scripts base para adquisición de datos crudos (`ingest.py`).
-* **`/analytics/`**: Definición de dashboards y métricas usando componentes UI de Evidence. Las queries analíticas residen en `sources/warehouse/`.
-* **`/sql/`**: DDLs y rutinas de carga de DuckDB (`build-warehouse.sql`, `load-tables.sql`).
-* **`/infra/`**: Definiciones de contenedores para cada etapa del ciclo de vida (`compiler`, `transformer`, `evidence`).
-
-## Consideraciones de Escalabilidad y Casos Límite (Edge Cases)
-* **Cuellos de botella de Memoria (OOM):** Procesar datasets censales completos in-memory puede saturar sistemas de 16GB de RAM. **Mitigación:** Asegurar el uso exclusivo de `LazyFrame` en el código Rust y aplicar *predicate pushdown* antes de invocar `.collect()`.
-* **Escrituras Concurrentes en DuckDB:** DuckDB limita la concurrencia de escritura. **Mitigación:** Diseñar el flujo de orquestación (`justfile`) de manera que las operaciones DML (carga de datos del ETL al DB) sean estrictamente secuenciales y bloqueantes antes de inicializar el servidor de lectura de Evidence.
-* **Manejo de Valores Nulos:** En datos censales, la ausencia de respuesta es común. Las reglas de validación en `etl/src/schema` deben usar tipos `Option<T>` estables para evitar `Panics` en tiempo de ejecución durante el parsing estructural.
+## Consideraciones de Escalabilidad y Casos Límite
+* **Gestión de Memoria y Planes de Ejecución:** DataFusion procesa datos en lotes (RecordBatches). Las operaciones costosas (como *Joins* o *Aggregations*) sobre el dataset CENAGRO deben aprovechar particionamiento para evitar cuellos de botella y errores OOM (Out of Memory).
+* **Manejo de Asignación de Memoria:** La integración de `snmalloc-rs` reduce la contención de bloqueos en operaciones altamente concurrentes durante la evaluación de expresiones de DataFusion.
+* **Concurrencia de Escritura:** DuckDB limita las transacciones de escritura concurrentes. Las cargas (`build-warehouse.sql`) deben ser secuenciales antes de inicializar la capa de BI.
 
 ## Comandos de Operación
-Utilizar `just` desde la raíz del proyecto para orquestar los contenedores:
-* `just build`: Construye las imágenes de Podman necesarias.
-* `just etl`: Ejecuta el binario de transformación en Rust.
-* `just db`: Inicializa DuckDB y ejecuta los scripts de carga en `/sql`.
-* `just analytics`: Levanta el servidor de desarrollo de Evidence para visualizar resultados.
+Utilizar `just` desde la raíz del proyecto para orquestar la infraestructura:
+
+* **Entorno de Desarrollo:**
+  `just enter` - Inicializa el layout del IDE en Zellij.
+
+* **Pipeline ETL (Rust):**
+  `just build-compiler` - Construye la imagen del compilador.
+  `just build-pipeline` - Construye el contenedor del transformador.
+  `just run-pipeline` - Ejecuta la ingesta procesando archivos Parquet (Farms & Parcels).
+
+* **Almacenamiento (DuckDB):**
+  `just build-werehouse` - Inicializa el motor OLAP y ejecuta los scripts de carga DDL/DML.
+
+* **Analytics (Evidence):**
+  `just build-bi-container` - Prepara la imagen para el servidor de BI.
+  `just add-meta-bi` - Sincroniza fuentes de datos y metadatos.
+  `just run-bi` - Levanta el servidor de desarrollo UI en `localhost:3000`.
+  `just build-bi` - Compila los artefactos estáticos de Evidence.
