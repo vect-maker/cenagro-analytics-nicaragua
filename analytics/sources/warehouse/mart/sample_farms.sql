@@ -1,9 +1,10 @@
 SELECT 
     department, 
     municipality, 
-    farm_operational_structure,
+    operational_structure,
     principal_activity, 
     total_area_mz, 
     received_loan 
-FROM warehouse.farms 
-LIMIT 10
+FROM warehouse.farms
+ORDER BY census_segment_id ASC, farm_id ASC
+LIMIT 10;

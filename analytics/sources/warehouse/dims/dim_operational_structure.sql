@@ -1,0 +1,1 @@
+SELECT * FROM dim_operational_structure;

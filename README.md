@@ -38,3 +38,8 @@ Utilizar `just` desde la raíz del proyecto para orquestar la infraestructura:
   `just add-meta-bi` - Sincroniza fuentes de datos y metadatos.
   `just run-bi` - Levanta el servidor de desarrollo UI en `localhost:3000`.
   `just build-bi` - Compila los artefactos estáticos de Evidence.
+
+
+## Open werehouse with cli 
+
+.open analytics/sources/warehouse/warehouse.duckdb

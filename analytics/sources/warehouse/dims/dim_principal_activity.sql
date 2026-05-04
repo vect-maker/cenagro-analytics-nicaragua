@@ -1,0 +1,1 @@
+SELECT * FROM dim_principal_activity;

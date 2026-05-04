@@ -1,6 +1,6 @@
 WITH raw_counts AS (
     SELECT 
-        farm_operational_structure AS structure, 
+        operational_structure AS structure, 
         COUNT(*) AS frequency
     FROM farms
     GROUP BY 1

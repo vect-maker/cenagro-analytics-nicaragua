@@ -1,0 +1,17 @@
+S324,principal_activity
+1,autoconsumo
+2,mercado_interno
+3,exportacion_tradicional
+4,exportacion_no_tradicional
+5,otros_agricolas
+6,ganaderia_leche
+7,ganaderia_carne
+8,doble_proposito
+9,ganaderia_menor
+10,crianza
+11,otros_pecuarios
+12,acuicola
+13,forestal
+14,apicola
+15,abandono_inactiva
+99,ignorado
