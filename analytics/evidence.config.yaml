@@ -1,7 +1,9 @@
+title: Your Custom Project Name
+
+
 appearance:
   default: system
   switcher: true
-
 theme:
   colorPalettes:
     default:

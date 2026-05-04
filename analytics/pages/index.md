@@ -35,7 +35,8 @@ El análisis del impacto del financiamiento en el sector agropecuario es fundame
 ### Objetivos Específicos
 *   **Comparar** el volumen de generación de empleo entre explotaciones agropecuarias financiadas y no financiadas durante el período de estudio.
 *   **Evaluar** el nivel de diversificación productiva en las explotaciones agropecuarias financiadas frente a las no financiadas.
-*   **Determinar** si existen diferencias estadísticamente significativas en la generación de empleo y la diversificación productiva según el acceso al financiamiento.
+*   **Contrastar** las brechas observadas en la generación de empleo y diversificación entre ambos grupos para identificar tendencias predominantes.
+
 ## Panorama Global del Censo
 
 ```sql global_summary
