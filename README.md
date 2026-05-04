@@ -29,6 +29,23 @@ La versión compilada de este informe se sirve estáticamente al público en la 
 
 ---
 
+## Requisitos de Sistema
+
+Este proyecto asume un entorno de desarrollo profesional en Linux (preferiblemente distribuciones basadas en **Fedora Aurora** o **Bazzite**) y requiere las siguientes herramientas instaladas para la ejecución, orquestación y edición del pipeline:
+
+### Herramientas de Ejecución Obligatorias
+*   **Podman**: Motor de contenedores *daemonless* y *rootless* utilizado para aislar el entorno de compilación de Rust y el servidor de BI.
+*   **Just**: Orquestador de comandos (`justfile`) que automatiza el flujo de trabajo entre los diferentes componentes del sistema.
+*   **DuckDB**: Motor analítico OLAP utilizado para la construcción del warehouse y la ejecución de consultas sobre archivos Parquet.
+
+### Entorno de Desarrollo (IDE)
+*   **Zellij**: Multiplexor de terminal utilizado para gestionar el layout del espacio de trabajo y las sesiones de consola concurrentes.
+*   **Neovim (NVChad)**: Editor de texto principal configurado para el desarrollo en Rust y Markdown, integrado mediante el layout de desarrollo del proyecto.
+
+> **Nota:** Se asume que estos binarios están presentes en el `$PATH` del sistema. La mayoría de los comandos definidos en el `justfile` fallarán si estas dependencias no están satisfechas.
+
+---
+
 ## 🛠️ Flujo de Operación (Justfile)
 
 El proyecto utiliza `just` para orquestar todas las fases del pipeline. Asegúrese de tener instalados **Podman** y **Just** antes de comenzar.
