@@ -20,6 +20,7 @@ pub async fn run_farms_pipeline(
     let df = farms::apply_gender_mapping(df)?;
     let df = farms::apply_operational_structure_mapping(df)?;
     let df = farms::apply_principal_activity_mapping(df)?;
+    let df = farms::apply_labor_intensity(df)?;
 
     //crate::saver::save_data(df.clone(), &format!("{}/{}", out_dir, "farms_raw.parquet")).await?;
 

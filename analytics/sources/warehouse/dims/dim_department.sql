@@ -1,1 +1,1 @@
-SELECT * FROM dim_department;
+SELECT CAST(S101 AS VARCHAR) AS S101, department FROM dim_department;

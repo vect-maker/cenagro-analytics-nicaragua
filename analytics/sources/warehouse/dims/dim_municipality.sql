@@ -1,1 +1,1 @@
-SELECT * FROM dim_municipality;
+SELECT CAST(code AS VARCHAR) AS code, municipality FROM dim_municipality;

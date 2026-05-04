@@ -1,1 +1,1 @@
-SELECT * FROM dim_producer_gender;
+SELECT CAST(S211D AS VARCHAR) AS S211D, producer_gender FROM dim_producer_gender;

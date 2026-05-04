@@ -35,6 +35,18 @@ pub fn apply_labor_ratios(df: DataFrame) -> Result<DataFrame> {
     Ok(df)
 }
 
+// Labor Intensity (Intensidad Laboral) = (permanent_workers_total + temporal_workers_total) / total_area_mz
+pub fn apply_labor_intensity(df: DataFrame) -> Result<DataFrame> {
+    let total_workers = col("permanent_workers_total") + col("temporal_workers_total");
+
+    let df = df.with_column(
+        "labor_intensity",
+        cast(total_workers.clone(), DataType::Float32)
+            / cast(col("total_area_mz"), DataType::Float32),
+    )?;
+    Ok(df)
+}
+
 pub fn apply_credit_logic(df: DataFrame) -> Result<DataFrame> {
     let loan_sources = [
         "loan_banco",

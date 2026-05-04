@@ -1,1 +1,1 @@
-SELECT * FROM dim_principal_activity;
+SELECT CAST(S324 AS VARCHAR) AS S324, principal_activity FROM dim_principal_activity;
