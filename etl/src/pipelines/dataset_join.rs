@@ -1,5 +1,5 @@
 use crate::mappings::composite_key::COMPOSITE_KEY;
-use crate::saver;
+
 use crate::transformers;
 use anyhow::Result;
 use datafusion::prelude::*;
@@ -8,7 +8,6 @@ pub async fn run_dataset_join_pipeline(
     _ctx: &SessionContext,
     farms_df: DataFrame,
     parcels_df: DataFrame,
-    out_dir: &str,
 ) -> Result<DataFrame> {
     let parcels_df = transformers::parcels::aggregate_parcels_by_composite_key(parcels_df).await?;
 
@@ -40,8 +39,6 @@ pub async fn run_dataset_join_pipeline(
         .collect();
 
     let df = joined_df.select(projection)?;
-
-    saver::save_data(df.clone(), &format!("{}/{}", out_dir, "farms.parquet")).await?;
 
     Ok(df)
 }

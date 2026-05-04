@@ -2,6 +2,7 @@ use anyhow::Result;
 use datafusion::prelude::*;
 use etl::env;
 use etl::pipelines;
+use etl::saver;
 use std::time::Instant;
 
 #[global_allocator]
@@ -27,11 +28,14 @@ async fn main() -> Result<()> {
     )
     .await?;
 
-    let _ = pipelines::dataset_join::run_dataset_join_pipeline(
-        &ctx,
-        farms,
-        parcels,
-        &app_config.out_dir,
+    let farms = pipelines::dataset_join::run_dataset_join_pipeline(&ctx, farms, parcels).await?;
+
+    let farms = pipelines::metrics::run_metrics_pipeline(&ctx, farms).await?;
+
+    // save the data
+    saver::save_data(
+        farms.clone(),
+        &format!("{}/{}", &app_config.out_dir, "farms.parquet"),
     )
     .await?;
 

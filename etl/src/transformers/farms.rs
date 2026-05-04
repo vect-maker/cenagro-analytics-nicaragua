@@ -2,14 +2,12 @@ use crate::dataframe::DataFrameExt;
 use crate::helpers::any_horizontal;
 use crate::mappings;
 use anyhow::{Context, Result};
-use datafusion::arrow::datatypes::DataType;
 use datafusion::prelude::*;
 
 pub fn apply_null_imputation(df: DataFrame) -> Result<DataFrame> {
     let imputations = vec![
         coalesce(vec![col("permanent_workers_total"), lit(0u16)]).alias("permanent_workers_total"),
         coalesce(vec![col("temporal_workers_total"), lit(0u16)]).alias("temporal_workers_total"),
-        coalesce(vec![col("total_area_mz"), lit(0.0f32)]).alias("total_area_mz"),
         coalesce(vec![col("has_irrigation_system"), lit(false)]).alias("has_irrigation_system"),
         coalesce(vec![col("traction_animal"), lit(false)]).alias("traction_animal"),
         coalesce(vec![col("traction_tractor"), lit(false)]).alias("traction_tractor"),
@@ -17,34 +15,6 @@ pub fn apply_null_imputation(df: DataFrame) -> Result<DataFrame> {
 
     df.with_columns(imputations)
         .context("Failed to apply consolidated null imputation layer")
-}
-
-pub fn apply_labor_ratios(df: DataFrame) -> Result<DataFrame> {
-    let total_workers = col("permanent_workers_total") + col("temporal_workers_total");
-
-    let df = df.with_column(
-        "permanent_labor_ratio",
-        when(
-            total_workers.clone().gt(lit(0u16)),
-            cast(col("permanent_workers_total"), DataType::Float32)
-                / cast(total_workers.clone(), DataType::Float32),
-        )
-        .otherwise(lit(0.0f32))?,
-    )?;
-
-    Ok(df)
-}
-
-// Labor Intensity (Intensidad Laboral) = (permanent_workers_total + temporal_workers_total) / total_area_mz
-pub fn apply_labor_intensity(df: DataFrame) -> Result<DataFrame> {
-    let total_workers = col("permanent_workers_total") + col("temporal_workers_total");
-
-    let df = df.with_column(
-        "labor_intensity",
-        cast(total_workers.clone(), DataType::Float32)
-            / cast(col("total_area_mz"), DataType::Float32),
-    )?;
-    Ok(df)
 }
 
 pub fn apply_credit_logic(df: DataFrame) -> Result<DataFrame> {

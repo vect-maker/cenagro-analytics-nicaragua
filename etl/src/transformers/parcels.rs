@@ -22,7 +22,7 @@ pub fn apply_total_farm_manzanas(df: DataFrame) -> Result<DataFrame> {
         .map(|&c| coalesce(vec![col(c), lit(0.0f32)]))
         .reduce(|acc, e| acc + e)
         .context("Land use component list cannot be empty")?
-        .alias("total_farm_manzanas");
+        .alias("total_area_mz");
 
     df.with_columns(vec![cast(total_expr, DataType::Float32)])
         .context("Failed to calculate total_farm_manzanas")

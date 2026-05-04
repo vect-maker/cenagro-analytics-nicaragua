@@ -11,8 +11,7 @@ pub fn apply_farms_schema(df: DataFrame) -> Result<DataFrame> {
 
     projection.extend(vec![
         // --- AREA & SCALE ---
-        cast(col("s427"), DataType::Float32).alias("total_area_mz"),
-        cast(col("s428"), DataType::Float32).alias("total_area_sqm"),
+        cast(col("s427"), DataType::Float32).alias("total_parcels_raw"),
         // --- CREDIT SOURCES ---
         col("s1275a").is_not_null().alias("loan_banco"),
         col("s1275b").is_not_null().alias("loan_banco_produzcamos"),
