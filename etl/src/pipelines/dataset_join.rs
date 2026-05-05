@@ -21,15 +21,14 @@ pub async fn run_dataset_join_pipeline(
 
     let projection: Vec<Expr> = joined_df
         .schema()
-        .iter() // Yields (Option<&TableReference>, &FieldRef)
+        .iter()
         .filter_map(|(qualifier, field)| {
             let name = field.name();
             let q_str = qualifier.map(|q| q.to_string());
 
             match q_str {
-                // Keep all columns from the 'farms' table
                 Some(q) if q == "farms" => Some(col(format!("{}.{}", q, name)).alias(name)),
-                // Keep only metric columns from the 'parcels' table
+
                 Some(q) if q == "parcels" && !COMPOSITE_KEY.contains(&name.as_str()) => {
                     Some(col(format!("{}.{}", q, name)).alias(name))
                 }
@@ -39,6 +38,8 @@ pub async fn run_dataset_join_pipeline(
         .collect();
 
     let df = joined_df.select(projection)?;
+
+    let df = transformers::farms::apply_surrogate_key(df)?;
 
     Ok(df)
 }

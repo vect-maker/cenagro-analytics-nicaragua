@@ -55,17 +55,22 @@ pub fn apply_land_use_composition_ratio(df: DataFrame) -> Result<DataFrame> {
     Ok(df)
 }
 
-// Labor Intensity (Intensidad Laboral) = (permanent_workers_total + temporal_workers_total) / total_area_mz
+// Labor Intensity = (permanent + temporal) / total_area_mz (Threshold: > 0.01 mz)
 pub fn apply_labor_intensity(df: DataFrame) -> Result<DataFrame> {
     let total_workers = col("permanent_workers_total") + col("temporal_workers_total");
 
     let df = df
         .with_column(
             "labor_intensity",
-            cast(total_workers.clone(), DataType::Float32)
-                / cast(col("total_area_mz"), DataType::Float32),
+            when(
+                col("total_area_mz").gt(lit(0.01f64)),
+                cast(total_workers, DataType::Float64) / col("total_area_mz"),
+            )
+            .otherwise(lit(0.0f64))
+            .expect("Failed to build CASE expression for labor intensity"),
         )
         .context("Could not apply labor intensity metric")?;
+
     Ok(df)
 }
 

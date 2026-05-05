@@ -59,14 +59,17 @@ En el motor analítico, esta métrica se implementa sumando indicadores booleano
 
 ### 6. Pasture-to-Crop Ratio (Ratio Pasto-Cultivo)
 
-Esta métrica resalta el balance entre la actividad pecuaria (extensificación) y la actividad agrícola (intensificación). Es fundamental para contrastar si el financiamiento fomenta la expansión de pastizales o la intensificación de áreas cultivables.
+Esta métrica cuantifica el balance entre la **extensificación pecuaria** y la **intensificación agrícola** de la unidad productiva. Se enfoca exclusivamente en el suelo activo, omitiendo deliberadamente las áreas de bosque, descanso o infraestructura para obtener un indicador puro de vocación económica.
 
 > **Pasture-to-Crop Ratio (Ratio Pasto-Cultivo)** = `(mz_cultivated_pasture + mz_natural_pasture) / (mz_annual_crops + mz_permanent_crops)`
 
 **Mapeo en SQL:**
-Utiliza el agregado de las columnas de pastos frente al agregado de cultivos temporales y permanentes. Un ratio > 1 indica un perfil predominantemente ganadero,mientras que un ratio menor a 1 indica una vocación mayoritariamente agrícola.
+*   **Ratio mayor a 1:** Perfil predominantemente **ganadero** (mayor superficie de pastos).
+*   **Ratio menor a 1:** Vocación mayoritariamente **agrícola** (mayor superficie de cultivos).
+*   **Ratio = 1:** Equilibrio entre ambas actividades productivas.
 
 ### 7. Credit Approval Efficiency (Eficiencia de Aprobación de Crédito)
+
 
 Esta métrica mide la **"tasa de éxito"** de las solicitudes de préstamo. Al segmentar este resultado mediante la matriz `req_`, es posible identificar qué rubros productivos (ej. ganadería vs. cultivos) enfrentan mayores obstáculos institucionales para la obtención del crédito.
 

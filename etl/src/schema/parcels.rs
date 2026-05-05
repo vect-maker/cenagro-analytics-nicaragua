@@ -10,18 +10,19 @@ pub fn apply_parcels_schema(df: DataFrame) -> Result<DataFrame> {
     let mut projection = get_domain_key_exprs().to_vec();
 
     projection.extend(vec![
-        // Total parcels (S434)
-        cast(col("s434"), DataType::Float32).alias("total_parcels"),
-        // Land use columns (S434A - S434H)
-        cast(col("s434a"), DataType::Float32).alias("mz_annual_crops"),
-        cast(col("s434b"), DataType::Float32).alias("mz_permanent_crops"),
-        cast(col("s434c"), DataType::Float32).alias("mz_cultivated_pasture"),
-        cast(col("s434d"), DataType::Float32).alias("mz_natural_pasture"),
-        cast(col("s434e"), DataType::Float32).alias("mz_fallow"),
-        cast(col("s434f"), DataType::Float32).alias("mz_forest"),
-        cast(col("s434g"), DataType::Float32).alias("mz_infrastructure"),
-        cast(col("s434h"), DataType::Float32).alias("mz_unusable"),
+        // Total parcels (S434) - Conteo de parcelas (Entero sin signo)
+        cast(col("s434"), DataType::UInt8).alias("total_parcels"),
+        // Land use columns (S434A - S434H) - Áreas en manzanas (Doble precisión)
+        cast(col("s434a"), DataType::Float64).alias("mz_annual_crops"),
+        cast(col("s434b"), DataType::Float64).alias("mz_permanent_crops"),
+        cast(col("s434c"), DataType::Float64).alias("mz_cultivated_pasture"),
+        cast(col("s434d"), DataType::Float64).alias("mz_natural_pasture"),
+        cast(col("s434e"), DataType::Float64).alias("mz_fallow"),
+        cast(col("s434f"), DataType::Float64).alias("mz_forest"),
+        cast(col("s434g"), DataType::Float64).alias("mz_infrastructure"),
+        cast(col("s434h"), DataType::Float64).alias("mz_unusable"),
     ]);
+
     let df = df.select(projection).context("Failed to apply schema")?;
 
     Ok(df)

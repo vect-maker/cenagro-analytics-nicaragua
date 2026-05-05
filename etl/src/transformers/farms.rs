@@ -2,6 +2,7 @@ use crate::dataframe::DataFrameExt;
 use crate::helpers::any_horizontal;
 use crate::mappings;
 use anyhow::{Context, Result};
+use datafusion::arrow::datatypes::DataType;
 use datafusion::prelude::*;
 
 pub fn apply_null_imputation(df: DataFrame) -> Result<DataFrame> {
@@ -101,6 +102,23 @@ pub fn apply_principal_activity_mapping(df: DataFrame) -> Result<DataFrame> {
     let df = df
         .with_column("principal_activity", expr.otherwise(lit("ignorado"))?)
         .context("Failed to replace principal_activity with categorical labels")?;
+
+    Ok(df)
+}
+
+pub fn apply_surrogate_key(df: DataFrame) -> Result<DataFrame> {
+    let farm_uid_expr = concat_ws(
+        lit("-"),
+        vec![
+            cast(col("department"), DataType::Utf8),
+            cast(col("municipality"), DataType::Utf8),
+            cast(col("supervision_area_id"), DataType::Utf8),
+            cast(col("census_segment_id"), DataType::Utf8),
+            cast(col("farm_id"), DataType::Utf8),
+        ],
+    );
+
+    let df = df.with_column("farm_uid", farm_uid_expr.clone())?;
 
     Ok(df)
 }
