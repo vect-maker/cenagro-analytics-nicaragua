@@ -44,4 +44,6 @@ WHERE labor_intensity > 0
 <Histogram
     data={labor_intensity}
     x=log_intensity
+    title="Distribución de Intensidad Laboral (Log10)"
+    xAxisTitle="Log10(Trabajadores por Mz + 1)"
 />
