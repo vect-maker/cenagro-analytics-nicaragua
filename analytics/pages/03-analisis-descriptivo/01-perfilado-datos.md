@@ -100,32 +100,35 @@ GROUP BY 1
 ORDER BY Fincas DESC
 LIMIT 8;
 ```
-
-<Grid cols={1}>
-    <BarChart
-        data={gender_dist}
-        x=Genero
-        y=Porcentaje
-        title="Distribución por Género"
-        yAxisTitle="% de Fincas"
-        swapXY=true
-        fillColor="#8dacbf"
-    />
- 
+<Tabs>
+    <Tab label="Género del Productor">
         <BarChart
-        data={activity_dist}
-        x=Actividad
-        y=Fincas
-        title="Top 8 Actividades Principales"
-        yAxisTitle="Número de Fincas"
-        swapXY=true
-        fillColor="#236aa4"
-    />
-</Grid>
-
+            data={gender_dist}
+            x=Genero
+            y=Porcentaje
+            title="Distribución por Género"
+            yAxisTitle="% de Fincas"
+            swapXY=true
+            fillColor="#8dacbf"
+            labels=true 
+        />
+    </Tab>
+    <Tab label="Actividad Principal">
+        <BarChart
+            data={activity_dist}
+            x=Actividad
+            y=Fincas
+            title="Top 8 Actividades Principales"
+            yAxisTitle="Número de Fincas"
+            swapXY=true
+            fillColor="#236aa4"
+            labels=true 
+        />
+    </Tab>
+</Tabs>
 
 <Details title="Interpretación del Perfil">
-  La inclusión de la <b>Estructura Operacional</b> revela la predominancia de modelos individuales frente a cooperativos o empresas[cite: 1]. Este cruce es vital: las unidades con estructura de "Empresa" o "Cooperativa" suelen presentar comportamientos de intensidad laboral y acceso a crédito radicalmente distintos a los del productor individual.
+  La inclusión de la <b>Estructura Operacional</b> revela la predominancia de modelos individuales frente a cooperativos o empresas. Este cruce es vital: las unidades con estructura de "Empresa" o "Cooperativa" suelen presentar comportamientos de intensidad laboral y acceso a crédito radicalmente distintos a los del productor individual.
 </Details>
 
 
@@ -171,6 +174,7 @@ ORDER BY Total DESC;
     title="Distribución de No Individuales"
     swapXY=true
     fillColor="#85c7c6"
+      labels=true 
 />
 
 <Details title="Interpretación: La Larga Cola de la Organización Rural">
@@ -181,7 +185,7 @@ ORDER BY Total DESC;
 ---
 
 ## 4. Estructura Operacional y Tenencia
-Esta sección analiza la naturaleza jurídica de las unidades productivas. Diferenciar entre la gestión individual y modelos organizados es vital, ya que la personería jurídica es el principal predictor del acceso al crédito formal y la estabilidad del empleo[cite: 1].
+Esta sección analiza la naturaleza jurídica de las unidades productivas. Diferenciar entre la gestión individual y modelos organizados es vital, ya que la personería jurídica es el principal predictor del acceso al crédito formal y la estabilidad del empleo.
 ```sql operational_stats
 SELECT 
     operational_structure AS estructura,
@@ -224,6 +228,7 @@ ORDER BY Total DESC;
             title="Conteo de Unidades Asociativas y Corporativas"
             swapXY=true
             fillColor="#85c7c6"
+              labels=true 
         />
     </Tab>
     <Tab label="Escala y Tamaño (Mz)">
@@ -235,6 +240,7 @@ ORDER BY Total DESC;
             swapXY=true
             fillColor="#d2c6ac"
             yAxisTitle="Promedio de Manzanas (Mz)"
+              labels=true 
         />
     </Tab>
 </Tabs>
@@ -272,7 +278,13 @@ INTO
     yAxisTitle="Manzanas (Mz)"
     sort="Total_Manzanas"
     fillColor="#46a485"
+      labels=true 
 />
+<Details title="Nota Analítica: Asimetría Hacia la Ganadería Extensiva">
+  Los datos revelan una asimetría estructural en la vocación productiva: las áreas destinadas a la ganadería (Pasto Natural y Cultivado combinados suman ~4.6 millones de manzanas) triplican la superficie destinada a la agricultura (Cultivos Anuales y Permanentes suman ~1.55 millones).
+  <br/><br/>
+    Estos datos son el punto de partida fundamental para nuestro análisis. Al evaluar cómo ayudan los préstamos, debemos recordar que la actividad más común en estas fincas es la ganadería tradicional. Lo que queremos comprobar es si recibir un crédito formal motiva a los productores a cambiar esta costumbre y aprovechar mejor su tierra; por ejemplo, cambiando pastos silvestres por pastos de mejor calidad o dedicando más espacio a la siembra de cultivos.
+</Details>
 
 ---
 
@@ -304,15 +316,19 @@ INTO
     VALUE Fincas;
 ```
 
-<Grid cols=1>
-    <BarChart
+<Tabs>
+    <Tab label="Acceso a credito">
+           <BarChart
         data={credit_funnel}
         x=Etapa
         y=Fincas
         title="Embudo de Acceso al Crédito"
         fillColor="#f4b548"
+          labels=true 
     />
-    <BarChart
+    </Tab>
+    <Tab label="Fuentes de financiamiento">
+           <BarChart
         data={credit_sources}
         x=Fuente
         y=Fincas
@@ -320,8 +336,10 @@ INTO
         swapXY=true
         sort="Fincas"
         fillColor="#dc2626"
+          labels=true 
     />
-</Grid>
+    </Tab>
+</Tabs>
 
 <Details title="Nota Analítica">
   La diferencia entre "Solicitaron" y "Recibieron" representa la tasa empírica de rechazo institucional. La matriz de fuentes de financiamiento evidencia la dependencia del sector respecto a entidades no tradicionales (ONGs y Cooperativas) frente a la banca privada.
@@ -345,17 +363,12 @@ SELECT * FROM farm_intensity_stats
 
 ---
 
-
-
-
 ## 8. Análisis de Distribución de Intensidad (Log10)
 Visualización de la densidad de trabajadores por unidad de área. La transformación logarítmica permite normalizar la asimetría extrema y observar la estructura de contratación subyacente.
-```sql labor_raw
+```sql labor_binned
 SELECT 
-    farm_size_class,
-    LOG10(labor_intensity + 1) AS log_intensity 
-FROM farm_labor
-WHERE labor_intensity > 0.0;
+    *,
+FROM agg_labor_hist_by_size
 ```
 
 ```sql size_classes
@@ -365,28 +378,33 @@ WHERE labor_intensity > 0.0
 ORDER BY farm_size_class;
 ```
 
+
 <Tabs>
 {#each size_classes as category}
     <Tab label={category.farm_size_class}>
-        <Histogram
-            data={labor_raw.filter(d => d.farm_size_class === category.farm_size_class)}
-            x=log_intensity
+          <BarChart
+            data={labor_binned.filter(d => d.farm_size_class === category.farm_size_class)}
+            x=bin_end
+            y=frequency
             title="Distribución Log10: {category.farm_size_class}"
-            xAxisTitle="Log10(Trabajadores/Mz + 1)"
-            bins={15}
+            xAxisTitle="Rango Log10(Trabajadores/Mz + 1)"
+            yAxisTitle="Frecuencia"
             fillColor="#236aa4"
+            sort="bin_start" 
         />
         
-        <Details title="Nota de Interpretación: {category.farm_size_class}">
+         <Details title="Nota de Interpretación: {category.farm_size_class}">
             {#if category.farm_size_class === 'Small'}
                 El segmento <b>Small</b> tiende a una distribución log-normal (forma de campana), indicando una mayor estabilidad en la absorción de mano de obra por unidad de área.
             {:else}
                 Los segmentos <b>Medium/Large</b> muestran una asimetría hacia la izquierda (cola inferior), reflejando un modelo de producción más extensivo o con mayor grado de mecanización.
             {/if}
         </Details>
+        
     </Tab>
 {/each}
 </Tabs>
+
 
 
 

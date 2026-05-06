@@ -37,6 +37,34 @@ El análisis del impacto del financiamiento en el sector agropecuario es fundame
 *   **Evaluar** el nivel de diversificación productiva en las explotaciones agropecuarias financiadas frente a las no financiadas.
 *   **Contrastar** las brechas observadas en la generación de empleo y diversificación entre ambos grupos para identificar tendencias predominantes.
 
+---
+
+## Enfoque y Diseño de la Investigación
+
+<Grid cols={2}>
+
+###  Enfoque Cuantitativo Mixto
+Procesamiento de un alto volumen de datos estructurados (más de 226,000 registros) mediante herramientas analíticas y la aplicación de técnicas de análisis estadístico descriptivo para el abordaje del problema.
+
+###  Diseño No Experimental
+Análisis puramente observacional de la realidad productiva; la base de datos censal se trata como un artefacto estático e inmutable sin manipulación alguna de variables de control por parte de los investigadores.
+
+</Grid>
+
+## Temporalidad y Alcance de la Investigación
+
+<Grid cols={2}>
+
+###  Corte Transversal
+Evaluación de datos correspondientes a un único periodo o corte temporal específico delimitado por la recolección censal (el año agrícola 2010-2011).
+
+###  Alcance Descriptivo
+El estudio se enfoca en detallar y documentar las características productivas, específicamente el volumen de empleo y el uso del suelo, proporcionando un panorama claro de la situación entre ambos grupos.
+
+</Grid>
+
+---
+
 ## Panorama Global del Censo
 
 ```sql global_summary
@@ -67,3 +95,5 @@ FROM global_summary
       fmt="num0"
     />
 </Grid>
+
+
