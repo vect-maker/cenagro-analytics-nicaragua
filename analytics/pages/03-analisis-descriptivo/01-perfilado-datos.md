@@ -6,8 +6,11 @@ Este apartado documenta el estado de integridad del censo y la distribución de 
   <b>Nota Metodológica:</b> La Intensidad Laboral se calcula exclusivamente para explotaciones mayores a 1 Manzana (Mz) para evitar sesgos por infraestructura en explotaciones de patio (Backyard/Micro).
 </Alert>
 
-## 1. Integridad Estructural
-Verificación de la consistencia de registros y detección de duplicidad mediante `farm_uid`.
+---
+
+## 1. Intensidad Laboral (Productividad Marginal)
+La intensidad laboral mide cuántos trabajadores se contratan por cada manzana (Mz) de tierra. Debido a que la mayoría de las fincas en Nicaragua son pequeñas y unas pocas propiedades gigantes concentran casi toda la tierra, los datos están muy desequilibrados (sesgados). Usamos una escala logarítmica para ajustar estos valores en los gráficos. Esto asegura que los patrones de las fincas pequeñas sigan siendo visibles y no queden ocultos por las cifras enormes de los grandes terrenos.
+
 ```sql integrity
 SELECT * FROM integrity;
 ```
@@ -72,9 +75,11 @@ SELECT * FROM anomalies;
     />
 </Grid>
 
-<Alert status="warning">
-  <b>Umbral de Alerta:</b> Se ha marcado la Intensidad Máxima en naranja si supera los 50 trabajadores/Mz, lo cual podría indicar errores de digitación en la boleta censal original o casos atípicos de invernaderos de alta densidad.
-</Alert>
+<Details title="Interpretación: El Fenómeno de la Extensificación">
+  <b>Evidencia:</b> La mayoría de las fincas se agrupan en el extremo izquierdo de la escala logarítmica. Esto indica un modelo de <b>baja intensidad laboral</b>, típico de la ganadería extensiva y cultivos de bajo valor agregado.
+  <br/><br/>
+  <b>Umbral Crítico:</b> Los valores Log10 > 0.5 representan fincas con alta densidad de mano de obra (hortalizas o café tecnificado). El análisis comparativo posterior determinará si el acceso al crédito empuja a los productores hacia este umbral de mayor intensidad productiva.
+</Details>
 
 ---
 
@@ -84,7 +89,7 @@ Distribución de la titularidad de las explotaciones y la naturaleza de las acti
 SELECT 
     producer_gender AS Genero, 
     COUNT(*) AS Total,
-    COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS Porcentaje
+    COUNT(*) * 1.0 / SUM(COUNT(*)) OVER() AS Porcentaje
 FROM farm_profiles
 GROUP BY 1
 ORDER BY Total DESC;
@@ -102,33 +107,25 @@ LIMIT 8;
 ```
 <Tabs>
     <Tab label="Género del Productor">
-        <BarChart
-            data={gender_dist}
-            x=Genero
-            y=Porcentaje
-            title="Distribución por Género"
-            yAxisTitle="% de Fincas"
-            swapXY=true
-            fillColor="#8dacbf"
-            labels=true 
+       <BarChart
+            data={gender_dist} x=Genero y=Porcentaje
+            title="Distribución por Género" yAxisTitle="% de Fincas"
+            swapXY=true fillColor="#8dacbf" labels=true yFmt="pct1"
         />
     </Tab>
     <Tab label="Actividad Principal">
-        <BarChart
-            data={activity_dist}
-            x=Actividad
-            y=Fincas
-            title="Top 8 Actividades Principales"
-            yAxisTitle="Número de Fincas"
-            swapXY=true
-            fillColor="#236aa4"
-            labels=true 
+       <BarChart
+            data={activity_dist} x=Actividad y=Fincas
+            title="Top 8 Actividades Principales" yAxisTitle="Número de Fincas"
+            swapXY=true fillColor="#236aa4" labels=true yFmt="num0"
         />
     </Tab>
 </Tabs>
 
-<Details title="Interpretación del Perfil">
-  La inclusión de la <b>Estructura Operacional</b> revela la predominancia de modelos individuales frente a cooperativos o empresas. Este cruce es vital: las unidades con estructura de "Empresa" o "Cooperativa" suelen presentar comportamientos de intensidad laboral y acceso a crédito radicalmente distintos a los del productor individual.
+<Details title="Nota Analítica: Predominancia del Productor Individual">
+  <b>Evidencia:</b> Los datos revelan una concentración abrumadora de unidades operando bajo la estructura "Individual" frente a modelos asociativos o corporativos.
+  <br/><br/>
+  <b>Implicación:</b> Este cruce es vital para nuestra variable de control. Las unidades con personería jurídica (Empresa/Cooperativa) presentan lógicas de contratación de personal y requisitos de acceso a crédito radicalmente distintos a los del productor minifundista individual.
 </Details>
 
 
@@ -160,7 +157,7 @@ FROM farm_profiles
 SELECT 
     operational_structure AS Estructura,
     COUNT(*) AS Total,
-    COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS Porcentaje
+    COUNT(*) * 1.0 / SUM(COUNT(*)) OVER() AS Porcentaje
 FROM farm_profiles
 WHERE operational_structure != 'individual' 
 GROUP BY 1
@@ -168,17 +165,15 @@ ORDER BY Total DESC;
 ```
 
 <BarChart
-    data={operational_long_tail}
-    x=Estructura
-    y=Porcentaje
+    data={operational_long_tail} x=Estructura y=Porcentaje
     title="Distribución de No Individuales"
-    swapXY=true
-    fillColor="#85c7c6"
-      labels=true 
+    swapXY=true fillColor="#85c7c6" labels=true yFmt="pct1"
 />
 
-<Details title="Interpretación: La Larga Cola de la Organización Rural">
-  Al omitir el ruido estadístico de la categoría dominante, observamos que las Cooperativas y los Colectivos Familiares emergen como las formas de organización más prevalentes después del productor independiente. Esta distinción es crítica para el análisis de crédito: mientras que el productor individual suele depender de financiamiento informal, las Empresas y Cooperativas registradas en el censo muestran una mayor interacción con el sistema bancario formal (Banco Produzcamos) y ONGs.
+<Details title="Nota Analítica: La Larga Cola de la Organización Asociativa">
+  <b>Evidencia:</b> Al aislar el ruido estadístico de la categoría dominante (Individual), las Cooperativas y los Colectivos Familiares emergen gráficamente como las formas de organización secundaria más prevalentes.
+  <br/><br/>
+  <b>Implicación:</b> Esta distinción es crítica para perfilar el riesgo. Mientras que el productor individual suele depender de redes informales, estas estructuras organizadas fungen como vehículos de agregación que facilitan el acceso al sistema bancario formal (ej. Banco Produzcamos) y fondos de ONGs.
 </Details>
 
 
@@ -186,6 +181,40 @@ ORDER BY Total DESC;
 
 ## 4. Estructura Operacional y Tenencia
 Esta sección analiza la naturaleza jurídica de las unidades productivas. Diferenciar entre la gestión individual y modelos organizados es vital, ya que la personería jurídica es el principal predictor del acceso al crédito formal y la estabilidad del empleo.
+
+```sql individual_weight
+SELECT 
+    COUNT(*) FILTER (WHERE operational_structure = 'individual') * 1.0 / COUNT(*) AS weight
+FROM farm_profiles;
+```
+
+```sql total_organizadas
+SELECT 
+    COUNT(*) AS total
+FROM farm_profiles
+WHERE operational_structure != 'individual' AND operational_structure != 'ignorado';
+```
+
+
+
+<Grid cols={2}>
+    <BigValue 
+        data={individual_weight} 
+        value=weight 
+        title="Predominancia Individual" 
+        subtitle="Productores independientes (Base del Censo)"
+        fmt="pct1"
+    />
+    <BigValue 
+        data={total_organizadas} 
+        value=total 
+        title="Unidades Organizadas" 
+        subtitle="Empresas, Cooperativas y Colectivos"
+        fmt="num0"
+    />
+</Grid>
+
+
 ```sql operational_stats
 SELECT 
     operational_structure AS estructura,
@@ -200,53 +229,28 @@ GROUP BY 1
 ORDER BY Total DESC;
 ```
 
-<Grid cols={2}>
-    <BigValue 
-        data={individual_weight} 
-        value=weight 
-        title="Predominancia Individual" 
-        subtitle="Productores independientes (Base del Censo)"
-        fmt='num1'
-        suffix="%"
-    />
-    <BigValue 
-        data={operational_stats} 
-        value=total 
-        agg="sum"
-        title="Unidades Organizadas" 
-        subtitle="Empresas, Cooperativas y Colectivos"
-        fmt='num0'
-    />
-</Grid>
-
 <Tabs>
     <Tab label="Frecuencia por Modelo">
         <BarChart 
-            data={operational_stats} 
-            x=estructura 
-            y=total 
+            data={operational_stats} x=estructura y=total 
             title="Conteo de Unidades Asociativas y Corporativas"
-            swapXY=true
-            fillColor="#85c7c6"
-              labels=true 
+            swapXY=true fillColor="#85c7c6" labels=true yFmt="num0"
         />
     </Tab>
     <Tab label="Escala y Tamaño (Mz)">
         <BarChart 
-            data={operational_stats} 
-            x=estructura 
-            y=avg_size 
+            data={operational_stats} x=estructura y=avg_size 
             title="Superficie Promedio por Tipo de Estructura"
-            swapXY=true
-            fillColor="#d2c6ac"
-            yAxisTitle="Promedio de Manzanas (Mz)"
-              labels=true 
+            swapXY=true fillColor="#d2c6ac" yAxisTitle="Promedio de Manzanas (Mz)"
+            labels=true yFmt="num0" 
         />
     </Tab>
 </Tabs>
 
-<Details title="Análisis de Tenencia y Gestión">
-Mientras que el <b>98%</b> de las unidades operan bajo gestión individual dentro del sector minifundista, la "larga cola" de estructuras organizadas revela datos críticos para la política pública. Las <b>Cooperativas y Colectivos</b> representan el segundo bloque de organización más importante, funcionando como núcleos de agregación para pequeños productores, mientras que las <b>Empresas y la Administración Pública</b>, aunque minoritarias en conteo, presentan los mayores promedios de área y son las principales generadoras de empleo permanente estable. Finalmente, las <b>Comunidades Indígenas</b> reflejan modelos de tenencia colectiva con lógicas de diversificación de cultivos que difieren de la propiedad privada tradicional.
+<Details title="Nota Analítica: Impacto de la Figura Jurídica en la Escala Productiva">
+  <b>Evidencia:</b> Aunque el 98% del universo es de gestión individual, la estadística descriptiva muestra que las Empresas y la Administración Pública, siendo minoritarias, presentan los mayores promedios de área (Mz) y generación de empleo.
+  <br/><br/>
+  <b>Implicación:</b> La estructura legal es un fuerte predictor de la capacidad productiva. Las comunidades indígenas muestran lógicas de tenencia colectiva divergentes, mientras que las empresas actúan como los principales anclajes de empleo permanente estable en el territorio.
 </Details>
 
 ---
@@ -271,19 +275,15 @@ INTO
 ```
 
 <BarChart
-    data={land_use_macro}
-    x=Categoria
-    y=Total_Manzanas
+    data={land_use_macro} x=Categoria y=Total_Manzanas
     title="Superficie Total por Categoría de Uso"
-    yAxisTitle="Manzanas (Mz)"
-    sort="Total_Manzanas"
-    fillColor="#46a485"
-      labels=true 
+    yAxisTitle="Manzanas (Mz)" sort="Total_Manzanas"
+    fillColor="#46a485" labels=true yFmt="num0"
 />
-<Details title="Nota Analítica: Asimetría Hacia la Ganadería Extensiva">
-  Los datos revelan una asimetría estructural en la vocación productiva: las áreas destinadas a la ganadería (Pasto Natural y Cultivado combinados suman ~4.6 millones de manzanas) triplican la superficie destinada a la agricultura (Cultivos Anuales y Permanentes suman ~1.55 millones).
+<Details title="Nota Analítica: Asimetría Estructural hacia la Ganadería Extensiva">
+  <b>Evidencia:</b> El balance de tierras expone que las áreas destinadas a pastos (naturales y cultivados, ~4.6M Mz) triplican la superficie dedicada a la agricultura de cultivos anuales y permanentes (~1.55M Mz).
   <br/><br/>
-    Estos datos son el punto de partida fundamental para nuestro análisis. Al evaluar cómo ayudan los préstamos, debemos recordar que la actividad más común en estas fincas es la ganadería tradicional. Lo que queremos comprobar es si recibir un crédito formal motiva a los productores a cambiar esta costumbre y aprovechar mejor su tierra; por ejemplo, cambiando pastos silvestres por pastos de mejor calidad o dedicando más espacio a la siembra de cultivos.
+  <b>Implicación:</b> Esta es nuestra línea base principal de diversificación. Dado que la ganadería tradicional domina el paisaje, nuestro análisis evaluará si el financiamiento formal incentiva un cambio en esta costumbre, promoviendo la transición de pastos silvestres hacia sistemas silvopastoriles o la intensificación agrícola.
 </Details>
 
 ---
@@ -325,6 +325,7 @@ INTO
         title="Embudo de Acceso al Crédito"
         fillColor="#f4b548"
           labels=true 
+          yFmt="num0"
     />
     </Tab>
     <Tab label="Fuentes de financiamiento">
@@ -337,75 +338,16 @@ INTO
         sort="Fincas"
         fillColor="#dc2626"
           labels=true 
+          yFmt="num0"
     />
     </Tab>
 </Tabs>
 
-<Details title="Nota Analítica">
-  La diferencia entre "Solicitaron" y "Recibieron" representa la tasa empírica de rechazo institucional. La matriz de fuentes de financiamiento evidencia la dependencia del sector respecto a entidades no tradicionales (ONGs y Cooperativas) frente a la banca privada.
+<Details title="Nota Analítica: Alta Tasa de Rechazo y Dependencia Informal">
+  <b>Evidencia:</b> El embudo expone una contracción aguda entre las explotaciones que solicitaron crédito y las que efectivamente lo recibieron. Paralelamente, la matriz de origen muestra a ONGs y Cooperativas superando a la banca comercial.
+  <br/><br/>
+  <b>Implicación:</b> Esta métrica cuantifica la tasa empírica de rechazo institucional. Demuestra que la matriz agropecuaria nicaragüense depende estructuralmente del financiamiento no tradicional para mantener sus operaciones, frente a un ecosistema bancario privado de difícil acceso para el agricultor promedio.
 </Details>
-
----
-
-## 7. Estadística Descriptiva de Intensidad
-Resumen de la capacidad de absorción de mano de obra segmentada por escala productiva.
-```sql farm_intensity_stats
-SELECT * FROM farm_intensity_stats
-```
-
-<DataTable data={farm_intensity_stats}>
-  <Column id="farm_size_class" title="Segmento de Tamaño"/>
-  <Column id="avg_intensity" title="Promedio" fmt="num2"/>
-  <Column id="median_intensity" title="Mediana" fmt="num2"/>
-  <Column id="max_intensity" title="Máximo" fmt="num2"/>
-  <Column id="farm_count" title="Total Fincas" fmt="num0"/>
-</DataTable>
-
----
-
-## 8. Análisis de Distribución de Intensidad (Log10)
-Visualización de la densidad de trabajadores por unidad de área. La transformación logarítmica permite normalizar la asimetría extrema y observar la estructura de contratación subyacente.
-```sql labor_binned
-SELECT 
-    *,
-FROM agg_labor_hist_by_size
-```
-
-```sql size_classes
-SELECT DISTINCT farm_size_class 
-FROM farm_labor 
-WHERE labor_intensity > 0.0
-ORDER BY farm_size_class;
-```
-
-
-<Tabs>
-{#each size_classes as category}
-    <Tab label={category.farm_size_class}>
-          <BarChart
-            data={labor_binned.filter(d => d.farm_size_class === category.farm_size_class)}
-            x=bin_end
-            y=frequency
-            title="Distribución Log10: {category.farm_size_class}"
-            xAxisTitle="Rango Log10(Trabajadores/Mz + 1)"
-            yAxisTitle="Frecuencia"
-            fillColor="#236aa4"
-            sort="bin_start" 
-        />
-        
-         <Details title="Nota de Interpretación: {category.farm_size_class}">
-            {#if category.farm_size_class === 'Small'}
-                El segmento <b>Small</b> tiende a una distribución log-normal (forma de campana), indicando una mayor estabilidad en la absorción de mano de obra por unidad de área.
-            {:else}
-                Los segmentos <b>Medium/Large</b> muestran una asimetría hacia la izquierda (cola inferior), reflejando un modelo de producción más extensivo o con mayor grado de mecanización.
-            {/if}
-        </Details>
-        
-    </Tab>
-{/each}
-</Tabs>
-
-
 
 
 
