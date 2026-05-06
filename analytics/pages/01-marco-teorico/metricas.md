@@ -2,7 +2,16 @@
 
 Para evaluar el impacto del financiamiento, se establecen métricas analíticas calculadas dinámicamente en nuestra capa semántica. Estas métricas permiten normalizar los datos y aislar el efecto del tamaño de la unidad productiva.
 
----
+## Dimensiones de Control
+
+### Segmentación por Tamaño de Explotación
+
+Para evitar sesgos en el análisis de intensidad laboral, las explotaciones se categorizan según su área total:
+*   **Micro / Backyard (menor que 1 Mz):** Unidades que suelen representar "explotaciones de patio" donde la infraestructura predomina sobre el área productiva.
+*   **Established Farm (mayor o igual a 1 Mz):** Unidades con escala suficiente para una medición estandarizada de rendimientos e intensidad por área.
+
+## Metricas
+
 
 ### 1. Labor Intensity (Intensidad Laboral)
 
@@ -99,3 +108,8 @@ Utiliza la matriz de tracción para evaluar si el financiamiento correlaciona co
 
 **Mapeo en SQL:**
 Se obtiene mediante el conteo de la variable booleana `traction_tractor` en relación al universo total de explotaciones (`total_farms`), permitiendo observar la prevalencia de maquinaria frente a métodos tradicionales de tracción animal o manual.
+
+
+
+
+

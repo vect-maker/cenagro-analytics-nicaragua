@@ -1,0 +1,1 @@
+SELECT * FROM farm_technology;

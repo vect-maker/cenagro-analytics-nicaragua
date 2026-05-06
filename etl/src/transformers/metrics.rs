@@ -1,6 +1,7 @@
 use crate::dataframe::DataFrameExt;
 use anyhow::{Context, Result};
 use datafusion::arrow::datatypes::DataType;
+
 use datafusion::prelude::*;
 
 const CATEGORIES_MZ: [&str; 8] = [
@@ -55,20 +56,20 @@ pub fn apply_land_use_composition_ratio(df: DataFrame) -> Result<DataFrame> {
     Ok(df)
 }
 
-// Labor Intensity = (permanent + temporal) / total_area_mz (Threshold: > 0.01 mz)
+// Labor Intensity = (permanent + temporal) / total_area_mz (Threshold: > 1 mz)
+
 pub fn apply_labor_intensity(df: DataFrame) -> Result<DataFrame> {
     let total_workers = col("permanent_workers_total") + col("temporal_workers_total");
 
+    let case_expr = when(
+        col("total_area_mz").gt(lit(1.0f64)),
+        cast(total_workers, DataType::Float64) / col("total_area_mz"),
+    )
+    .otherwise(lit(0.0f64))
+    .expect("Failed to build CASE expression for labor intensity");
+
     let df = df
-        .with_column(
-            "labor_intensity",
-            when(
-                col("total_area_mz").gt(lit(0.01f64)),
-                cast(total_workers, DataType::Float64) / col("total_area_mz"),
-            )
-            .otherwise(lit(0.0f64))
-            .expect("Failed to build CASE expression for labor intensity"),
-        )
+        .with_column("labor_intensity", case_expr)
         .context("Could not apply labor intensity metric")?;
 
     Ok(df)

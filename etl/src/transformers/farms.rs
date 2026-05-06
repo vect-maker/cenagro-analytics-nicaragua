@@ -106,6 +106,7 @@ pub fn apply_principal_activity_mapping(df: DataFrame) -> Result<DataFrame> {
     Ok(df)
 }
 
+// should be apply after join with parcels
 pub fn apply_surrogate_key(df: DataFrame) -> Result<DataFrame> {
     let farm_uid_expr = concat_ws(
         lit("-"),
@@ -119,6 +120,16 @@ pub fn apply_surrogate_key(df: DataFrame) -> Result<DataFrame> {
     );
 
     let df = df.with_column("farm_uid", farm_uid_expr.clone())?;
+
+    Ok(df)
+}
+
+pub fn apply_farm_classification(df: DataFrame) -> Result<DataFrame> {
+    let farm_size_class_expr = when(col("total_area_mz").lt(lit(1.0f32)), lit("Micro"))
+        .when(col("total_area_mz").lt(lit(5.0f32)), lit("Small"))
+        .otherwise(lit("Medium/Large"))?;
+
+    let df = df.with_column("farm_size_class", farm_size_class_expr)?;
 
     Ok(df)
 }

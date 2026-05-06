@@ -40,6 +40,6 @@ pub async fn run_dataset_join_pipeline(
     let df = joined_df.select(projection)?;
 
     let df = transformers::farms::apply_surrogate_key(df)?;
-
+    let df = transformers::farms::apply_farm_classification(df)?;
     Ok(df)
 }

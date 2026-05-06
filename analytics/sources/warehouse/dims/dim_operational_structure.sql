@@ -1,1 +1,1 @@
-SELECT CAST(S322 AS VARCHAR) AS S322, operational_structure FROM dim_operational_structure;
+SELECT S322, operational_structure FROM dim_operational_structure;
