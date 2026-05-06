@@ -64,7 +64,8 @@ SELECT
     municipality,
     producer_gender,
     operational_structure,
-    principal_activity
+    principal_activity,
+    total_area_mz
 FROM farms;
 
 CREATE OR REPLACE VIEW farm_technology AS
