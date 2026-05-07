@@ -1,5 +1,7 @@
 # Analisis univariado
 
+Este apartado constituye la fase diagnóstica del análisis, donde se caracterizan las unidades productivas a través de sus dimensiones fundamentales: productividad marginal, calidad del empleo, complejidad técnica y vocación económica. Dado que los datos agrarios de Nicaragua presentan una asimetría extrema (distribuciones de potencia), aquí se aplican técnicas de normalización Log10 y segmentación por deciles para estabilizar la varianza. El resultado de este análisis univariado provee el contexto estructural necesario para determinar, en fases posteriores, si el acceso al crédito actúa como un catalizador de cambio o si las fincas permanecen ancladas en modelos de subsistencia y baja tecnificación.
+
 ---
 
 ## 1. Distribución de la Intensidad Laboral (Labor Intensity Log10)

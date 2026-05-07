@@ -18,4 +18,11 @@
 ### **Phase 4: Executive Aggregation (`04-sintesis-resultados.md`)**
 * **Phase Objective:** Directly answer Specific Objective 3 and the General Objective. Consolidate the observed gaps into definitive trends regarding the socioeconomic impact of agricultural credit.
 * **Target Metrics:** Delta of `labor_intensity` (%), Delta of `diversification_index` (absolute shift), and `Credit Approval Efficiency`.
-* **Analytical Approach:** **Domain-Specific Synthesis.** Abstract the statistical outputs into business logic. State clearly if financing formalizes the workforce (shifts from seasonal to permanent) and if it drives an agricultural transition (shifts from pure pasture to polyculture). Rely on pre-calculated summary tables from DuckDB, rendered as macroscopic `<BigValue>` KPIs.
+* **Analytical Approach:** **Domain-Specific Synthesis.** Abstract the statistical outputs into business logic. State clearly if financing formalizes the workforce (shifts from seasonal to permanent) and if it drives an agricultural transition (shifts from pure pasture to polyculture). Rely on pre-calculated summary tables from DuckDB, rendered as macroscopic KPIs.
+
+
+Feature,04-sintesis-resultados.md,05-conclusiones.md
+Focus,Quantitative Deltas.,Research Validation.
+Content,"Deltas of labor_intensity, Credit Approval Efficiency, and cross-tabulated trends.",Answering the General Objective and confirming/denying hypotheses.
+Output,"""Financed farms saw a 40% increase in employment.""","""Credit access is a primary driver of rural labor stability."""
+UI Components,".","Heavy Markdown prose, bullet points, and high-level summaries."
