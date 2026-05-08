@@ -1,4 +1,5 @@
 # Síntesis de Resultados: Impacto Estructural del Financiamiento
+Este apartado consolida los hallazgos granulares del análisis comparativo transversal en indicadores macroscópicos (KPIs) de nivel ejecutivo. Su objetivo es responder de manera definitiva a las hipótesis centrales de la investigación, cuantificando el impacto real del crédito en la matriz socioeconómica rural. A través de la abstracción de más de 260,000 registros censales, esta síntesis evalúa tres pilares estructurales: la fricción del ecosistema financiero para inyectar capital, el salto cuantitativo en la generación y formalización de empleo, y la capacidad del apalancamiento para impulsar la diversificación productiva y romper la trampa de la ganadería extensiva.
 
 ## 1. Eficiencia de Aprobación de Crédito (Fricción Institucional)
 

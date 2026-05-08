@@ -37,6 +37,12 @@ SELECT * FROM integrity;
     />
 </Grid>
 
+<Details title="Nota Analítica: Integridad Estructural y Resolución de Entidades">
+  <b>Evidencia:</b> El escaneo primario procesó <b>262,546</b> registros, coincidiendo de forma exacta con <b>262,546</b> llaves primarias únicas (`farm_uid`), arrojando <b>0</b> duplicados o colisiones.
+  <br/><br/>
+  <b>Implicación:</b> Se valida empíricamente que los registros censales son unicos. Esta estricta cardinalidad 1:1 es un prerrequisito arquitectónico crítico. garantiza que los cálculos posteriores de varianza y los modelos  estén matemáticamente exentos de sesgos por doble conteo en el Data Warehouse.
+</Details>
+
 ---
 
 ## 2. Validación Técnica y Detección de Anomalías
@@ -125,7 +131,7 @@ LIMIT 8;
 <Details title="Nota Analítica: Predominancia del Productor Individual">
   <b>Evidencia:</b> Los datos revelan una concentración abrumadora de unidades operando bajo la estructura "Individual" frente a modelos asociativos o corporativos.
   <br/><br/>
-  <b>Implicación:</b> Este cruce es vital para nuestra variable de control. Las unidades con personería jurídica (Empresa/Cooperativa) presentan lógicas de contratación de personal y requisitos de acceso a crédito radicalmente distintos a los del productor minifundista individual.
+  <b>Implicación:</b> Este cruce es vital para nuestra variable de control. Las unidades con personería jurídica (Empresa/Cooperativa) presentan lógicas de contratación de personal y requisitos de acceso a crédito radicalmente distintos a los del productor individual.
 </Details>
 
 
@@ -173,7 +179,7 @@ ORDER BY Total DESC;
 <Details title="Nota Analítica: La Larga Cola de la Organización Asociativa">
   <b>Evidencia:</b> Al aislar el ruido estadístico de la categoría dominante (Individual), las Cooperativas y los Colectivos Familiares emergen gráficamente como las formas de organización secundaria más prevalentes.
   <br/><br/>
-  <b>Implicación:</b> Esta distinción es crítica para perfilar el riesgo. Mientras que el productor individual suele depender de redes informales, estas estructuras organizadas fungen como vehículos de agregación que facilitan el acceso al sistema bancario formal (ej. Banco Produzcamos) y fondos de ONGs.
+  <b>Implicación:</b> Esta distinción es crítica para perfilar el riesgo. Mientras que el productor individual suele depender de redes informales, estas estructuras organizadas fungen como vehículos de agregación que facilitan el acceso al sistema bancario formal.
 </Details>
 
 
@@ -283,7 +289,7 @@ INTO
 <Details title="Nota Analítica: Asimetría Estructural hacia la Ganadería Extensiva">
   <b>Evidencia:</b> El balance de tierras expone que las áreas destinadas a pastos (naturales y cultivados, ~4.6M Mz) triplican la superficie dedicada a la agricultura de cultivos anuales y permanentes (~1.55M Mz).
   <br/><br/>
-  <b>Implicación:</b> Esta es nuestra línea base principal de diversificación. Dado que la ganadería tradicional domina el paisaje, nuestro análisis evaluará si el financiamiento formal incentiva un cambio en esta costumbre, promoviendo la transición de pastos silvestres hacia sistemas silvopastoriles o la intensificación agrícola.
+  <b>Implicación:</b> Esta es nuestra línea base principal de diversificación. Dado que la ganadería tradicional domina el paisaje.
 </Details>
 
 ---

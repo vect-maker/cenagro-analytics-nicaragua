@@ -5,7 +5,7 @@ Este apartado constituye la fase diagnóstica del análisis, donde se caracteriz
 ---
 
 ## 1. Distribución de la Intensidad Laboral (Labor Intensity Log10)
-Visualización de la densidad de trabajadores por unidad de área. La transformación logarítmica permite normalizar la asimetría extrema y observar la estructura de contratación subyacente.
+Visualización de la densidad de trabajadores por unidad de área. La transformación logarítmica permite normalizar la asimetría extrema y observar la estructura de contratación.
 
 <Alert status="info">
   <b>Nota sobre la Escala Log10:</b> 
@@ -49,7 +49,7 @@ ORDER BY farm_size_class;
         
          <Details title="Nota Analítica: Comportamiento de Distribución en Segmento {category.farm_size_class}">
             {#if category.farm_size_class === 'Small'}
-                <b>Evidencia:</b> El segmento Small tiende a dibujar una distribución log-normal (forma de campana) en la gráfica.
+                <b>Evidencia:</b> El segmento Pequenio tiende a dibujar una distribución log-normal (forma de campana) en la gráfica.
                 <br/><br/>
                 <b>Implicación:</b> Esto indica un patrón de contratación altamente estandarizado y estable en la absorción de mano de obra por manzana dentro de las fincas de menor escala.
             {:else}
@@ -131,7 +131,7 @@ SELECT * FROM agg_permanent_labor_hist
 />
 
 <Details title="Nota Analítica: Polarización y Dependencia de Mano de Obra Estacional">
-  <b>Evidencia:</b> Los datos confirman una distribución fuertemente bimodal y polarizada. Entre el 63% (Medium/Large) y el 82% (Small) de las explotaciones se concentran en el bin de 0.0, indicando que operan exclusivamente con mano de obra temporal. Existe un segundo pico menor en el valor 1.0 (empleo 100% permanente), mientras que los valores intermedios (contratación mixta) son estadísticamente marginales.
+  <b>Evidencia:</b> Los datos confirman una distribución fuertemente bimodal y polarizada. Entre el 63% (Medium/Large) y el 82% (Small) de las explotaciones se concentran en el bin de 0.0, indicando que operan exclusivamente con mano de obra temporal. Existe un segundo pico menor en el valor 1.0 (empleo 100% permanente).
   <br/><br/>
   <b>Implicación:</b> La estructura laboral agropecuaria de Nicaragua es predominantemente transitoria y estacional. La baja prevalencia de modelos mixtos sugiere que las fincas no transitan gradualmente hacia la estabilidad; el acceso al crédito será evaluado para determinar si funciona como un catalizador que logre "mover" a las fincas del extremo de temporalidad (0.0) hacia el de permanencia (1.0).
 </Details>
@@ -160,14 +160,14 @@ SELECT * FROM agg_diversification_dist
 <Details title="Nota Analítica: Predominancia de Sistemas de Baja Complejidad">
   <b>Evidencia:</b> La distribución revela una concentración masiva en niveles de baja complejidad; el 57.13% de las explotaciones reportan entre 1 y 3 rubros distintos, con la moda estadística situada en el indice 2 (24.67% de la muestra). Por el contrario, la diversificación extrema (índices 7-8) es un fenómeno marginal que abarca a menos del 5% del universo censado.
   <br/><br/>
-  <b>Implicación:</b> El perfil productivo base es mayoritariamente especializado o de baja mixtura. Esta métrica es el "baseline" para el Objetivo 2: permitirá determinar si el financiamiento actúa como motor de complejidad horizontal, incentivando a los productores a integrar nuevos rubros para mitigar riesgos climáticos o de mercado.
+  <b>Implicación:</b> El perfil productivo base es mayoritariamente especializado o de baja mixtura. Esta métrica permitirá determinar si el financiamiento actúa como motor de complejidad horizontal, incentivando a los productores a integrar nuevos rubros para mitigar riesgos climáticos o de mercado.
 </Details>
 
 ---
 
 ## 4. Vocación Económica (Pasture-to-Crop Ratio)
 
-Esta métrica categoriza a las unidades productivas según su balance entre la **extensificación pecuaria** y la **intensificación agrícola**. Al discretizar el ratio continuo, se eliminan los sesgos por valores atípicos y se facilita la comparación de modelos de negocio divergentes.
+Esta métrica categoriza a las unidades productivas según su balance entre la extensificación pecuaria y la intensificación agrícola. Al discretizar el ratio continuo, se eliminan los sesgos por valores atípicos y se facilita la comparación de modelos de negocio divergentes.
 
 <Alert status="info">
   <b>Lógica de Agrupación:</b> Las categorías se determinan mediante el balance de superficies de pastos (<code>mz_pasture &gt; 0</code> y <code>mz_crops = 0</code>) versus cultivos (<code>mz_crops &gt; 0</code>):

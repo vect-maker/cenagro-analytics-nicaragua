@@ -1,10 +1,28 @@
+## 2. Impacto en la Generación y Estabilidad del Empleo (Delta Laboral)
 
-## 4. Conclusión General
+El acceso al capital transforma radicalmente la capacidad de absorción de mano de obra del ecosistema rural. Al aislar el efecto por escala productiva, la data demuestra que la inyección de liquidez no se utiliza para automatizar y recortar personal, sino que actúa como un catalizador expansivo para la contratación.
 
-El análisis exhaustivo de los datos del CENAGRO 2011 confirma que el acceso al crédito es un determinante estructural para el desarrollo agropecuario nicaragüense, dando cumplimiento a los objetivos de esta investigación mediante las siguientes validaciones empíricas:
+```sql labor_intensity_kpi
+SELECT * FROM agg_labor_intensity_delta;
+```
 
-* **Expansión y Estabilidad Laboral (Objetivo 1):** El financiamiento no actúa como un sustituto tecnológico para recortar personal, sino como un motor de escala. Las explotaciones financiadas absorben exponencialmente más mano de obra (hasta un **171.6%** adicional por manzana en fincas medianas/grandes) y facilitan la transición de la estacionalidad hacia la **formalización del empleo permanente**.
-* **Resiliencia Productiva (Objetivo 2):** El capital inyectado rompe la trampa de la especialización de bajo valor. Al proveer liquidez, se mitiga el riesgo de entrada a nuevos mercados, permitiendo a los productores diversificar sus parcelas (incremento de **0.29 rubros**) y transitar desde la ganadería extensiva tradicional hacia modelos de **policultivo e intensificación agrícola**.
-* **Fricción Institucional (Objetivo 3):** Pese al rotundo impacto positivo de las unidades que logran capitalizarse, la baja **Tasa de Aprobación** evidencia un ecosistema financiero altamente restrictivo. El sistema bancario formal funciona actualmente como un embudo que limita el crecimiento masivo del sector, forzando la dependencia hacia el crédito informal o limitando a las fincas a economías de subsistencia.
+<Grid cols=2>
+    <BigValue 
+      data={labor_intensity_kpi.filter(d => d.farm_size_class === 'Medium/Large')} 
+      value=relative_gap_pct
+      title="Brecha de Empleo (Medianas/Grandes)" 
+      fmt="pct1"
+    />
+    <BigValue 
+      data={labor_intensity_kpi.filter(d => d.farm_size_class === 'Small')} 
+      value=relative_gap_pct
+      title="Brecha de Empleo (Pequeñas)" 
+      fmt="pct1"
+    />
+</Grid>
 
-**Veredicto Final:** El financiamiento agropecuario trasciende la mera optimización operativa; es un **catalizador indispensable para la reducción de la pobreza multidimensional**, la fijación de la fuerza laboral en el campo y la modernización sistémica de la matriz productiva de Nicaragua.
+<Details title="Nota Analítica: El Crédito como Motor de Contratación">
+  <b>Evidencia:</b> Las fincas medianas/grandes con crédito incrementan su intensidad laboral mediana en un 171.6%, y las pequeñas en un 33.3%, frente a las no financiadas.
+  <br/><br/>
+  <b>Implicación:</b> El apalancamiento financiero permite estabilizar contratos estacionales en empleos permanentes, rompiendo el estándar de agricultura de subsistencia.
+</Details>

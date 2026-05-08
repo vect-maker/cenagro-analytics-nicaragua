@@ -1,3 +1,5 @@
+
+
 SELECT 
     CASE WHEN received_loan THEN 'Financed' ELSE 'Non-Financed' END AS cohort,
     COUNT(*) AS total_farms

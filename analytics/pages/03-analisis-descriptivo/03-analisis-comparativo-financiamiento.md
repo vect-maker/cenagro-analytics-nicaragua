@@ -82,6 +82,11 @@ ORDER BY a.ratio_bin, grupo;
     colorPalette={['#5ba423', '#d5d75e']}
 />
 
+<Details title="Nota Analítica: Distribución Estructural de la Temporalidad Laboral">
+  <b>Evidencia:</b> La distribución se concentra masivamente en el extremo estacional (ratio 0.0). El <b>72.5%</b> de las unidades financiadas operan exclusivamente con trabajadores temporales, superando al <b>68.3%</b> del grupo no financiado. Inversamente, la consolidación de planillas 100% permanentes (ratio 1.0) es del doble en fincas sin crédito (<b>12.0%</b> vs <b>5.8%</b>).
+  <br/><br/>
+  <b>Implicación:</b> Contrario a la hipótesis de formalización inmediata, el modelo A/B demuestra empíricamente que la inyección de liquidez se destina a financiar <b>picos de demanda estacional</b> (ej. periodos críticos de siembra o cosecha). El apalancamiento actúa como un multiplicador del <i>volumen</i> absoluto de contratación, pero no altera la dependencia estructural del ecosistema hacia la fuerza laboral transitoria.
+</Details>
 
 ## 3. Complejidad Productiva (Diversificación Horizontal)
 
