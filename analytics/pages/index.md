@@ -1,7 +1,8 @@
 #  Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011) 
 
 > **Autores:** Aguilar Rodríguez, Miranda Pérez, Oyarzo Morales, Medrano Dávila.  
-> **Componente:** Integrador III - Ingeniería en Ciencias de Datos (UNAN-Managua).
+> **Componente:** Integrador III - Ingeniería en Ciencias de Datos (UNAN-Managua).   
+> **Docente:** Deyvi Antonio López Rojas
 
 ---
 

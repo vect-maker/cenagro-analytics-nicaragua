@@ -145,16 +145,6 @@ SELECT
 FROM farm_profiles
 ```
 
-<Grid cols={1}>
-    <BigValue 
-        data={individual_weight} 
-        value=weight 
-        title="Peso de la Categoría Individual" 
-        fmt='num1'
-        suffix="%"
-    />
-</Grid>
-
 <Alert status="info">
   <b>Nota de Escala:</b> Se ha excluido la categoría "Individual" de la visualización inferior para permitir la comparación efectiva de los modelos asociativos y empresariales, los cuales de otro modo quedarían ocultos por la magnitud del sector minifundista.
 </Alert>
@@ -194,6 +184,13 @@ SELECT
 FROM farm_profiles;
 ```
 
+```sql individual_count
+SELECT 
+    COUNT(*) AS count
+FROM farm_profiles
+WHERE operational_structure = 'individual';
+```
+
 ```sql total_organizadas
 SELECT 
     COUNT(*) AS total
@@ -203,13 +200,20 @@ WHERE operational_structure != 'individual' AND operational_structure != 'ignora
 
 
 
-<Grid cols={2}>
+<Grid cols={3}>
     <BigValue 
         data={individual_weight} 
         value=weight 
         title="Predominancia Individual" 
         subtitle="Productores independientes (Base del Censo)"
         fmt="pct1"
+    />
+    <BigValue 
+        data={individual_count} 
+        value=count 
+        title="Total de individuales" 
+        subtitle="Productores independientes (Base del Censo)"
+        fmt="num0"
     />
     <BigValue 
         data={total_organizadas} 
@@ -283,7 +287,7 @@ INTO
 <BarChart
     data={land_use_macro} x=Categoria y=Total_Manzanas
     title="Superficie Total por Categoría de Uso"
-    yAxisTitle="Manzanas (Mz)" sort="Total_Manzanas"
+    yAxisTitle="Mz" sort="Total_Manzanas"
     fillColor="#46a485" labels=true yFmt="num0"
 />
 <Details title="Nota Analítica: Asimetría Estructural hacia la Ganadería Extensiva">
