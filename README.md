@@ -9,7 +9,7 @@ La versión compilada de este informe se sirve estáticamente al público en la 
 ## 🗄️ Dataset de Investigación (Open Access)
 Los microdatos transformados, normalizados y anonimizados utilizados en esta investigación están disponibles públicamente para fines académicos y científicos.
 
-* **DOI:** [10.5281/zenodo.10652059](https://zenodo.org/records/10652059)
+* **DOI:** [10.5281/zenodo.20652059](https://zenodo.org/records/20652059)
 * **Formato:** Parquet (Optimizado para lectura columnar/OLAP).
 * **Licencia:** CC-BY 4.0 (Atribución Internacional).
 * **Descripción:** Dataset resultante del pipeline ETL, que contiene los registros del CENAGRO 2011 tras el proceso de *downcasting*, tipificación estricta y desnormalización de tablas de hechos (Facts) y dimensiones (Dims).
