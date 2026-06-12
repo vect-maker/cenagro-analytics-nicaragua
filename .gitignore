@@ -3,3 +3,7 @@ data/*
 # ignore db files
 analytics/sources/warehouse/*.duckdb
 analytics/sources/warehouse/*.wal
+
+
+**/.env
+**/repomix-output.xml

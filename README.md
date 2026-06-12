@@ -6,6 +6,16 @@ Este repositorio contiene una solución de ingeniería de datos integral para pr
 La versión compilada de este informe se sirve estáticamente al público en la siguiente dirección:
 **[cenagro-analytics-ni.netlify.app](https://cenagro-analytics-ni.netlify.app)**
 
+## 🗄️ Dataset de Investigación (Open Access)
+Los microdatos transformados, normalizados y anonimizados utilizados en esta investigación están disponibles públicamente para fines académicos y científicos.
+
+* **DOI:** [10.5281/zenodo.10652059](https://zenodo.org/records/10652059)
+* **Formato:** Parquet (Optimizado para lectura columnar/OLAP).
+* **Licencia:** CC-BY 4.0 (Atribución Internacional).
+* **Descripción:** Dataset resultante del pipeline ETL, que contiene los registros del CENAGRO 2011 tras el proceso de *downcasting*, tipificación estricta y desnormalización de tablas de hechos (Facts) y dimensiones (Dims).
+
+> **Nota para investigadores:** Este dataset se distribuye en formato Parquet para garantizar la compatibilidad con motores analíticos modernos (DuckDB, Apache Arrow, Polars). Se recomienda consultar la documentación de la capa semántica en la sección de `/pages` para comprender el diccionario de variables y matrices de indicadores (One-Hot Encoding) aplicadas.
+
 ## 🚀 Capacidades del Sistema
 
 *   **Procesamiento de Alto Rendimiento:** Motor ETL desarrollado en **Rust** utilizando **Apache DataFusion** para transformaciones vectorizadas y multihilo sobre memoria columnar **Arrow**.

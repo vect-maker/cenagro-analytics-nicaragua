@@ -31,7 +31,6 @@ WHERE labor_intensity > 0.0
 ORDER BY farm_size_class;
 ```
 
-
 <Tabs>
 {#each size_classes as category}
     <Tab label={category.farm_size_class}>
@@ -49,20 +48,19 @@ ORDER BY farm_size_class;
         
          <Details title="Nota Analítica: Comportamiento de Distribución en Segmento {category.farm_size_class}">
             {#if category.farm_size_class === 'Small'}
-                <b>Evidencia:</b> El segmento Pequenio tiende a dibujar una distribución log-normal (forma de campana) en la gráfica.
+                <b>Evidencia:</b> La distribución aproxima una curva log-normal canónica con la moda estadística centrada en el rango [0.30, 0.35].
                 <br/><br/>
-                <b>Implicación:</b> Esto indica un patrón de contratación altamente estandarizado y estable en la absorción de mano de obra por manzana dentro de las fincas de menor escala.
+                <b>Implicación:</b> El segmento obedece a un patrón estandarizado y resiliente de absorción laboral, indicando un nivel base de intensidad manual inelástico.
             {:else}
-                <b>Evidencia:</b> Los segmentos Medium y Large muestran un marcado sesgo o asimetría hacia la izquierda (cola inferior extendida).
+                <b>Evidencia:</b> Presenta una asimetría extrema hacia la derecha (Positive Skew), con el máximo de densidad (33,729 fincas) anclado en el límite inferior [0.00, 0.05] y una pronunciada decadencia exponencial.
                 <br/><br/>
-                <b>Implicación:</b> Refleja la transición hacia modelos de economía de escala, donde la producción extensiva o la inserción de tracción mecanizada (tractores) reduce drásticamente la densidad de trabajadores manuales requeridos por manzana.
+                <b>Implicación:</b> Confirma empíricamente la presencia de economías de escala estructurales, donde la consolidación territorial o tracción mecanizada reducen asintóticamente la dependencia de densidad laboral.
             {/if}
         </Details>
         
     </Tab>
 {/each}
 </Tabs>
-
 
 
 ### Estadística Descriptiva de Intensidad
@@ -86,9 +84,9 @@ SELECT * FROM agg_labor_boxplot
 />
 
 <Details title="Nota Analítica: Economías de Escala y Asimetría en Minifundios">
-  <b>Evidencia:</b> La mediana de intensidad laboral y los valores máximos absolutos disminuyen conforme aumenta el tamaño de la finca. El segmento "Micro" concentra los valores atípicos más extremos (log_max de 2.69) y las medianas más altas, mientras que las fincas "Medium/Large" presentan la caja (IQR) más baja y compacta.
+  <b>Evidencia:</b> La mediana de intensidad laboral y los valores máximos absolutos disminuyen drásticamente conforme aumenta el tamaño de la finca. El segmento <b>Small</b> concentra los valores atípicos más extremos (log_max de 2.03, máximo absoluto de ~106 trabajadores/Mz) y las medianas más altas (1.33). En cambio, las fincas <b>Medium/Large</b> presentan una caja intercuartílica (IQR) considerablemente más baja y compacta (mediana de 0.15).
   <br/><br/>
-  <b>Implicación:</b> Esto corrobora un fuerte efecto de economías de escala. Las fincas grandes logran operar de forma mucho más predecible y con menor mano de obra por manzana (probablemente por tracción mecanizada o vocación ganadera). En contraste, los minifundios absorben trabajo de forma desproporcionada, y su extensa "cola larga" refleja sistemas de patio hiper-intensivos.
+  <b>Implicación:</b> Esto confirma empíricamente la presencia de economías de escala estructurales. Las operaciones de mayor tamaño optimizan su densidad laboral mediante tracción mecanizada o modelos de extensificación pecuaria, reduciendo asintóticamente la dependencia manual. En contraste, los minifundios (Small) absorben la fuerza laboral de forma intensiva y asimétrica.
 </Details>
 
 ```sql farm_intensity_stats
@@ -130,10 +128,10 @@ SELECT * FROM agg_permanent_labor_hist
     stack=false
 />
 
-<Details title="Nota Analítica: Polarización y Dependencia de Mano de Obra Estacional">
-  <b>Evidencia:</b> Los datos confirman una distribución fuertemente bimodal y polarizada. Entre el 63% (Medium/Large) y el 82% (Small) de las explotaciones se concentran en el bin de 0.0, indicando que operan exclusivamente con mano de obra temporal. Existe un segundo pico menor en el valor 1.0 (empleo 100% permanente).
+<Details title="Nota Analítica: Polarización y Dependencia de Trabajo Temporal">
+  <b>Evidencia:</b> Los datos muestran una distribución bimodal extrema. El <b>63.7%</b> de las fincas medianas/grandes y el <b>82.5%</b> de las pequeñas operan exclusivamente con mano de obra temporal (ratio 0.0). Existe un segundo pico menor de fincas que contratan personal 100% permanente (ratio 1.0), pero casi no hay fincas en los niveles intermedios.
   <br/><br/>
-  <b>Implicación:</b> La estructura laboral agropecuaria de Nicaragua es predominantemente transitoria y estacional. La baja prevalencia de modelos mixtos sugiere que las fincas no transitan gradualmente hacia la estabilidad; el acceso al crédito será evaluado para determinar si funciona como un catalizador que logre "mover" a las fincas del extremo de temporalidad (0.0) hacia el de permanencia (1.0).
+  <b>Implicación:</b> El empleo agrícola en Nicaragua es estructuralmente inestable. Las fincas no formalizan a sus trabajadores de forma gradual; operan por temporadas o tienen planillas fijas completas. El análisis evaluará si el acceso al crédito logra empujar a las fincas del extremo temporal (0.0) hacia la estabilidad permanente (1.0).
 </Details>
 
 ---
@@ -157,10 +155,10 @@ SELECT * FROM agg_diversification_dist
     yFmt="num0"
 />
 
-<Details title="Nota Analítica: Predominancia de Sistemas de Baja Complejidad">
-  <b>Evidencia:</b> La distribución revela una concentración masiva en niveles de baja complejidad; el 57.13% de las explotaciones reportan entre 1 y 3 rubros distintos, con la moda estadística situada en el indice 2 (24.67% de la muestra). Por el contrario, la diversificación extrema (índices 7-8) es un fenómeno marginal que abarca a menos del 5% del universo censado.
+<Details title="Nota Analítica: Predominancia de Sistemas con Baja Complejidad">
+  <b>Evidencia:</b> La mayoría de las fincas operan con poca variedad de cultivos o pastos. El <b>57.13%</b> reporta entre 1 y 3 rubros, siendo 2 rubros la configuración más común (<b>24.67%</b>). Por el contrario, la diversificación extrema (7 a 8 rubros) es mínima y representa menos del <b>5%</b> del total censado.
   <br/><br/>
-  <b>Implicación:</b> El perfil productivo base es mayoritariamente especializado o de baja mixtura. Esta métrica permitirá determinar si el financiamiento actúa como motor de complejidad horizontal, incentivando a los productores a integrar nuevos rubros para mitigar riesgos climáticos o de mercado.
+  <b>Implicación:</b> El modelo de producción base es especializado o poco variado. Este indicador servirá para comprobar si el financiamiento impulsa a los productores a diversificar sus tierras e integrar nuevos rubros para protegerse de los riesgos del clima y el mercado.
 </Details>
 
 ---
@@ -195,9 +193,8 @@ SELECT * FROM agg_vocation_split
     fillColor="#46a485"
 />
 
-<Details title="Nota Analítica: Predominancia de la Especialización Pecuaria">
-  <b>Evidencia:</b> La estructura agraria presenta una marcada asimetría hacia la ganadería. Según el inventario de uso de suelo, las áreas de pastos (~4.6M Mz) triplican a las agrícolas (~1.55M Mz). Se observa que el grueso de la muestra se concentra en <b>Pure Livestock</b> y <b>Mixed - Livestock Dominant</b>.
+<Details title="Nota Analítica: El Contraste entre la Tierra y la Cantidad de Fincas">
+  <b>Evidencia:</b> Existe un gran contraste entre el uso del suelo y la cantidad de productores. Aunque los pastos ocupan la mayor parte del país (~4.6M Mz), la gráfica muestra que la mayoría de las unidades productivas se dedican exclusivamente a la agricultura (<b>Pure Agriculture</b> con 108,659 fincas). Por el contrario, las fincas dedicadas solo a la ganadería (<b>Pure Livestock</b>) son una minoría (15,511 fincas).
   <br/><br/>
-  <b>Implicación:</b> El financiamiento en este contexto enfrenta el reto de la "trampa de la extensificación". Las fincas con vocación puramente ganadera suelen demandar créditos para mantenimiento de hato, mientras que los segmentos <b>Mixed - Agriculture Dominant</b> representan los focos de mayor potencial para la intensificación tecnológica y diversificación de cultivos de alto valor.
+  <b>Implicación:</b> El sistema financiero enfrenta un reto doble. Para llegar a más personas y tener un verdadero impacto social, el crédito debe enfocarse en esa inmensa base de pequeños agricultores (para comprar semillas e insumos). Sin embargo, como la mayor parte de la tierra física está concentrada en la ganadería, se necesitan créditos diferentes para transformar esos grandes pastizales en sistemas más eficientes y modernos.
 </Details>
-

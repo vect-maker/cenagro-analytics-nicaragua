@@ -37,12 +37,6 @@ SELECT * FROM integrity;
     />
 </Grid>
 
-<Details title="Nota Analítica: Integridad Estructural y Resolución de Entidades">
-  <b>Evidencia:</b> El escaneo primario procesó <b>262,546</b> registros, coincidiendo de forma exacta con <b>262,546</b> llaves primarias únicas (`farm_uid`), arrojando <b>0</b> duplicados o colisiones.
-  <br/><br/>
-  <b>Implicación:</b> Se valida empíricamente que los registros censales son unicos. Esta estricta cardinalidad 1:1 es un prerrequisito arquitectónico crítico. garantiza que los cálculos posteriores de varianza y los modelos  estén matemáticamente exentos de sesgos por doble conteo en el Data Warehouse.
-</Details>
-
 ---
 
 ## 2. Validación Técnica y Detección de Anomalías
@@ -81,11 +75,6 @@ SELECT * FROM anomalies;
     />
 </Grid>
 
-<Details title="Interpretación: El Fenómeno de la Extensificación">
-  <b>Evidencia:</b> La mayoría de las fincas se agrupan en el extremo izquierdo de la escala logarítmica. Esto indica un modelo de <b>baja intensidad laboral</b>, típico de la ganadería extensiva y cultivos de bajo valor agregado.
-  <br/><br/>
-  <b>Umbral Crítico:</b> Los valores Log10 > 0.5 representan fincas con alta densidad de mano de obra (hortalizas o café tecnificado). El análisis comparativo posterior determinará si el acceso al crédito empuja a los productores hacia este umbral de mayor intensidad productiva.
-</Details>
 
 ---
 
@@ -128,13 +117,11 @@ LIMIT 8;
     </Tab>
 </Tabs>
 
-<Details title="Nota Analítica: Predominancia del Productor Individual">
-  <b>Evidencia:</b> Los datos revelan una concentración abrumadora de unidades operando bajo la estructura "Individual" frente a modelos asociativos o corporativos.
+<Details title="Nota Analítica: Brecha de Género y Autoconsumo">
+  <b>Evidencia:</b> Los hombres dirigen el <b>76.3%</b> de las fincas, frente a solo un <b>23.2%</b> dirigido por mujeres. Además, la mayoría produce solo para sobrevivir: <b>138,316 fincas</b> se dedican al <b>autoconsumo</b>, muy por encima de las que venden al mercado interno (51,153) o exportan (17,219).
   <br/><br/>
-  <b>Implicación:</b> Este cruce es vital para nuestra variable de control. Las unidades con personería jurídica (Empresa/Cooperativa) presentan lógicas de contratación de personal y requisitos de acceso a crédito radicalmente distintos a los del productor individual.
+  <b>Implicación:</b> El sector agrario produce poco dinero y tiene una fuerte desigualdad entre hombres y mujeres. Los bancos y financieras necesitan crear créditos especiales que ayuden a las mujeres productoras y que se adapten a las fincas que no generan ganancias comerciales directas.
 </Details>
-
-
 
 ### Detalle de Estructuras Organizadas
 Para observar la distribución entre modelos asociativos y corporativos, se excluye el segmento individual que representa la mayoría del universo censal.
@@ -257,12 +244,11 @@ ORDER BY Total DESC;
     </Tab>
 </Tabs>
 
-<Details title="Nota Analítica: Impacto de la Figura Jurídica en la Escala Productiva">
-  <b>Evidencia:</b> Aunque el 98% del universo es de gestión individual, la estadística descriptiva muestra que las Empresas y la Administración Pública, siendo minoritarias, presentan los mayores promedios de área (Mz) y generación de empleo.
+<Details title="Nota Analítica: La Larga Cola de la Organización Asociativa y Corporativa">
+  <b>Evidencia:</b> Al aislar la categoría dominante (Individual), los <b>Colectivos Familiares (470)</b>, las <b>Empresas (297)</b> y las <b>Cooperativas (262)</b> emergen como las formas de organización secundaria más prevalentes.
   <br/><br/>
-  <b>Implicación:</b> La estructura legal es un fuerte predictor de la capacidad productiva. Las comunidades indígenas muestran lógicas de tenencia colectiva divergentes, mientras que las empresas actúan como los principales anclajes de empleo permanente estable en el territorio.
+  <b>Implicación:</b> Esta distinción es crítica para perfilar el riesgo. Mientras que el productor individual suele depender de redes informales, las figuras corporativas (empresas) y asociativas (cooperativas) actúan como vehículos formales que cumplen más fácilmente con los requisitos fiduciarios del sistema bancario tradicional.
 </Details>
-
 ---
 
 ## 5. Estructura Global de Uso de Suelo
@@ -353,11 +339,8 @@ INTO
     </Tab>
 </Tabs>
 
-<Details title="Nota Analítica: Alta Tasa de Rechazo y Dependencia Informal">
-  <b>Evidencia:</b> El embudo expone una contracción aguda entre las explotaciones que solicitaron crédito y las que efectivamente lo recibieron. Paralelamente, la matriz de origen muestra a ONGs y Cooperativas superando a la banca comercial.
+<Details title="Nota Analítica: Baja Penetración y Dominio de la Banca Privada">
+  <b>Evidencia:</b> El embudo revela que el verdadero cuello de botella es la baja demanda: solo 41,756 fincas (~15.9%) solicitaron financiamiento. Sin embargo, la tasa de aprobación es altísima (~92.6%), con 38,680 créditos desembolsados. Paralelamente, la matriz de origen confirma que la <b>banca privada (18,255)</b> es el proveedor líder absoluto, duplicando casi el alcance de las Cooperativas (9,793) y superando ampliamente a las ONGs (2,662).
   <br/><br/>
-  <b>Implicación:</b> Esta métrica cuantifica la tasa empírica de rechazo institucional. Demuestra que la matriz agropecuaria nicaragüense depende estructuralmente del financiamiento no tradicional para mantener sus operaciones, frente a un ecosistema bancario privado de difícil acceso para el agricultor promedio.
+  <b>Implicación:</b> El problema estructural no es el "rechazo bancario", sino las barreras de entrada previas a la solicitud (falta de garantías, autoexclusión o aislamiento). Además, el apalancamiento agrario nicaragüense depende primariamente de la banca comercial formal, refutando la hipótesis de una dependencia mayoritaria hacia el sector asociativo o informal.
 </Details>
-
-
-
