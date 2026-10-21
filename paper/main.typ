@@ -39,29 +39,32 @@
 
 #set par(
   justify: true,
-  leading: 0.8em,
-  spacing: 1.4em
+  leading: 0.65em,
+  spacing: 1.05em
 )
 
-#set figure(gap: 1em)
+#set figure(gap: 0.8em)
 #set figure.caption(separator: [. ])
+
+#set list(spacing: 0.75em)
+#set enum(spacing: 0.75em)
 
 #show heading.where(level: 1): it => block(
   width: 100%,
-  above: 2.0em,
-  below: 1.2em,
+  above: 1.5em,
+  below: 0.9em,
   align(center, text(weight: "bold", size: 16pt)[#it.body])
 )
 
 #show heading.where(level: 2): it => block(
-  above: 1.5em,
-  below: 0.8em,
+  above: 1.2em,
+  below: 0.6em,
   text(weight: "bold", size: 13pt)[#it.body]
 )
 
 #show heading.where(level: 3): it => block(
-  above: 1.2em,
-  below: 0.6em,
+  above: 1.0em,
+  below: 0.4em,
   text(weight: "bold", size: 12pt)[#it.body]
 )
 
@@ -127,11 +130,18 @@
 // ==========================================
 // ÍNDICE GENERAL
 // ==========================================
-#outline(
-  title: [Índice],
-  depth: 3,
-  indent: 1.5em,
-)
+#{
+  show outline.entry: it => {
+    set text(size: 9.5pt)
+    it
+  }
+  set par(leading: 0.45em)
+  outline(
+    title: [Índice],
+    depth: 2,
+    indent: 1.2em,
+  )
+}
 
 #pagebreak()
 
@@ -373,110 +383,202 @@ Como componente de interfaz y divulgación del producto integrador, se desarroll
 #pagebreak()
 
 // ==========================================
-// RESULTADOS Y DISCUSIÓN
+// CAPÍTULO VII: RESULTADOS Y ANÁLISIS
 // ==========================================
-= Resultados y discusión
+= Resultados y Análisis
 
-El análisis transversal segmentó el universo censal en dos cohortes definitivas (explotaciones financiadas y no financiadas), utilizando la variable de recepción de crédito como clave de partición principal. Esto permitió aislar estadísticamente el impacto socioeconómico de la inyección de capital, evaluando en primera instancia las barreras de acceso al ecosistema financiero, para luego contrastar las brechas relativas en la generación de empleo y la diversificación productiva.
+Los resultados derivados del procesamiento cuantitativo del universo censal (CENAGRO 2011) se presentan organizados en correspondencia directa con los tres objetivos específicos planteados en la investigación. Para cada dimensión, se contrasta la evidencia empírica provista por las visualizaciones vectoriales nativas con los datos numéricos y el marco teórico de la economía agraria.
 
-== Eficiencia del Ecosistema y Barreras de Entrada
+== Eficiencia del Ecosistema Financiero y Fuentes de Crédito
 
-La eficiencia de aprobación de crédito constituye el primer filtro estructural para el desarrollo agropecuario, operando como un indicador directo de la fricción institucional. Al modelar el embudo de acceso al crédito (Credit Funnel), se contrasta el volumen masivo de solicitudes emitidas por los productores frente a los capitales que fueron efectivamente desembolsados. Esta métrica visibiliza las barreras formales que enfrenta el sector rural al intentar capitalizar sus operaciones.
+En correspondencia con el tercer objetivo específico, se modeló el embudo de acceso al crédito (_Credit Funnel_) para cuantificar la fricción institucional que experimentan los productores agropecuarios al interactuar con el sistema financiero formal e informal.
 
 #figure(
   chart-embudo(),
   caption: [Embudo de Acceso al Crédito.]
 ) <fig-embudo>
 
-Como se demuestra en la @fig-embudo, la contracción más aguda no ocurre en la fase de evaluación bancaria, sino en la entrada misma al sistema crediticio: de las 262,546 explotaciones censadas en el país, únicamente 41,756 unidades (15.9%) lograron tramitar una solicitud de financiamiento. En contraste, entre los productores que consiguen formalizar su solicitud, la tasa empírica de aprobación asciende a un elevado 92.6% (38,680 créditos concedidos), frente a un rechazo de apenas el 7.4%. Este contraste demuestra empíricamente que la principal falla de mercado no reside en una denegación masiva de créditos en ventanilla, sino en una exclusión estructural de base (carencia de garantías hipotecarias, aislamiento geográfico o autoexclusión por informalidad) que impide al 84.1% de los productores tan siquiera postularse al sistema formal.
+Como se demuestra en la @fig-embudo, la contracción más aguda del sistema no ocurre en la fase de evaluación bancaria en ventanilla, sino en la entrada misma al circuito de financiamiento: de las 262,546 explotaciones censadas en el país, únicamente 41,756 unidades (15.9%) lograron tramitar una solicitud de financiamiento. En marcado contraste, entre los productores que consiguen formalizar su solicitud, la tasa empírica de aprobación asciende a un elevado 92.6% (38,680 créditos concedidos), frente a un rechazo de apenas el 7.4%.
 
-Paralelamente, el análisis de la matriz de orígenes de financiamiento confirma la estructura del mercado financiero en el sector agrario.
+Este contraste empírico desmiente la hipótesis tradicional de que la restricción crediticia obedece a una denegación masiva de solicitudes en ventanilla. Por el contrario, corrobora la formulación teórica de @boucher2008 sobre el racionamiento por riesgo y la autoexclusión: la principal falla de mercado reside en una barrera estructural de base (carencia de garantías hipotecarias, asimetrías de información, lejanía geográfica o aversión al riesgo de pérdida patrimonial) que margina al 84.1% de los productores antes de formular una solicitud.
+
+Paralelamente, se analizó la matriz de orígenes de financiamiento para caracterizar la composición institucional de los proveedores de capital en el agro.
 
 #figure(
   chart-fuentes(),
   caption: [Principales Fuentes de Financiamiento.]
 ) <fig-fuentes>
 
-De acuerdo con los datos reflejados en la @fig-fuentes, contrario a la asunción de que el agro nicaragüense se sostiene primariamente por vías informales o solidarias, la banca comercial privada (18,255 créditos) es el proveedor líder absoluto, duplicando casi el alcance de las estructuras asociativas (Cooperativas con 9,793) y superando ampliamente a las ONGs (2,662). Las fuentes informales (1,801 prestamistas y 1,618 acopiadores) y la banca estatal de fomento (Banco Produzcamos con 586) representan participaciones minoritarias en el volumen global. Este comportamiento demuestra que, para la minoría de explotaciones que logran insertarse en el circuito de crédito, el apalancamiento depende primariamente del ecosistema bancario tradicional y sus exigencias colaterales.
+De acuerdo con los datos reflejados en la @fig-fuentes, la banca comercial privada es el proveedor líder absoluto con 18,255 créditos otorgados, duplicando casi el alcance de las estructuras asociativas (cooperativas con 9,793 créditos) y superando con amplitud a las ONGs (2,662 créditos). Por su parte, las vías informales (1,801 prestamistas y 1,618 acopiadores) y la banca estatal de fomento (Banco Produzcamos con 586 créditos) presentan participaciones minoritarias en el volumen censal.
 
-En síntesis, los datos prueban que la privación de servicios financieros formales actúa como una barrera de entrada que margina a la mayoría del universo censal. El ecosistema financiero, lejos de funcionar como un habilitador fluido, limita el crecimiento macroeconómico del sector y confina a una gran proporción de las explotaciones a operar bajo modelos de subsistencia y vulnerabilidad de capital.
+Estos datos demuestran que, para la minoría de explotaciones que logran superar las barreras de entrada, el apalancamiento depende predominantemente de la banca tradicional y sus exigencias colaterales clásicas @stiglitz1981, limitando el alcance democratizador de las instituciones financieras solidarias o estatales durante el ciclo estudiado.
 
 #pagebreak()
 
-== Dinámica de la Fuerza Laboral: Densidad y Calidad del Empleo
+== Dinámica de la Fuerza Laboral: Densidad y Estabilidad Contractual
 
-Para cuantificar el impacto real de la inyección de capital en la generación de empleo agropecuario, se evaluó la Intensidad Laboral (absorción de trabajadores por manzana). Con el fin de aislar el sesgo generado por las economías de escala y evitar que el comportamiento de los minifundios distorsionara el análisis comparativo, la muestra se segmentó rigurosamente por clase de tamaño (`farm_size_class`). El sector micro no es tomado en cuenta para la métrica de intensidad laboral, agrupando en esa categoria las explotaciones agronomas que poseen menos de una manzana.
+Para dar respuesta al primer objetivo específico, se evaluó la Intensidad Laboral (absorción de trabajadores totales por manzana de superficie). Con el propósito de aislar el sesgo de economías de escala y evitar que los minifundios distorsionaran la comparación, la muestra se segmentó rigurosamente por clases de tamaño (`farm_size_class`), omitiendo el estrato micro (menor a una manzana) en este indicador.
 
 #figure(
   chart-intensidad(),
   caption: [Intensidad Laboral Mediana por Escala y Acceso a Crédito.]
 ) <fig-intensidad>
 
-Como se observa en la @fig-intensidad, los datos demuestran empíricamente que el financiamiento actúa como un catalizador expansivo para la contratación, desestimando la hipótesis de que el capital se destina primariamente a la sustitución tecnológica del trabajador. Las fincas clasificadas como medianas y grandes (Medium/Large) que recibieron crédito registraron un incremento masivo en su capacidad de absorción, superando en un 171.6% la mediana de intensidad laboral de las unidades equivalentes sin acceso a financiamiento. Asimismo, en el segmento de pequeñas explotaciones (Small), la brecha relativa se situó en un incremento del 33.3%.
+Como se observa en la @fig-intensidad, los resultados confirman que el financiamiento actúa como un multiplicador expansivo de la absorción laboral, desestimando la hipótesis de sustitución tecnológica de mano de obra por maquinaria. Las explotaciones medianas y grandes (_Medium/Large_) que recibieron crédito registraron un incremento masivo en su capacidad de absorción, superando en un 171.6% la mediana de intensidad laboral de las fincas homólogas sin crédito (0.326 vs. 0.120 trabajadores/Mz). Asimismo, en las unidades pequeñas (_Small_), la inyección de liquidez generó una brecha positiva del 33.3% (1.667 vs. 1.250 trabajadores/Mz).
 
-Más allá del volumen absoluto de contrataciones, resulta crítico evaluar la calidad y estabilidad del empleo generado. Se procedió a analizar el Ratio de Trabajo Permanente para determinar si la disponibilidad de liquidez permite a las explotaciones transitar desde un modelo dependiente de mano de obra puramente estacional (ratio 0.0) hacia estructuras de contratación continuas y estables (ratio 1.0).
+Más allá del volumen absoluto de contratación, se examinó la calidad del empleo a través del Ratio de Trabajo Permanente, midiendo si la liquidez facilita la transición de un esquema estacional (ratio 0.0) hacia relaciones laborales estables (ratio 1.0).
 
 #figure(
   chart-estabilidad(),
   caption: [Distribución de la Estabilidad Laboral (Proporción Relativa).]
 ) <fig-estabilidad>
 
-La @fig-estabilidad confirma la naturaleza estructuralmente bimodal y polarizada del mercado laboral rural nicaragüense. El análisis de la distribución revela que el 72.5% de las unidades financiadas operan exclusivamente con trabajadores temporales, una proporción ligeramente superior al 68.3% observado en el grupo no financiado. Inversamente, la consolidación de planillas compuestas en un 100% por personal permanente presenta una mayor prevalencia relativa en fincas sin crédito (12.0% frente a 5.8%).
+La @fig-estabilidad confirma una estructura bimodal y altamente polarizada en el mercado laboral rural nicaragüense. El 72.5% de las explotaciones financiadas operan exclusivamente con trabajadores temporales (ratio 0.0), cifra superior al 68.3% reportado por el grupo no financiado. En contraposición, las planillas compuestas en un 100% por personal permanente presentan una mayor prevalencia relativa en fincas no financiadas (12.0% frente a 5.88%).
 
-Estos resultados indican que el apalancamiento financiero funciona como un multiplicador extraordinario del volumen absoluto de empleo, pero dicho capital es inyectado predominantemente para satisfacer picos de demanda estacional (procesos intensivos de siembra, mantenimiento o cosecha). En consecuencia, si bien el crédito formaliza y expande drásticamente las operaciones agrícolas, la estructura de contratación subyacente mantiene una dependencia histórica hacia la fuerza laboral transitoria.
+Esta evidencia demuestra que, si bien el apalancamiento expande de manera notable la escala de contratación agregada, el capital crediticio se canaliza preponderantemente a solventar necesidades de capital de trabajo para picos estacionales de siembra y cosecha, perpetuando la dependencia estructural hacia la mano de obra transitoria sin inducir formalización contractual permanente.
 
 == Complejidad Productiva y Transición hacia la Intensificación Agrícola
 
-La resiliencia económica de una unidad productiva frente a la volatilidad climática y de mercado está estrechamente vinculada a su nivel de diversificación. Para evaluar si la inyección de capital promueve la adopción del policultivo como mecanismo de mitigación de riesgo, se contrastó el Índice de Diversificación (conteo de rubros operativos) entre las cohortes analizadas.
+En correspondencia con el segundo objetivo específico, se contrastó el Índice de Diversificación (conteo de rubros operativos simultáneos) y la composición del uso del suelo para verificar si el capital inyectado permite mitigar el riesgo de monocultivo y superar la extensificación pecuaria.
 
 #figure(
   chart-complejidad(),
   caption: [Densidad de Complejidad Productiva (Distribución Normalizada).]
 ) <fig-complejidad>
 
-Al contrastar la distribución en la @fig-complejidad, se evidencia un claro desplazamiento estadístico hacia una mayor diversificación en el grupo capitalizado. Mientras que las explotaciones no financiadas concentran su pico modal en apenas 2 rubros (25.1% de las fincas), la cohorte financiada traslada su moda hacia los 3 rubros (23.7%) y sostiene una mayor presencia relativa en niveles superiores de complejidad (4 a 6 rubros). Los cálculos de los deltas absolutos confirman que las unidades con acceso a crédito incorporan en promedio 0.29 rubros adicionales (media de 3.65 frente a 3.36 rubros). Este comportamiento demuestra empíricamente que el apalancamiento financiero reduce el riesgo y supera las barreras de entrada para nuevos cultivos, rompiendo la dependencia hacia el monocultivo o la especialización pecuaria pura.
+Al evaluar la distribución en la @fig-complejidad, se evidencia un desplazamiento estadístico hacia niveles superiores de diversificación en el grupo financiado. Mientras que las unidades no financiadas concentran su pico modal en apenas 2 rubros (25.1% de las fincas), la cohorte capitalizada traslada su moda hacia los 3 rubros (23.7%) y sostiene una mayor presencia en estratos de alta complejidad (4 a 6 rubros). En términos absolutos, las fincas con crédito incorporan en promedio 0.29 rubros adicionales (media de 3.65 frente a 3.36 rubros), confirmando que el financiamiento mitiga las barreras de entrada para la diversificación de cultivos.
 
-De forma complementaria, el análisis evaluó si el acceso a crédito fomenta una transición desde la ganadería extensiva (modelo de bajo rendimiento dominante a nivel nacional) hacia la intensificación agrícola. Para ello, se contrastó la composición del uso del suelo y el Ratio Pasto-Cultivo. Una ratio menor a 1.0 indica un dominio de la superficie agrícola, mientras que un valor superior refleja una vocación de intensificación ganadera.
+Complementariamente, se examinó la transición en la vocación del uso de la tierra a través de la superficie asignada a Cultivos Permanentes frente a Pasto Natural y el Ratio Pasto-Cultivo.
 
 #figure(
   chart-vocacion(),
   caption: [Proporción del Área Destinada a Cultivos vs. Pasturas Naturales.]
 ) <fig-pasto>
 
-La @fig-pasto ilustra una alteración estructural en la vocación económica del suelo impulsada por el financiamiento. Las explotaciones con acceso a crédito destinan en promedio un 22.9% de su área total a Cultivos Permanentes, superando de forma sustancial el 13.6% observado en las unidades no financiadas. En contrapartida, la superficie asignada a Pasto Natural disminuye del 19.1% en las no financiadas al 16.8% en las financiadas. En consecuencia, el Ratio Pasto-Cultivo medio desciende marcadamente de 4.18 a 2.71 (un delta de -1.47), confirmando una transición efectiva hacia un modelo de intensificación agrícola.
+La @fig-pasto ilustra una reconfiguración estructural en la vocación económica del suelo inducida por el financiamiento. Las fincas financiadas destinan en promedio un 22.9% de su área total a Cultivos Permanentes, superando notablemente el 13.6% registrado en las no financiadas (+9.3 puntos porcentuales). Paralelamente, la superficie asignada a Pasto Natural desciende del 19.1% al 16.8%. En consecuencia, el Ratio Pasto-Cultivo promedio desciende marcadamente de 4.18 a 2.71 (un delta absoluto de -1.47).
 
-Esta reducción relativa de pasturas y el incremento en cultivos permanentes corrobora que el financiamiento permite a los productores escapar de la "trampa de la extensificación" ganadera tradicional. Al dotar a la unidad agrícola de recursos suficientes, el capital inhibe la expansión pasiva mediante potreros extensivos y, en su lugar, canaliza la inversión hacia la intensificación tecnológica y la siembra de rubros perennes de ciclo largo (como café, cacao o frutales), los cuales exigen una alta inversión inicial y tiempo de maduración biológica, pero garantizan una mayor rentabilidad y estabilidad por manzana en el largo plazo.
-
-#pagebreak()
-
-// ==========================================
-// CONCLUSIONES Y/O RECOMENDACIONES
-// ==========================================
-= Conclusiones y/o recomendaciones
-
-El procesamiento determinista y el análisis empírico de los microdatos del CENAGRO 2011 mediante una arquitectura de Modern Data Stack permiten establecer las siguientes conclusiones estructurales sobre el impacto del financiamiento agropecuario en Nicaragua:
-
-- *Expansión laboral estacional (Refutación de formalización):* Se demuestra estadísticamente que el financiamiento actúa como un multiplicador masivo de escala operativa. Las explotaciones capitalizadas absorben una densidad laboral exponencialmente mayor, registrando un incremento relativo del 171.6% por manzana en unidades medianas y grandes. Sin embargo, la liquidez no genera formalidad contractual; el capital es inyectado predominantemente para financiar picos de temporalidad, perpetuando un modelo agrario dependiente de la mano de obra estacional en lugar de consolidar planillas permanentes.
-- *Resiliencia productiva e intensificación:* La inyección de capital rompe la trampa de la especialización de bajo valor. Se comprueba que el crédito mitiga el riesgo de entrada a nuevos mercados, incrementando el Índice de Diversificación. Este apalancamiento promueve el abandono sistemático de la ganadería extensiva tradicional a favor de modelos dinámicos de policultivo e intensificación agrícola.
-- *Fricción institucional por exclusión, no por rechazo:* A pesar del impacto socioeconómico expansivo en las unidades capitalizadas, la falla sistémica del ecosistema financiero no radica en el rechazo crediticio, dado que la Tasa de Aprobación empírica es excepcionalmente alta (\~92.6%). El verdadero cuello de botella es la profunda exclusión estructural (penetración del \~15.9%), revelando que la inmensa mayoría de los productores operan bajo condiciones de subsistencia o informalidad que les impiden siquiera ingresar al sistema para solicitar un crédito.
-
-#align(right)[*Recomendaciones estratégicas:*]
-
-- *Democratización del crédito:* Se recomienda formular políticas públicas orientadas a reducir las barreras de entrada del sistema bancario formal, estableciendo al financiamiento como un catalizador indispensable para la reducción de la pobreza multidimensional, la fijación de la fuerza laboral rural y la modernización de la matriz productiva.
-- *Optimización basada en datos:* Se sugiere la integración gubernamental de infraestructuras de datos desacopladas y procesamiento analítico de alto rendimiento para mejorar la trazabilidad, focalización y eficiencia en la distribución de los servicios financieros del Estado.
-
-== Disponibilidad de datos y código
-
-Para garantizar la reproducibilidad y el escrutinio científico independiente, los recursos computacionales desarrollados para esta investigación se encuentran disponibles públicamente:
-- *Código fuente y pipeline ETL:* Repositorio en GitHub (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]), implementado por J. D. Miranda Pérez con Apache DataFusion, DuckDB y Evidence.dev.
-- *Portal interactivo:* Panel analítico web para consulta pública (#link("https://cenagro-analytics-ni.netlify.app")[https://cenagro-analytics-ni.netlify.app]).
-- *Dataset procesado:* Base consolidada en formato Parquet depositada en Zenodo bajo licencia CC-BY 4.0 @miranda2026dataset.
+Este comportamiento valida empíricamente la teoría de intensificación de @boserup1965: el acceso a capital permite a los productores escapar de la «trampa de la extensificación» ganadera tradicional (potreros extensivos de bajo rendimiento), invirtiendo en rubros perennes de ciclo largo (café, cacao, frutales) que demandan una alta inversión inicial y maduración biológica, pero garantizan mayor rentabilidad por manzana y resiliencia en el largo plazo.
 
 #pagebreak()
 
 // ==========================================
-// REFERENCIAS BIBLIOGRÁFICAS
+// CAPÍTULO VIII: CONCLUSIONES
 // ==========================================
-= Referencias bibliográficas
+= Conclusiones
+
+El procesamiento determinista y el análisis empírico de los microdatos del IV Censo Nacional Agropecuario (CENAGRO 2011) mediante una arquitectura de _Modern Data Stack_ permiten establecer las siguientes conclusiones estructurales en correspondencia directa con los objetivos planteados:
+
++ *Expansión laboral estacional y refutación de la sustitución tecnológica:* Se comprobó empíricamente que el financiamiento actúa como un potente catalizador de escala operativa y absorción de mano de obra en el campo, desestimando la hipótesis de sustitución tecnológica por mecanización. Las unidades medianas y grandes financiadas registraron un incremento masivo del 171.6% en su mediana de intensidad laboral (0.326 vs. 0.120 trabajadores/Mz), y las unidades pequeñas un aumento del 33.3% (1.667 vs. 1.250 trabajadores/Mz). Sin embargo, se evidenció una paradoja en la calidad contractual: el capital inyectado se destina predominantemente a financiar picos de demanda estacional (siembra y cosecha), perpetuando la dependencia del trabajo transitorio (72.5% de unidades financiadas operan con ratio permanente 0.0) en lugar de consolidar planillas fijas.
++ *Ruptura de la trampa de extensificación y diversificación productiva:* Se verificó que el apalancamiento financiero promueve una reconfiguración favorable en la vocación del uso del suelo, validando los postulados de intensificación agrícola de Boserup. Las explotaciones con crédito aumentaron significativamente su proporción de cultivos permanentes del 13.6% al 22.9% (+9.3 puntos porcentuales) y redujeron la superficie en pastos naturales del 19.1% al 16.8%, contrayendo el Ratio Pasto-Cultivo promedio de 4.18 a 2.71. Asimismo, el crédito facilitó la superación de barreras de entrada hacia nuevos rubros, desplazando el pico modal del Índice de Diversificación de 2 a 3 actividades productivas y mejorando la resiliencia económica frente al monocultivo.
++ *Falla de mercado por exclusión estructural de entrada, no por rechazo bancario:* El análisis del embudo de financiamiento demostró que el cuello de botella crítico del ecosistema rural no radica en una denegación generalizada de solicitudes en ventanilla bancaria (donde la tasa empírica de aprobación alcanza un elevado 92.6%), sino en una severa exclusión de base. El 84.1% de los productores censados ni siquiera formalizó una solicitud de préstamo formal, condicionados por la carencia de garantías hipotecarias, aislamiento geográfico y la autoexclusión por aversión al riesgo de pérdida patrimonial ante choques productivos.
++ *Aporte y pertinencia del producto integrador en Ciencia de Datos:* Se demostró la viabilidad técnica y el valor metodológico de integrar herramientas modernas de código abierto (Rust, Apache DataFusion, DuckDB, Parquet y Evidence.dev) para procesar censos masivos en hardware de consumo estándar. La articulación interdisciplinaria del plan de estudios permitió construir una infraestructura analítica reproducible, inmutable y auditada, capaz de transformar microdatos censales brutos en evidencia empírica rigurosa para el diseño de políticas públicas.
+
+#pagebreak()
+
+// ==========================================
+// CAPÍTULO IX: RECOMENDACIONES O PROYECCIONES
+// ==========================================
+= Recomendaciones o Proyecciones
+
+A partir de los hallazgos cuantitativos y de la experiencia en el desarrollo del producto integrador, se formulan las siguientes recomendaciones y proyecciones:
+
+== Recomendaciones de Política Pública y Fomento Financiero
+
++ *Diseño de esquemas de garantías no colaterales:* Dado que la falla principal radica en la exclusión de entrada y no en el rechazo en ventanilla, se recomienda fortalecer los fondos de garantía recíproca y promover figuras de aval solidario o garantías reputacionales mediante el Banco Produzcamos y el movimiento cooperativo, reduciendo la dependencia excluyente del título hipotecario formal.
++ *Incentivos al crédito orientados a la formalización laboral:* Formular líneas crediticias preferenciales o bonificaciones de tasa de interés para aquellas unidades productivas que utilicen el apalancamiento no solo para financiar zafras temporales, sino para formalizar contratos laborales continuos y estables durante todo el ciclo anual.
++ *Crédito verde y asistencia técnica para intensificación perenne:* Canalizar recursos financieros condicionados a planes de reconversión de pasturas naturales degradadas hacia sistemas agroforestales y cultivos perennes de alto valor biológico (café, cacao, frutales), impulsando la productividad por manzana y mitigando la presión de frontera agrícola.
+
+== Modernización de la Gestión Pública Basada en Datos
+
++ *Adopción de arquitecturas analíticas desacopladas en el sector público:* Promover en instituciones rectoras (INIDE, MAG, MEFCCA) la implementación de estándares de datos abiertos (Parquet/Arrow) y bases analíticas embebidas (DuckDB), permitiendo a analistas y funcionarios auditar microdatos masivos con costos de infraestructura computacional mínimos.
++ *Portal de inteligencia territorial para la toma de decisiones:* Utilizar plataformas analíticas basadas en código (similares al portal desarrollado en Evidence.dev) para visibilizar transparentemente las brechas departamentales de crédito y empleo, facilitando la focalización territorial de subsidios y programas sociales.
+
+== Proyecciones de Continuidad Investigativa
+
++ *Modelado predictivo de riesgo crediticio con variables productivas:* Extender este producto integrador mediante algoritmos de aprendizaje automático (_Machine Learning_) que evalúen el perfil crediticio del productor incorporando su diversificación productiva y aptitud agroecológica como factores atenuantes de riesgo.
++ *Análisis dinámico longitudinal con censos agropecuarios futuros:* Desarrollar metodologías de emparejamiento por panel sintético cuando se publiquen nuevos levantamientos censales, permitiendo evaluar el impacto causal de mediano y largo plazo del crédito sobre la productividad total de los factores.
+
+#pagebreak()
+
+// ==========================================
+// REFERENCIAS
+// ==========================================
+= Referencias
 
 #bibliography("references.bib", style: "apa", title: none)
+
+#pagebreak()
+
+// ==========================================
+// ANEXOS
+// ==========================================
+= Anexos
+
+== Anexo A: Diccionario de Variables Analíticas Clave (CENAGRO 2011)
+
+A continuación, se describen las principales variables operativas del CENAGRO 2011 procesadas y transformadas en la bodega de datos analítica:
+
+#align(center)[
+  #text(size: 9.5pt)[
+    #table(
+      columns: (2.3fr, 0.9fr, 1.4fr, 2.7fr),
+      fill: (col, row) => if row == 0 { rgb("e2e8f0") } else { none },
+      align: (col, row) => if col == 1 { center } else { left },
+      stroke: 0.5pt + luma(120),
+      [Nombre de Variable], [Tipo], [Tabla de Origen], [Descripción Operativa],
+      [`farm_uid`], [`INT64`], [`farms`], [Identificador único de la Explotación Agropecuaria (EA).],
+      [`received_loan`], [`BOOLEAN`], [`farm_credit_access`], [Indica si la EA recibió financiamiento en el ciclo censal.],
+      [`requested_loan`], [`BOOLEAN`], [`farm_credit_access`], [Indica si la EA gestionó una solicitud formal de crédito.],
+      [`farm_size_class`], [`VARCHAR`], [`farms`], [Estrato de tamaño censal: Micro (< 1 Mz), Small (1 a 10 Mz), Medium/Large (> 10 Mz).],
+      [`total_area_mz`], [`FLOAT64`], [`farms`], [Superficie total de la EA en manzanas censales.],
+      [`labor_intensity`], [`FLOAT64`], [`farm_labor`], [Total de trabajadores absorbidos dividido entre la superficie total (trabajadores/Mz).],
+      [`permanent_labor_ratio`], [`FLOAT64`], [`farm_labor`], [Proporción de trabajadores permanentes respecto a la mano de obra total (0.0 a 1.0).],
+      [`diversification_index`], [`INT32`], [`farms`], [Conteo de actividades productivas simultáneas presentes en la finca (1 a 8 rubros).],
+      [`pasture_to_crop_ratio`], [`FLOAT64`], [`farms`], [Superficie de pastos dividida entre superficie de cultivos activos.]
+    )
+  ]
+]
+
+#pagebreak()
+
+== Anexo B: Diagrama de Arquitectura del Producto Integrador
+
+El siguiente esquema describe el flujo de ingeniería de datos y la arquitectura desacoplada de _Modern Data Stack_ implementada en el proyecto:
+
+#align(center)[
+  #block(
+    width: 95%,
+    stroke: 0.5pt + luma(140),
+    radius: 4pt,
+    inset: 1.2em,
+    fill: rgb("f8fafc")
+  )[
+    #text(weight: "bold", size: 11pt)[Flujo de Datos e Infraestructura Computacional:] \
+    #v(0.6em)
+    *1. Microdatos Binarios Crudos* (`CENAGRO 2011 .sav`) \
+    #text(size: 9pt)[Archivos relacionales originales provistos por INIDE y MAGFOR (~100 MB)] \
+    $arrow.b$ \
+    *2. Pipeline ETL Vectorizado en Rust* (`Apache DataFusion` + `Apache Arrow`) \
+    #text(size: 9pt)[Downcasting de tipos, Dictionary Encoding, saneamiento de nulos y conversión columnar Parquet (~10 MB)] \
+    $arrow.b$ \
+    *3. Bodega de Datos Analítica OLAP* (`DuckDB In-Process Engine`) \
+    #text(size: 9pt)[Tablas de hechos normalizadas (`farm_labor`, `farm_credit_access`, `farm_land_use`) y consultas SQL con UNPIVOT] \
+    $arrow.b$ \
+    *4. Capas de Divulgación y Síntesis Científica:* \
+    - *Portal Web Interactivo:* Framework `Evidence.dev` desplegado en Netlify \
+    - *Informe Científico:* Tipografía vectorial y gráficos dinámicos con `Typst` y `CeTZ` \
+    - *Repositorio de Datos Abiertos:* Dataset Parquet inmutable con DOI en `Zenodo`
+  ]
+]
+
+== Anexo C: Evidencias y Recursos de Acceso Abierto
+
+Para garantizar la auditoría, transparencia y reproducibilidad completa del estudio, los recursos se encuentran disponibles públicamente en las siguientes plataformas:
+
+- *Repositorio de Código Fuente (GitHub):* Contiene los scripts de ingesta en Rust, consultas en DuckDB, código de Evidence y la maquetación en Typst: \
+  #link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]
+- *Plataforma Analítica Interactiva (Netlify):* Portal web para consulta pública con visualizaciones interactivas de las distribuciones censales: \
+  #link("https://cenagro-analytics-ni.netlify.app")[https://cenagro-analytics-ni.netlify.app]
+- *Conjunto de Datos Procesado (Zenodo):* Base de microdatos censales depurada en formato Parquet, con DOI permanente y licencia Creative Commons Atribución 4.0 Internacional (CC-BY 4.0): \
+  #link("https://doi.org/10.5281/zenodo.20652059")[https://doi.org/10.5281/zenodo.20652059] (Miranda Pérez, 2026).
+
