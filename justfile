@@ -91,4 +91,15 @@ run-pipeline:
     -e OUT_DIR=data \
     localhost/transformer-integrador-3:dev
 
+compile-paper:
+  typst compile paper/main.typ paper/main.pdf
+
+watch-paper:
+  typst watch paper/main.typ paper/main.pdf
+
+compare-paper:
+  mkdir -p paper/comparison/original paper/comparison/typst
+  pdftoppm -png -r 150 documento.pdf paper/comparison/original/page
+  pdftoppm -png -r 150 paper/main.pdf paper/comparison/typst/page
+
 
