@@ -1,5 +1,5 @@
 // Metadata and configuration shared across paper documents
-#let title = "Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011)"
+#let title = "Impacto del Financiamiento en el Empleo y la Diversificación Productiva de Explotaciones Agropecuarias Nicaragüenses"
 
 #let title-short = "Impacto del Financiamiento en el Agro de Nicaragua"
 

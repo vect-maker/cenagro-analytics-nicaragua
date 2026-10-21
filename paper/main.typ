@@ -128,7 +128,7 @@
   #v(0.5cm)
   #text(weight: "bold", size: 11pt)[Tutor:] \
   #v(0.15cm)
-  #text(size: 12pt)[#tutor.name]
+  #text(size: 12pt)[#tutor.name] - (ORCID: #link("https://orcid.org/" + tutor.orcid)[#tutor.orcid])
 
   #v(0.6cm)
   #text(size: 11pt)[
@@ -193,7 +193,7 @@ Resolver estas preguntas requiere procesar el universo censal sin sesgos de agre
 
 La justificación de esta investigación abarca dimensiones teóricas, metodológicas y de impacto social:
 
-En el plano socioeconómico, la privación de servicios financieros en el campo no representa únicamente una restricción contable, sino una manifestación crítica de la *pobreza multidimensional*. Desde el enfoque de capacidades y libertades de Amartya Sen y el Programa de las Naciones Unidas para el Desarrollo (PNUD), el crédito opera como un habilitador de activos productivos que permite a los hogares rurales mitigar choques externos, adquirir insumos tecnológicos y estabilizar los ingresos de la mano de obra. 
+En el plano socioeconómico, la privación de servicios financieros en el campo no representa únicamente una restricción contable, sino una manifestación crítica de la *pobreza multidimensional*. Desde el enfoque de capacidades y libertades de Amartya Sen y el Programa de las Naciones Unidas para el Desarrollo (PNUD), el crédito opera como un habilitador de activos productivos que permite a los hogares rurales mitigar choques externos, adquirir insumos tecnológicos y estabilizar los ingresos de la mano de obra.
 
 Asimismo, la investigación se fundamenta en las prioridades estratégicas del Estado de Nicaragua, articulándose con el *Plan Nacional de Lucha contra la Pobreza para el Desarrollo Humano 2022-2026*, específicamente bajo su *Principio 4: Soberanía y Seguridad Alimentaria y Nutricional* y el *Eje 8: Producción en el Campo, Crédito y Diversificación* @grun2021[pp. 21, 98-103]. Proveer evidencia cuantitativa rigurosa a partir del CENAGRO permite informar la formulación de políticas públicas orientadas a democratizar los instrumentos de crédito rural y optimizar la asignación del gasto público.
 
@@ -592,4 +592,3 @@ Para garantizar la auditoría, transparencia y reproducibilidad completa del est
   #link("https://cenagro-analytics-ni.netlify.app")[https://cenagro-analytics-ni.netlify.app]
 - *Conjunto de Datos Procesado (Zenodo):* Base de microdatos censales depurada en formato Parquet, con DOI permanente y licencia Creative Commons Atribución 4.0 Internacional (CC-BY 4.0): \
   #link("https://doi.org/10.5281/zenodo.20652059")[https://doi.org/10.5281/zenodo.20652059] (Miranda Pérez, 2026).
-
