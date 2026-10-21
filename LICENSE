@@ -1,0 +1,70 @@
+# Licencias del Proyecto / Project Licenses
+
+Este repositorio utiliza un esquema de licenciamiento dual para distinguir los derechos y la atribución del software/pipeline respecto a la producción académica y documental:
+
+---
+
+## 1. Código Fuente y Pipeline de Datos (Software)
+
+El código fuente de este repositorio (incluyendo el pipeline ETL en Rust/Apache DataFusion, scripts de ingesta en Python, esquemas DDL/DML para DuckDB y la configuración de contenedores) se distribuye bajo la **Licencia MIT**:
+
+```text
+MIT License
+
+Copyright (c) 2026 José Daniel Miranda Pérez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 2. Artículo Científico, Textos e Informes Analíticos (Contenido)
+
+El manuscrito del artículo científico (`paper/`), figuras generadas, informes y textos explicativos se distribuyen bajo la licencia **Creative Commons Atribución 4.0 Internacional (CC-BY 4.0)**:
+
+**Titulares de los derechos de autor (Coautores):**
+* Kendall Ezequiel Aguilar Rodríguez
+* José Daniel Miranda Pérez
+* Ricardo Alberto Oyarzo Morales
+* Luis David Medrano Dávila
+
+Universidad Nacional Autónoma de Nicaragua, Managua (UNAN-Managua).
+
+Usted es libre de:
+* **Compartir:** Copiar y redistribuir el material en cualquier medio o formato.
+* **Adaptar:** Remezclar, transformar y construir a partir del material para cualquier propósito, incluso comercialmente.
+
+Bajo los siguientes términos:
+* **Atribución:** Debe dar crédito a todos los autores mencionados de manera adecuada, brindar un enlace a la licencia, e indicar si se han realizado cambios. Puede hacerlo en cualquier forma razonable, pero no de forma tal que sugiera que usted o su uso tienen el apoyo de los licenciantes.
+
+Texto legal completo disponible en: https://creativecommons.org/licenses/by/4.0/legalcode.es
+
+---
+
+## 3. Dataset Procesado (Zenodo)
+
+Los microdatos normalizados en formato Parquet se distribuyen en acceso abierto bajo licencia **Creative Commons Atribución 4.0 Internacional (CC-BY 4.0)**:
+* **Autor / Creador:** José Daniel Miranda Pérez
+* **DOI:** [10.5281/zenodo.20652059](https://doi.org/10.5281/zenodo.20652059)
+
+---
+
+## 4. Documentos de Referencia de Terceros
+
+Los documentos oficiales en formato PDF preservados en `paper/reference_documents/` pertenecen a sus respectivas instituciones gubernamentales (INIDE, MAGFOR, PGR/GRUN) y se conservan exclusivamente con fines académicos, de cita y verificación de reproducibilidad (Uso Justo). Consulte `paper/reference_documents/README.md` para el descargo de responsabilidad detallado.

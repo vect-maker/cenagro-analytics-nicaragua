@@ -172,6 +172,52 @@ Este comando activa una sesión de terminal multiplexada con el editor, consola 
 
 ---
 
-## ⚖️ Licencia y Atribución de Terceros
-* **Dataset de Investigación:** Publicado bajo licencia [Creative Commons Attribution 4.0 International (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/) en Zenodo ([10.5281/zenodo.20652059](https://zenodo.org/records/20652059)).
-* **Documentos Oficiales de Referencia:** Los archivos PDF preservados en `paper/reference_documents/` son publicaciones institucionales del Estado de Nicaragua (INIDE, MAGFOR, PGR/GRUN). Se almacenan exclusivamente con fines académicos, de verificación y reproducibilidad científica sin fines comerciales. Para más detalles, consulte el [descargo de responsabilidad y atribución](paper/reference_documents/README.md).
+## ⚖️ Licenciamiento Dual y Atribución
+
+Este repositorio aplica un modelo de licenciamiento diferenciado para salvaguardar la autoría del software y la autoría colectiva del trabajo de investigación (ver detalles completos en [LICENSE](LICENSE)):
+
+* **Pipeline ETL y Software:** Licencia **[MIT](LICENSE)** — Copyright (c) 2026 **José Daniel Miranda Pérez**.
+* **Artículo Científico y Documentación:** Licencia **[Creative Commons CC-BY 4.0](LICENSE)** — Copyright (c) 2026 **Kendall Ezequiel Aguilar Rodríguez, José Daniel Miranda Pérez, Ricardo Alberto Oyarzo Morales, Luis David Medrano Dávila**.
+* **Dataset Procesado:** Licencia **[CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)** — Creado por **José Daniel Miranda Pérez** en Zenodo ([10.5281/zenodo.20652059](https://zenodo.org/records/20652059)).
+* **Documentos Oficiales:** Publicaciones oficiales de INIDE, MAGFOR y GRUN conservadas para reproducibilidad científica bajo [Uso Justo y Descargo de Responsabilidad](paper/reference_documents/README.md).
+
+---
+
+## 📖 Cómo Citar / How to Cite
+
+Si utiliza este trabajo en sus investigaciones, proyectos o desarrollo de software, por favor cite los componentes correspondientes:
+
+### 1. Para citar el artículo científico (Todos los coautores):
+```bibtex
+@article{aguilar2026impacto,
+  author  = {Aguilar Rodríguez, Kendall Ezequiel and Miranda Pérez, José Daniel and Oyarzo Morales, Ricardo Alberto and Medrano Dávila, Luis David},
+  title   = {Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011)},
+  year    = {2026},
+  school  = {Universidad Nacional Autónoma de Nicaragua, Managua (UNAN-Managua)},
+  note    = {Carrera de Ingeniería en Ciencias de Datos}
+}
+```
+
+### 2. Para citar el pipeline de ingeniería y arquitectura computacional:
+```bibtex
+@software{miranda2026pipeline,
+  author  = {Miranda Pérez, José Daniel},
+  title   = {CENAGRO Analytics Pipeline: High-Performance Data Engineering and Modern Data Stack for Agricultural Census Microdata},
+  year    = {2026},
+  url     = {https://github.com/vect-maker/cenagro-analytics-nicaragua},
+  version = {1.0.0}
+}
+```
+
+### 3. Para citar el dataset procesado en Parquet (Zenodo):
+```bibtex
+@dataset{miranda2026dataset,
+  author    = {Miranda Pérez, José Daniel},
+  title     = {Processed Dataset: CENAGRO 2011 (Nicaragua) - Agricultural Financing and Labor Impact},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {1.0.0},
+  doi       = {10.5281/zenodo.20652059},
+  url       = {https://doi.org/10.5281/zenodo.20652059}
+}
+```
