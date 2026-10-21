@@ -205,7 +205,7 @@ El presente trabajo surge como resultado directo de la integración de competenc
 
 - *CITG013 - Integrador III*: Eje articulador del proyecto, aportando las bases metodológicas de la investigación científica, la definición del problema, la formulación de objetivos, la gestión colaborativa del ciclo de vida del software y la redacción del informe técnico.
 - *CPRG011 - Programación I*: Desarrollo de algoritmos de procesamiento de datos y construcción del pipeline ETL mediante tecnologías modernas de alto rendimiento en Rust (Apache DataFusion), aplicando principios de tipado estricto, gestión segura de memoria y ejecución vectorizada inmutable.
-- *CEST011 - Estadística I*: Diseño de la metodología cuantitativa transversal, formulación de contrastes de cohortes, cálculo de estadísticos no paramétricos robustos (medianas y rangos intercuartílicos), construcción de distribuciones de frecuencia y control de sesgos por escala censal (`farm_size_class`).
+- *CEST011 - Estadística I*: Diseño de la metodología cuantitativa transversal, comparación estadística entre grupos (con y sin crédito), cálculo de estadísticos no paramétricos robustos (medianas y rangos intercuartílicos), construcción de distribuciones de frecuencia y control de sesgos por escala censal (`farm_size_class`).
 - *CBDN020 - Base de Datos Relacionales*: Modelado dimensional de la bodega de datos analítica (_warehouse_) bajo esquema en estrella/copo de nieve, normalización de tablas de dimensiones y hechos (`farm_labor`, `farm_credit_access`, `farm_land_use`), aseguramiento de la integridad referencial y ejecución de consultas SQL analíticas avanzadas (CTEs, agregaciones por ventana y funciones `UNPIVOT`).
 - *CMAT183 - Matemática III*: Fundamentación de operaciones matriciales y algebraicas subyacentes en el procesamiento columnar de vectores de datos en memoria, así como optimización de funciones matemáticas para el cálculo de distancias e índices de diversificación productiva.
 - *CING020 - Inglés Técnico*: Consulta, comprensión y asimilación de documentación técnica especializada en idioma inglés para herramientas computacionales de frontera (Apache DataFusion, DuckDB, Evidence.dev, Typst), así como la redacción del ensayo técnico complementario de la investigación.
@@ -285,7 +285,7 @@ Evaluar el impacto del financiamiento en la generación de empleo y la diversifi
 // ==========================================
 = Integración de los Componentes Curriculares
 
-La ejecución de este proyecto de investigación se fundamenta en la articulación interdisciplinaria de seis componentes curriculares correspondientes al plan de estudios de la carrera de Ingeniería en Ciencias de Datos de la UNAN-Managua. La convergencia sinérgica de estas disciplinas permitió transformar un desafío complejo de microdatos censales masivos y heterogéneos en una solución analítica rigurosa, reproducible y de alto rendimiento computacional.
+Este proyecto de investigación integra los conocimientos de seis asignaturas de la carrera de Ingeniería en Ciencias de Datos de la UNAN-Managua. La combinación de estas materias permitió procesar y analizar eficientemente el gran volumen de datos del censo agropecuario, logrando un estudio riguroso, confiable y reproducible.
 
 A continuación, se detalla la contribución específica de cada componente curricular, los aprendizajes aplicados y su interacción concreta en el desarrollo del estudio:
 
@@ -299,7 +299,7 @@ Proveyó las bases computacionales para el desarrollo de software estructurado y
 
 == CEST011 - Estadística I
 
-Constituyó la base analítica para el tratamiento cuantitativo de los datos censales. Se aplicaron técnicas de estadística descriptiva e inferencial no paramétrica para caracterizar variables asimétricas y con distribuciones de ley de potencia (como el tamaño de la tierra y la fuerza laboral). El dominio de medidas de tendencia central robustas (medianas y rangos intercuartílicos), tablas de frecuencias cruzadas, distribuciones relativas normalizadas y técnicas de segmentación demográfica permitió controlar el sesgo de economías de escala (`farm_size_class`), asegurando que las comparaciones de absorción laboral y diversificación entre cohortes financiadas y no financiadas fueran estadísticamente válidas y confiables.
+Constituyó la base analítica para el tratamiento cuantitativo de los datos censales. Se aplicaron técnicas de estadística descriptiva e inferencial no paramétrica para caracterizar variables asimétricas y con distribuciones de ley de potencia (como el tamaño de la tierra y la fuerza laboral). El dominio de medidas de tendencia central robustas (medianas y rangos intercuartílicos), tablas de frecuencias cruzadas, distribuciones relativas normalizadas y técnicas de segmentación demográfica permitió controlar el sesgo de economías de escala (`farm_size_class`), asegurando que las comparaciones de absorción laboral y diversificación entre fincas financiadas y no financiadas fueran estadísticamente válidas y confiables.
 
 == CBDN020 - Base de Datos Relacionales
 
@@ -326,7 +326,7 @@ La articulación entre los seis componentes no operó como una suma aislada de m
 
 == Enfoque y Tipo de Investigación
 
-La investigación se desarrolló bajo un enfoque cuantitativo, de diseño no experimental y de corte transversal. El alcance es de carácter descriptivo-analítico y correlacional, orientado a contrastar y evaluar empíricamente las brechas socioeconómicas generadas por el financiamiento en las unidades agrarias durante el ciclo censal. El estudio trata el corpus censal como un artefacto de datos inmutable y cerrado, sobre el cual se ejecutan particiones por cohortes (_A/B testing observacional_) para aislar estadísticamente el impacto del crédito sin manipular el entorno productivo real @cenagro2013[p. 12].
+La investigación se desarrolló bajo un enfoque cuantitativo, de diseño no experimental y de corte transversal. El alcance es de carácter descriptivo-analítico y correlacional, orientado a contrastar y evaluar empíricamente las brechas socioeconómicas generadas por el financiamiento en las unidades agrarias durante el ciclo censal. El estudio aborda los datos del censo como una base analítica consolidada, sobre la cual se clasifica y compara a las fincas en dos grupos principales (con financiamiento y sin financiamiento), aislando estadísticamente el impacto del crédito sin intervenir en el entorno productivo real @cenagro2013[p. 12].
 
 == Población y Unidades de Análisis
 
@@ -343,7 +343,7 @@ El desarrollo de la investigación y del producto integrador se estructuró en c
 + *Fase 1: Ingesta y conversión estructural:* Lectura automatizada de los microdatos binarios de origen y conversión al estándar columnar abierto Apache Parquet, reduciendo el volumen de almacenamiento de 100 MB a 10 MB y habilitando lecturas rápidas sin sobrecarga de entrada/salida.
 + *Fase 2: Limpieza, tipificación y perfilado:* Depuración de anomalías, imputación determinista de tipos de datos de precisión mínima viable mediante _downcasting_ y codificación de diccionarios (_dictionary encoding_) para variables categóricas, eliminando valores inválidos o registros huérfanos.
 + *Fase 3: Modelado dimensional:* Diseño de un esquema analítico en estrella en DuckDB, vinculando tablas de dimensiones geográficas y estructurales con tablas de hechos operativas (`farm_labor`, `farm_credit_access`, `farm_land_use`).
-+ *Fase 4: Agregación analítica y partición por cohortes:* Formulación de consultas SQL analíticas para segmentar el universo censal en cohortes (financiadas vs. no financiadas), controlando por estratos de escala y derivando las métricas de empleo, suelo y diversificación.
++ *Fase 4: Agregación analítica y segmentación por grupos:* Formulación de consultas SQL analíticas para clasificar las explotaciones agropecuarias en grupos de comparación (financiadas frente a no financiadas), controlando por estratos de escala y derivando las métricas de empleo, suelo y diversificación.
 + *Fase 5: Síntesis gráfica y comunicación científica:* Implementación de visualizaciones vectoriales nativas en CeTZ y redacción del informe técnico integrado en Typst.
 
 == Materiales, Recursos y Herramientas Computacionales
@@ -358,7 +358,7 @@ El flujo de trabajo analítico se desplegó sobre una estación de trabajo con p
 == Control de Sesgos, Validación y Reproducibilidad
 
 Debido a que las distribuciones agrarias presentan una extrema asimetría positiva con colas pesadas (distribuciones de ley de potencia), se aplicaron técnicas estadísticas rigurosas para mitigar el sesgo:
-- *Control del sesgo de economías de escala:* La muestra fue segmentada en clases de tamaño de explotación (`farm_size_class`), aislando las fincas medianas y grandes (_Medium/Large_) y pequeñas (_Small_) de los minifundios (menores a 1 manzana), comparando exclusivamente medianas entre cohortes dentro del mismo estrato.
+- *Control del sesgo de economías de escala:* La muestra fue segmentada en clases de tamaño de explotación (`farm_size_class`), aislando las fincas medianas y grandes (_Medium/Large_) y pequeñas (_Small_) de los minifundios (menores a 1 manzana), comparando exclusivamente medianas entre fincas financiadas y no financiadas dentro del mismo estrato.
 - *Uso de estadística no paramétrica:* Se privilegió el uso de medianas y rangos intercuartílicos sobre la media aritmética, evitando distorsiones por valores atípicos extremos.
 - *Garantía de reproducibilidad científica:* Todo el código fuente de extracción, transformación y agregación se encuentra versionado y depositado en acceso abierto en GitHub (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]), mientras que el dataset procesado y normalizado cuenta con identificador de objeto digital permanente (DOI: `10.5281/zenodo.20652059`) en Zenodo @miranda2026dataset.
 
@@ -457,7 +457,7 @@ En correspondencia con el segundo objetivo específico, se contrastó el Índice
   caption: [Densidad de Complejidad Productiva (Distribución Normalizada).]
 ) <fig-complejidad>
 
-Al evaluar la distribución en la @fig-complejidad, se evidencia un desplazamiento estadístico hacia niveles superiores de diversificación en el grupo financiado. Mientras que las unidades no financiadas concentran su pico modal en apenas 2 rubros (25.1% de las fincas), la cohorte capitalizada traslada su moda hacia los 3 rubros (23.7%) y sostiene una mayor presencia en estratos de alta complejidad (4 a 6 rubros). En términos absolutos, las fincas con crédito incorporan en promedio 0.29 rubros adicionales (media de 3.65 frente a 3.36 rubros), confirmando que el financiamiento mitiga las barreras de entrada para la diversificación de cultivos.
+Al evaluar la distribución en la @fig-complejidad, se evidencia un desplazamiento estadístico hacia niveles superiores de diversificación en el grupo financiado. Mientras que las unidades no financiadas concentran su pico modal en apenas 2 rubros (25.1% de las fincas), el grupo que recibió crédito traslada su valor más frecuente hacia los 3 rubros (23.7%) y sostiene una mayor presencia en estratos de alta complejidad (4 a 6 rubros). En términos absolutos, las fincas con crédito incorporan en promedio 0.29 rubros adicionales (media de 3.65 frente a 3.36 rubros), confirmando que el financiamiento mitiga las barreras de entrada para la diversificación de cultivos.
 
 Complementariamente, se examinó la transición en la vocación del uso de la tierra a través de la superficie asignada a Cultivos Permanentes frente a Pasto Natural y el Ratio Pasto-Cultivo.
 
@@ -558,27 +558,201 @@ El siguiente esquema describe el flujo de ingeniería de datos y la arquitectura
 
 #align(center)[
   #block(
-    width: 95%,
-    stroke: 0.5pt + luma(140),
+    width: 100%,
+    stroke: 0.6pt + rgb("#cbd5e1"),
     radius: 4pt,
-    inset: 1.2em,
-    fill: rgb("f8fafc")
+    inset: (x: 8pt, y: 6pt),
+    fill: rgb("#ffffff"),
   )[
-    #text(weight: "bold", size: 11pt)[Flujo de Datos e Infraestructura Computacional:] \
-    #v(0.6em)
-    *1. Microdatos Binarios Crudos* (`CENAGRO 2011 .sav`) \
-    #text(size: 9pt)[Archivos relacionales originales provistos por INIDE y MAGFOR (~100 MB)] \
-    $arrow.b$ \
-    *2. Pipeline ETL Vectorizado en Rust* (`Apache DataFusion` + `Apache Arrow`) \
-    #text(size: 9pt)[Downcasting de tipos, Dictionary Encoding, saneamiento de nulos y conversión columnar Parquet (~10 MB)] \
-    $arrow.b$ \
-    *3. Bodega de Datos Analítica OLAP* (`DuckDB In-Process Engine`) \
-    #text(size: 9pt)[Tablas de hechos normalizadas (`farm_labor`, `farm_credit_access`, `farm_land_use`) y consultas SQL con UNPIVOT] \
-    $arrow.b$ \
-    *4. Capas de Divulgación y Síntesis Científica:* \
-    - *Portal Web Interactivo:* Framework `Evidence.dev` desplegado en Netlify \
-    - *Informe Científico:* Tipografía vectorial y gráficos dinámicos con `Typst` y `CeTZ` \
-    - *Repositorio de Datos Abiertos:* Dataset Parquet inmutable con DOI en `Zenodo`
+    // Helper badge
+    #let badge(txt, bg, fg) = box(
+      fill: bg,
+      radius: 2pt,
+      inset: (x: 3.5pt, y: 1.2pt),
+      baseline: 0%,
+      text(size: 6.5pt, weight: "bold", fill: fg)[#txt]
+    )
+
+    // Connector
+    #let connector(label) = [
+      #align(center)[
+        #box(
+          fill: rgb("#f8fafc"),
+          stroke: 0.35pt + rgb("#cbd5e1"),
+          radius: 6pt,
+          inset: (x: 6pt, y: 1pt),
+        )[
+          #text(size: 6.5pt, weight: "medium", fill: rgb("#475569"))[#sym.arrow.b #label]
+        ]
+      ]
+    ]
+
+    // Header
+    #align(left)[
+      #grid(
+        columns: (1fr, auto),
+        align: (left + horizon, right + horizon),
+        [
+          #text(weight: "bold", size: 9pt, fill: rgb("#0f172a"))[Arquitectura Modular de Datos: CENAGRO 2011]
+          #text(size: 7pt, fill: rgb("#64748b"))[ --- Pipeline reproducible de procesamiento, modelado y divulgación]
+        ],
+        [
+          #badge("MODERN DATA STACK", rgb("#e0e7ff"), rgb("#3730a3"))
+        ]
+      )
+    ]
+
+    #v(0.15em)
+    #line(length: 100%, stroke: 0.35pt + rgb("#e2e8f0"))
+    #v(0.15em)
+
+    // Etapa 1: Ingesta
+    #block(
+      width: 100%,
+      stroke: (left: 2.5pt + rgb("#3b82f6"), rest: 0.35pt + rgb("#e2e8f0")),
+      radius: (right: 3pt),
+      fill: rgb("#f8fafc"),
+      inset: (x: 6pt, y: 3.5pt),
+      align(left)[
+        #grid(
+          columns: (1fr, auto),
+          align: (left + horizon, right + horizon),
+          [
+            #text(weight: "bold", size: 7.8pt, fill: rgb("#1e293b"))[1. Ingesta de Microdatos Censales Crudos]
+            #text(size: 7pt, fill: rgb("#64748b"))[ --- Fuentes primarias INIDE / MAGFOR]
+          ],
+          [
+            #badge("SPSS .sav", rgb("#dbeafe"), rgb("#1e40af"))
+            #h(1.5pt)
+            #badge("~100 MB", rgb("#f1f5f9"), rgb("#475569"))
+          ]
+        )
+        #text(size: 6.8pt, fill: rgb("#475569"))[
+          Archivos relacionales con 262,560 registros de explotaciones agropecuarias y variables productivas crudas.
+        ]
+      ]
+    )
+
+    #connector("Lectura binaria, saneamiento de tipos y normalización de nulos")
+
+    // Etapa 2: Transformación ETL en Rust
+    #block(
+      width: 100%,
+      stroke: (left: 2.5pt + rgb("#ea580c"), rest: 0.35pt + rgb("#e2e8f0")),
+      radius: (right: 3pt),
+      fill: rgb("#fff7ed"),
+      inset: (x: 6pt, y: 3.5pt),
+      align(left)[
+        #grid(
+          columns: (1fr, auto),
+          align: (left + horizon, right + horizon),
+          [
+            #text(weight: "bold", size: 7.8pt, fill: rgb("#9a3412"))[2. Pipeline ETL Vectorizado en Rust]
+            #text(size: 7pt, fill: rgb("#7c2d12"))[ --- Apache DataFusion & Apache Arrow]
+          ],
+          [
+            #badge("RUST", rgb("#ffedd5"), rgb("#c2410c"))
+            #h(1.5pt)
+            #badge("PARQUET", rgb("#fef3c7"), rgb("#b45309"))
+            #h(1.5pt)
+            #badge("~10 MB (-90%)", rgb("#dcfce7"), rgb("#15803d"))
+          ]
+        )
+        #text(size: 6.8pt, fill: rgb("#78350f"))[
+          Downcasting tipológico (u8/i32), dictionary encoding categórico, filtrado y compresión columnar Snappy.
+        ]
+      ]
+    )
+
+    #connector("Carga columnar en memoria y consultas analíticas OLAP")
+
+    // Etapa 3: Bodega de Datos DuckDB
+    #block(
+      width: 100%,
+      stroke: (left: 2.5pt + rgb("#d97706"), rest: 0.35pt + rgb("#e2e8f0")),
+      radius: (right: 3pt),
+      fill: rgb("#fffbeb"),
+      inset: (x: 6pt, y: 3.5pt),
+      align(left)[
+        #grid(
+          columns: (1fr, auto),
+          align: (left + horizon, right + horizon),
+          [
+            #text(weight: "bold", size: 7.8pt, fill: rgb("#78350f"))[3. Bodega de Datos Analítica OLAP]
+            #text(size: 7pt, fill: rgb("#92400e"))[ --- DuckDB In-Process Engine]
+          ],
+          [
+            #badge("DUCKDB", rgb("#fef3c7"), rgb("#92400e"))
+            #h(1.5pt)
+            #badge("STAR SCHEMA", rgb("#e0e7ff"), rgb("#3730a3"))
+            #h(1.5pt)
+            #badge("SQL OLAP", rgb("#f1f5f9"), rgb("#334155"))
+          ]
+        )
+        #text(size: 6.8pt, fill: rgb("#713f12"))[
+          Modelado en estrella con tablas de hechos (`farm_labor`, `farm_credit_access`, `farm_land_use`) y agregaciones `UNPIVOT`.
+        ]
+      ]
+    )
+
+    #connector("Distribución y consumo analítico multipropósito")
+
+    // Etapa 4: Divulgación (3 Columnas en paralelo)
+    #grid(
+      columns: (1fr, 1fr, 1fr),
+      gutter: 4pt,
+      [
+        #block(
+          width: 100%,
+          stroke: 0.35pt + rgb("#bbf7d0"),
+          radius: 3pt,
+          fill: rgb("#f0fdf4"),
+          inset: (x: 4.5pt, y: 4pt),
+          align(left)[
+            #badge("WEB INTERACTIVA", rgb("#dcfce7"), rgb("#166534")) \
+            #v(1pt)
+            #text(weight: "bold", size: 7.2pt, fill: rgb("#14532d"))[Evidence.dev] \
+            #text(size: 6.5pt, fill: rgb("#166534"))[
+              Portal en Netlify con dashboards y DuckDB WebAssembly.
+            ]
+          ]
+        )
+      ],
+      [
+        #block(
+          width: 100%,
+          stroke: 0.35pt + rgb("#fed7aa"),
+          radius: 3pt,
+          fill: rgb("#fffaf5"),
+          inset: (x: 4.5pt, y: 4pt),
+          align(left)[
+            #badge("PUBLICACIÓN", rgb("#ffedd5"), rgb("#9a3412")) \
+            #v(1pt)
+            #text(weight: "bold", size: 7.2pt, fill: rgb("#7c2d12"))[Typst + CeTZ] \
+            #text(size: 6.5pt, fill: rgb("#9a3412"))[
+              Monografía reproducible con tipografía de precisión.
+            ]
+          ]
+        )
+      ],
+      [
+        #block(
+          width: 100%,
+          stroke: 0.35pt + rgb("#e9d5ff"),
+          radius: 3pt,
+          fill: rgb("#faf5ff"),
+          inset: (x: 4.5pt, y: 4pt),
+          align(left)[
+            #badge("ACCESO ABIERTO", rgb("#f3e8ff"), rgb("#6b21a8")) \
+            #v(1pt)
+            #text(weight: "bold", size: 7.2pt, fill: rgb("#581c87"))[Zenodo (CERN)] \
+            #text(size: 6.5pt, fill: rgb("#6b21a8"))[
+              Dataset Parquet con DOI permanente y licencia CC-BY 4.0.
+            ]
+          ]
+        )
+      ]
+    )
   ]
 ]
 

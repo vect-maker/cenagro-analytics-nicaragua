@@ -117,7 +117,7 @@
       bar-style: style-dual,
       size: (12.5, 4.5),
       x-label: [Ratio de Empleo Permanente (0 = Estacional, 1 = Fijo)],
-      y-label: [% de Fincas en Cohorte],
+      y-label: [% de Fincas del Grupo],
       y-max: 80,
       bar-width: 0.7,
     )
@@ -142,7 +142,7 @@
       bar-style: style-dual,
       size: (12.5, 4.5),
       x-label: [Índice de Diversificación Productiva (Rubros)],
-      y-label: [% de Fincas en Cohorte],
+      y-label: [% de Fincas del Grupo],
       y-max: 30,
       bar-width: 0.7,
     )
