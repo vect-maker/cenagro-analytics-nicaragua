@@ -7,25 +7,29 @@
   (
     name: "Br. Miranda Pérez, José Daniel",
     formal-name: "José Daniel Miranda Pérez",
-    email: "jose.miranda@estu.unan.edu.ni",
+    email: "jose.miranda25405450@estu.unan.edu.ni",
+    phone: "81078581",
     orcid: "0009-0006-5609-4765",
   ),
   (
     name: "Br. Aguilar Rodríguez, Kendall Ezequiel",
     formal-name: "Kendall Ezequiel Aguilar Rodríguez",
-    email: "kendall.aguilar@estu.unan.edu.ni",
+    email: "kendall.aguilar25416812@estu.unan.edu.ni",
+    phone: "82714479",
     orcid: "0009-0006-5763-1956",
   ),
   (
     name: "Br. Oyarzo Morales, Ricardo Alberto",
     formal-name: "Ricardo Alberto Oyarzo Morales",
-    email: "ricardo.oyarzo@estu.unan.edu.ni",
+    email: "ricardo.oyarzo25405614@estu.unan.edu.ni",
+    phone: "82262971",
     orcid: "0009-0006-6388-0270",
   ),
   (
     name: "Br. Medrano Dávila, Luis David",
     formal-name: "Luis David Medrano Dávila",
-    email: "luis.medrano@estu.unan.edu.ni",
+    email: "luis.medrano25414997@estu.unan.edu.ni",
+    phone: "77054675",
     orcid: "0009-0005-8777-7457",
   ),
 )
