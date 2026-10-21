@@ -56,35 +56,101 @@ Este proyecto asume un entorno de desarrollo profesional en Linux (preferiblemen
 
 ---
 
-## 🛠️ Flujo de Operación (Justfile)
+## 🛠️ Guía de Ejecución y Flujo del Pipeline
 
-El proyecto utiliza `just` para orquestar todas las fases del pipeline. Asegúrese de tener instalados **Podman** y **Just** antes de comenzar.
+El proyecto utiliza `just` para orquestar todas las fases del ciclo de vida del dato y los entornos contenerizados con **Podman**.
 
-### 1. Preparación del Environment
-```bash
-just build-python-container # Prepara la imagen del runtime Python y dependencias
-just build-compiler         # Prepara la imagen base de compilación Rust
-just build-pipeline         # Compila el ejecutable ETL en un contenedor ligero
-just build-bi-container     # Prepara el entorno para el portal de analytics
+### Mapa de Comandos y Artefactos
+
+```mermaid
+flowchart TD
+    C1["⚡ just download-data"] --> F1[("data/*.sav")]
+    F1 --> C2["⚡ just ingest-data"]
+    C2 --> F2[("data/*.parquet\n(Raw Staging)")]
+    F2 --> C3["⚡ just run-pipeline"]
+    C3 --> F3[("data/farms.parquet\n(Wide Table OLAP)")]
+    F3 --> C4["⚡ just build-werehouse"]
+    M1[("mappings/*.csv\n(Dimensiones)")] --> C4
+    C4 --> F4[("warehouse.duckdb")]
+    F4 --> C5["⚡ just add-meta-bi"]
+    C5 --> C6["⚡ just run-bi"]
+    C6 --> APP["🌐 localhost:3000\n(Portal Evidence)"]
 ```
 
-### 2. Ingesta y Descarga de Fuentes (Python Container)
+| Paso | Comando | Entrada (Input) | Salida (Output) |
+| :---: | :--- | :--- | :--- |
+| **1** | `just download-data` | Servidor INIDE (URL) | `data/*.sav` |
+| **2** | `just ingest-data` | `data/*.sav` | `data/*.parquet` + `*-metadata.json` |
+| **3** | `just run-pipeline` | `data/*.parquet` (explotaciones + parcelas) | `data/farms.parquet` |
+| **4** | `just build-werehouse` | `data/farms.parquet` + `mappings/*.csv` | `analytics/sources/warehouse/*.duckdb` |
+| **5** | `just add-meta-bi` | `warehouse.duckdb` | Metadatos sincronizados |
+| **6** | `just run-bi` | Almacén y metadatos | Servidor BI en `localhost:3000` |
+
+---
+
+### Fase 1: Configuración Inicial del Entorno (Setup Phase)
+
+Ejecute estos comandos una única vez para construir las imágenes de contenedor de cada tecnología e inicializar las dependencias:
+
 ```bash
-just download-data          # Descarga los microdatos oficiales .sav desde INIDE a data/
-just ingest-data            # Convierte los archivos .sav a Parquet y extrae metadatos JSON
+# 1. Construir la imagen del runtime de Python para descargas e ingesta
+just build-python-container
+
+# 2. Construir la imagen base del compilador Rust (con mold y clang)
+just build-compiler
+
+# 3. Compilar el ejecutable ETL de Rust en su imagen ligera de producción
+just build-pipeline
+
+# 4. Construir la imagen del entorno del portal de BI (Evidence.dev)
+just build-bi-container
+
+# 5. Instalar dependencias de Node.js en el portal de analytics
+just setup-bi
 ```
 
-### 3. Ejecución del Pipeline ETL y Almacén
+---
+
+### Fase 2: Flujo de Datos y Ejecución (Data Pipeline Flow)
+
+Una vez completada la fase de configuración, el flujo secuencial de datos se ejecuta mediante las siguientes recetas de `just`:
+
+#### 1. Ingesta y Extracción de Fuentes (Python Container)
+Descarga los microdatos oficiales desde los servidores del INIDE y genera los archivos intermedios tipificados:
 ```bash
-just run-pipeline           # Ejecuta la transformación Rust (genera farms.parquet)
-just build-werehouse        # Inicializa DuckDB y carga las dimensiones y hechos
-just add-meta-bi            # Sincroniza los metadatos de las fuentes de datos
+# Descarga los archivos SPSS (.sav) originales en la carpeta data/
+just download-data
+
+# Convierte los archivos .sav a formato Parquet columnar y extrae los metadatos JSON
+just ingest-data
 ```
 
-### 4. Visualización y Análisis
+#### 2. Procesamiento Vectorizado y Modelado (Rust + DataFusion)
+Ejecuta el motor analítico compilado para aplicar limpieza de tipos, agrupaciones relacionales y feature engineering:
 ```bash
-just run-bi                 # Levanta el servidor local en localhost:3000 con hot-reload
-just build-bi               # Genera el sitio web estático para despliegue final
+# Procesa y combina fincas con parcelas pre-agregadas, calculando ratios e indicadores
+just run-pipeline
+```
+> **Salida:** Genera `data/farms.parquet`, una tabla de hechos denormalizada y optimizada para consultas analíticas.
+
+#### 3. Carga del Data Warehouse (DuckDB)
+Inicializa la base de datos analítica local, crea la tabla de hechos a partir del Parquet procesado y acopla los diccionarios dimensionales maestros:
+```bash
+# Crea warehouse.duckdb, carga dimensions (mappings/) y define los Data Marts (vistas)
+just build-werehouse
+
+# Sincroniza el catálogo de datos y metadatos con el portal de Evidence
+just add-meta-bi
+```
+
+#### 4. Visualización y Análisis (Evidence.dev)
+Levanta el portal interactivo de Business Intelligence para consultar las métricas e informes:
+```bash
+# Inicia el servidor de desarrollo local en http://localhost:3000 con recarga en vivo
+just run-bi
+
+# (Opcional) Compila el sitio estático para su despliegue público
+just build-bi
 ```
 
 ---
