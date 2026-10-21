@@ -60,24 +60,31 @@ Este proyecto asume un entorno de desarrollo profesional en Linux (preferiblemen
 
 El proyecto utiliza `just` para orquestar todas las fases del pipeline. Asegúrese de tener instalados **Podman** y **Just** antes de comenzar.
 
-### 1. Preparación del Envornment
+### 1. Preparación del Environment
 ```bash
-just build-compiler     # Prepara la imagen base de compilación Rust
-just build-pipeline     # Compila el ejecutable ETL en un contenedor ligero
-just build-bi-container   # Prepara el entorno para el portal de analytics
+just build-python-container # Prepara la imagen del runtime Python y dependencias
+just build-compiler         # Prepara la imagen base de compilación Rust
+just build-pipeline         # Compila el ejecutable ETL en un contenedor ligero
+just build-bi-container     # Prepara el entorno para el portal de analytics
 ```
 
-### 2. Ejecución del Pipeline
+### 2. Ingesta y Descarga de Fuentes (Python Container)
 ```bash
-just run-pipeline       # Ejecuta la transformación Rust (genera farms.parquet)
-just build-werehouse    # Inicializa DuckDB y carga las dimensiones y hechos
-just add-meta-bi        # Sincroniza los metadatos de las fuentes de datos
+just download-data          # Descarga los microdatos oficiales .sav desde INIDE a data/
+just ingest-data            # Convierte los archivos .sav a Parquet y extrae metadatos JSON
 ```
 
-### 3. Visualización y Análisis
+### 3. Ejecución del Pipeline ETL y Almacén
 ```bash
-just run-bi             # Levanta el servidor local en localhost:3000 con hot-reload
-just build-bi           # Genera el sitio web estático para despliegue final
+just run-pipeline           # Ejecuta la transformación Rust (genera farms.parquet)
+just build-werehouse        # Inicializa DuckDB y carga las dimensiones y hechos
+just add-meta-bi            # Sincroniza los metadatos de las fuentes de datos
+```
+
+### 4. Visualización y Análisis
+```bash
+just run-bi                 # Levanta el servidor local en localhost:3000 con hot-reload
+just build-bi               # Genera el sitio web estático para despliegue final
 ```
 
 ---

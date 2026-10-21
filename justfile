@@ -4,6 +4,40 @@ default:
 enter:
   zellij --layout .ide/dev.kdl
 
+build-python-container:
+  podman build -f infra/python.Containerfile -t python-runtime:dev .
+
+run-python *args="":
+  podman run -it --rm \
+    --userns=keep-id \
+    --security-opt label=disable \
+    -v $(pwd):/app:Z \
+    -w /app \
+    python-runtime:dev python3 {{args}}
+
+python-shell:
+  podman run -it --rm \
+    --userns=keep-id \
+    --security-opt label=disable \
+    -v $(pwd):/app:Z \
+    -w /app \
+    python-runtime:dev /bin/bash
+
+download-data *args="":
+  podman run -it --rm \
+    --userns=keep-id \
+    --security-opt label=disable \
+    -v $(pwd):/app:Z \
+    -w /app \
+    python-runtime:dev python3 pipes/download.py {{args}}
+
+ingest-data:
+  podman run -it --rm \
+    --userns=keep-id \
+    --security-opt label=disable \
+    -v $(pwd):/app:Z \
+    -w /app \
+    python-runtime:dev python3 pipes/ingest.py
 
 setup-bi:
   podman run -it --rm \
