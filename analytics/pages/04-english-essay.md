@@ -1,6 +1,6 @@
 # Impact of Financing on Employment and Agricultural Diversification in Nicaragua
 
-> **Authors:** Miranda Pérez, José Daniel; Aguilar Rodríguez, Kendall Ezequiel; Medrano Dávila, Luis David; Oyarzo Morales, Ricardo Alberto  
+> **Authors:** Aguilar Rodríguez, Kendall Ezequiel; Miranda Pérez, José Daniel; Oyarzo Morales, Ricardo Alberto; Medrano Dávila, Luis David  
 > **Institution:** Universidad Nacional Autónoma de Nicaragua (UNAN-Managua)
 
 Access to rural credit is a fundamental driver of economic development; however, evaluating its impact on Nicaragua's agricultural landscape remains complex. This study leverages microdata from the IV National Agricultural Census (CENAGRO 2011) to analyze how financing influences productive outcomes, providing an empirical basis for understanding rural economic dynamics. This essay argues that agricultural financing served as a primary catalyst for land diversification and labor absorption during the period studied, shifting production models toward more complex, multi-crop systems. The following analysis examines this transition from a Macro Impact perspective, encompassing the interplay between employment generation and scale, productive diversification, and the institutional friction that limited formal credit access.
@@ -124,5 +124,7 @@ INTO NAME source VALUE farms;
 In conclusion, agricultural credit during the 2011 census period proved to be a vital driver of job creation and productive variety, yet its potential remained constrained by systemic exclusion. While capital injection significantly increased labor volume and facilitated a transition toward intensified, diversified land use, the formal banking system failed to reach the majority of small-scale producers. To foster comprehensive growth and reduce rural poverty, future policies must prioritize the expansion of financial inclusion and the development of credit architectures that address the barriers preventing formal applications in the first place.
 
 
-**References**
-Instituto Nacional de Información de Desarrollo. (2011). IV Censo Nacional Agropecuario (CENAGRO 2011). Managua, Nicaragua.
+**References & Open Data**
+* Instituto Nacional de Información de Desarrollo (INIDE) & Ministerio Agropecuario y Forestal (MAGFOR). (2013). *IV Censo Nacional Agropecuario (IV CENAGRO): Aspectos metodológicos*. Managua, Nicaragua.
+* Miranda Pérez, J. D. (2026). *Processed Dataset: CENAGRO 2011 (Nicaragua) - Agricultural Financing and Labor Impact* (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20652059
+* Computational pipeline & codebase: https://github.com/vect-maker/cenagro-analytics-nicaragua

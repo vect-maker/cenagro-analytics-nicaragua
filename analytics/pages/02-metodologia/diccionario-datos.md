@@ -87,3 +87,10 @@ Variables independientes que funcionan como dimensiones de filtrado o métricas 
 ---
 
 > **Nota Técnica:** El cruce de las matrices `req_` y `rec_` permite identificar la tasa de aprobación por rubro específico. Todas las métricas de superficie están expresadas en manzanas (Mz) para mantener la consistencia con el estándar del CENAGRO.
+
+---
+
+### Disponibilidad de Datos (Open Data)
+El archivo resultante en formato Parquet (`farms.parquet`, ~10 MB) con la estructura aquí descrita se encuentra archivado públicamente bajo licencia **Creative Commons Attribution 4.0 International (CC-BY 4.0)** en Zenodo:
+* **DOI:** [10.5281/zenodo.20652059](https://doi.org/10.5281/zenodo.20652059)
+* **Autor:** José Daniel Miranda Pérez

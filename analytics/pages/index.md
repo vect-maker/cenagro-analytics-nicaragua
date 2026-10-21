@@ -45,7 +45,7 @@ El análisis del impacto del financiamiento en el sector agropecuario es fundame
 <Grid cols={2}>
 
 ###  Enfoque Cuantitativo Mixto
-Procesamiento de un alto volumen de datos estructurados (más de 226,000 registros) mediante herramientas analíticas y la aplicación de técnicas de análisis estadístico descriptivo para el abordaje del problema.
+Procesamiento de un alto volumen de microdatos estructurados (262,546 registros correspondientes a las 227,541 explotaciones agropecuarias censadas) mediante una arquitectura de Modern Data Stack y técnicas de análisis estadístico descriptivo e inferencial.
 
 ###  Diseño No Experimental
 Análisis puramente observacional de la realidad productiva; la base de datos censal se trata como un artefacto estático e inmutable sin manipulación alguna de variables de control por parte de los investigadores.
@@ -96,5 +96,16 @@ FROM global_summary
       fmt="num0"
     />
 </Grid>
+
+---
+
+## 🗄️ Reproducibilidad y Datos Abiertos (Open Science)
+
+Los artefactos computacionales y los microdatos transformados de esta investigación se encuentran disponibles públicamente:
+
+* **Dataset de Investigación:** Publicado en formato Parquet en Zenodo bajo licencia CC-BY 4.0 con DOI persistente: **[10.5281/zenodo.20652059](https://zenodo.org/records/20652059)**.
+* **Código Fuente y Pipeline:** El motor ETL (Rust/DataFusion), warehouse (DuckDB) y la capa analítica completa están alojados en GitHub: **[github.com/vect-maker/cenagro-analytics-nicaragua](https://github.com/vect-maker/cenagro-analytics-nicaragua)**.
+* **Artículo Científico:** El manuscrito académico en Typst se encuentra versionado en el directorio `/paper` del repositorio.
+
 
 

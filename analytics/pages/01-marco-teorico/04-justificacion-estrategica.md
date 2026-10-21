@@ -10,9 +10,9 @@ El análisis del financiamiento agropecuario no es únicamente un ejercicio de o
 * **Concepto:** Según el enfoque de Amartya Sen y el PNUD, el desarrollo es la expansión de las libertades reales que disfrutan los individuos.
 * **Aplicación:** Una explotación financiada que genera empleo estable (**Ratio de Trabajo Permanente**) permite que el trabajador rural pase de la subsistencia estacional a la seguridad económica. Esto expande sus capacidades para invertir en salud, educación y participación social, fortaleciendo el **capital humano** del país.
 
-### 3. Alineación Institucional: PNLPDH
-* **Referencia Directa:** Este proyecto se alinea con el **Lineamiento 4** del *Plan Nacional de Lucha contra la Pobreza y para el Desarrollo Humano (PNLPDH)*, enfocado en la consolidación de bienes y servicios públicos.
-* **Eje Estratégico:** El financiamiento es un servicio público/estatal crítico. Al cuantificar la **Eficiencia de Aprobación de Crédito** y el impacto en la diversificación, este análisis provee la evidencia necesaria para la "ejecución directa" de las metas nacionales de **Soberanía Alimentaria** y dinamización del campo.
+### 3. Alineación Institucional: Plan Nacional de Lucha contra la Pobreza (2022-2026)
+* **Referencia Directa:** Este proyecto se fundamenta en las prioridades estratégicas del *Plan Nacional de Lucha contra la Pobreza para el Desarrollo Humano 2022-2026*, alineándose específicamente con su **Principio 4: Soberanía y Seguridad Alimentaria y Nutricional** (p. 21) y el **Eje 8: Producción en el Campo, Crédito y Diversificación** (pp. 98–103).
+* **Eje Estratégico:** El financiamiento agrario actúa como un mecanismo habilitador clave del Estado (fomentado a través de instrumentos como el Banco de Fomento a la Producción / Banco Produzcamos, p. 102). Al cuantificar empíricamente la **Eficiencia de Aprobación de Crédito** y el impacto en la diversificación y uso del suelo, este análisis provee evidencia para el diseño y focalización de políticas de Soberanía Alimentaria y dinamización económica rural.
 
 ### 4. Eficiencia Económica y "Humanware"
 * **Optimización del Gasto:** Sistemas de crédito eficientes reducen los costos sociales de la migración rural-urbana y la dependencia de subsidios.
