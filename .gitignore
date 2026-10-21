@@ -10,4 +10,5 @@ analytics/sources/warehouse/*.wal
 
 # Typst output and visual comparison artifacts
 paper/comparison/
+paper/preview/
 

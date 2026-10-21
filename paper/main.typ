@@ -6,16 +6,28 @@
   chart-complejidad,
   chart-vocacion,
 )
+#import "metadata.typ": (
+  title,
+  authors,
+  tutor,
+  date,
+  location,
+  institutional-motto,
+  university,
+  campus,
+  area,
+  department,
+  career,
+)
+#import "content/abstract.typ": (
+  resumen-es,
+  palabras-clave-es,
+)
 
 #set document(
-  title: "Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011)",
-  author: (
-    "José Daniel Miranda Pérez",
-    "Kendall Ezequiel Aguilar Rodríguez",
-    "Ricardo Alberto Oyarzo Morales",
-    "Luis David Medrano Dávila"
-  ),
-  date: datetime(year: 2026, month: 10, day: 21)
+  title: title,
+  author: authors.map(a => a.formal-name),
+  date: date,
 )
 
 #set page(
@@ -73,7 +85,7 @@
 // ==========================================
 #align(center)[
   #text(size: 11pt, style: "italic")[
-    «2026: Por una Educación al Servicio del Pueblo, ¡Viva Sandino!»
+    #institutional-motto
   ]
 
   #v(0.3cm)
@@ -81,11 +93,11 @@
 
   #v(0.3cm)
   #text(weight: "bold", size: 12pt)[
-    Universidad Nacional Autónoma de Nicaragua, Managua \
-    Recinto Universitario «Rubén Darío» \
-    Área de Conocimiento de Ciencias Básicas y Tecnología \
-    Departamento de Matemáticas \
-    Carrera de Ingeniería en Ciencias de Datos \
+    #university \
+    #campus \
+    #area \
+    Departamento de #department \
+    #career \
   ]
 
   #v(0.2cm)
@@ -97,7 +109,7 @@
   #text(weight: "bold", size: 11pt)[Título:] \
   #v(0.15cm)
   #text(weight: "bold", size: 13pt)[
-    Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011)
+    #title
   ]
 
   #v(0.5cm)
@@ -107,21 +119,20 @@
     #grid(
       columns: (1fr),
       row-gutter: 0.5em,
-      [Br. Miranda Pérez, José Daniel -- (ORCID: #link("https://orcid.org/0009-0006-5609-4765")[0009-0006-5609-4765])],
-      [Br. Aguilar Rodríguez, Kendall Ezequiel -- (ORCID: #link("https://orcid.org/0009-0006-5763-1956")[0009-0006-5763-1956])],
-      [Br. Oyarzo Morales, Ricardo Alberto -- (ORCID: #link("https://orcid.org/0009-0006-6388-0270")[0009-0006-6388-0270])],
-      [Br. Medrano Dávila, Luis David -- (ORCID: #link("https://orcid.org/0009-0005-8777-7457")[0009-0005-8777-7457])],
+      ..authors.map(a => [
+        #a.name -- (ORCID: #link("https://orcid.org/" + a.orcid)[#a.orcid])
+      ])
     )
   ])
 
   #v(0.5cm)
   #text(weight: "bold", size: 11pt)[Tutor:] \
   #v(0.15cm)
-  #text(size: 12pt)[MSc. Deyvi Antonio López Rojas]
+  #text(size: 12pt)[#tutor.name]
 
   #v(0.6cm)
   #text(size: 11pt)[
-    Managua, octubre de 2026
+    #location
   ]
 ]
 
@@ -150,9 +161,9 @@
 // ==========================================
 = Resumen
 
-El acceso equitativo a servicios financieros en el sector agropecuario de Nicaragua constituye un determinante crítico para el desarrollo socioeconómico; sin embargo, persiste una limitada evaluación empírica sobre su impacto estructural en el campo. La presente investigación analiza el efecto del financiamiento en la generación de empleo y la diversificación productiva a partir de los microdatos del IV Censo Nacional Agropecuario (CENAGRO 2011). Como producto integrador, el proyecto articula competencias del plan de estudios de Ingeniería en Ciencias de Datos: Integrador III (gestión y metodología de investigación), Base de Datos Relacionales (diseño del almacén dimensional OLAP), Programación I (pipeline ETL vectorizado de alto rendimiento en Rust con Apache DataFusion), Estadística I (análisis transversal descriptivo y control de sesgos por escala censal), Matemática III (optimización de transformaciones multidimensionales) e Inglés Técnico (revisión de literatura especializada y documentación de tecnologías analíticas abiertas). Metodológicamente, se implementó un diseño no experimental transversal, analizando más de 262,000 explotaciones mediante una arquitectura moderna de datos (DuckDB y Evidence.dev). Los resultados revelan una severa exclusión de entrada donde solo el 15.9% de los productores logró solicitar crédito, pese a una aprobación bancaria del 92.6%. En las fincas capitalizadas, la intensidad laboral mediana aumentó un 171.6% en unidades medianas y grandes, aunque concentrada en mano de obra estacional (72.5% de unidades operan con ratio permanente 0.0). Asimismo, el crédito redujo el ratio pasto-cultivo de 4.18 a 2.71, elevando la asignación de cultivos permanentes del 13.6% al 22.9% y desplazando la complejidad productiva modal hacia 3 rubros. Se concluye que el financiamiento dinamiza la absorción operativa y fomenta la intensificación tecnológica, pero perpetúa la precariedad contractual transitoria.
+#resumen-es
 
-*Palabras clave:* Financiamiento rural, Intensidad laboral, Diversificación productiva, Ingeniería de datos, Producto integrador.
+*Palabras clave:* #palabras-clave-es.join(", ").
 
 #pagebreak()
 

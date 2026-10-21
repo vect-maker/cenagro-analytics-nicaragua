@@ -100,8 +100,25 @@ run-pipeline:
     -e OUT_DIR=data \
     localhost/transformer-integrador-3:dev
 
-compile-paper: export-paper-data
+compile-paper: export-paper-data compile-monograph compile-abstract
+
+compile-monograph:
   typst compile paper/main.typ paper/main.pdf
+
+compile-abstract:
+  typst compile paper/abstract.typ paper/abstract.pdf
+
+compile-resumen: compile-abstract
+
+preview-paper:
+  mkdir -p paper/preview
+  typst compile --format png --ppi 150 paper/main.typ paper/preview/main-{n}.png
+
+preview-abstract:
+  mkdir -p paper/preview
+  typst compile --format png --ppi 150 paper/abstract.typ paper/preview/abstract-{n}.png
+
+preview-resumen: preview-abstract
 
 export-paper-data:
   mkdir -p paper/data
