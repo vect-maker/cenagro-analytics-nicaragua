@@ -1,7 +1,7 @@
-source,farms
-Banco Produzcamos,586
-Acopiadores,1618
-Prestamistas,1801
-ONGs,2662
-Cooperativas,9793
-Banco Privado,18255
+source,farms,pct_share
+Banco Produzcamos,586,1.7
+Acopiadores,1618,4.7
+Prestamistas,1801,5.2
+ONGs,2662,7.7
+Cooperativas,9793,28.2
+Banco Privado,18255,52.6

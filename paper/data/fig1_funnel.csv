@@ -1,4 +1,4 @@
-stage,farms
-1. Universo Total,262546
-2. Solicitaron Crédito,41756
-3. Recibieron Crédito,38680
+stage,count_val,pct
+1. Universo Censal,262546,100.0
+2. Solicitaron Crédito,41756,15.9
+3. Recibieron Crédito,38680,92.6

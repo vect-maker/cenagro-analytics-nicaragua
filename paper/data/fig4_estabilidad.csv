@@ -1,12 +1,4 @@
-ratio_bin,financiadas,no_financiadas
-0.0,72.5,68.33
-0.1,5.87,2.66
-0.2,5.69,4.39
-0.3,3.31,3.85
-0.4,1.63,1.72
-0.5,3.23,4.62
-0.6,1.25,1.63
-0.7,0.39,0.5
-0.8,0.23,0.25
-0.9,0.02,0.03
-1.0,5.88,12.03
+regimen,financiadas,no_financiadas
+Solo Temporal,68.6,66.7
+Régimen Mixto,25.6,21.3
+Solo Permanente,5.9,12.0

@@ -406,7 +406,7 @@ En correspondencia con el tercer objetivo específico, se modeló el embudo de a
 
 #figure(
   chart-embudo(),
-  caption: [Embudo de Acceso al Crédito.]
+  caption: [Embudo de Acceso al Crédito: Tasa de Entrada vs. Resolución Bancaria.]
 ) <fig-embudo>
 
 Como se demuestra en la @fig-embudo, la contracción más aguda del sistema no ocurre en la fase de evaluación bancaria en ventanilla, sino en la entrada misma al circuito de financiamiento: de las 262,546 explotaciones censadas en el país, únicamente 41,756 unidades (15.9%) lograron tramitar una solicitud de financiamiento. En marcado contraste, entre los productores que consiguen formalizar su solicitud, la tasa empírica de aprobación asciende a un elevado 92.6% (38,680 créditos concedidos), frente a un rechazo de apenas el 7.4%.
@@ -441,10 +441,10 @@ Más allá del volumen absoluto de contratación, se examinó la calidad del emp
 
 #figure(
   chart-estabilidad(),
-  caption: [Distribución de la Estabilidad Laboral (Proporción Relativa).]
+  caption: [Distribución de la Fuerza Laboral por Régimen Contractual.]
 ) <fig-estabilidad>
 
-La @fig-estabilidad confirma una estructura bimodal y altamente polarizada en el mercado laboral rural nicaragüense. El 72.5% de las explotaciones financiadas operan exclusivamente con trabajadores temporales (ratio 0.0), cifra superior al 68.3% reportado por el grupo no financiado. En contraposición, las planillas compuestas en un 100% por personal permanente presentan una mayor prevalencia relativa en fincas no financiadas (12.0% frente a 5.88%).
+La @fig-estabilidad confirma una estructura polarizada en el mercado laboral rural nicaragüense. El 68.6% de las explotaciones financiadas operan exclusivamente con trabajadores temporales, mientras que un 25.6% combina esquemas temporales y permanentes. En contraposición, las planillas compuestas en un 100% por personal permanente presentan una mayor prevalencia relativa en fincas no financiadas (12.0% frente a 5.9%).
 
 Esta evidencia demuestra que, si bien el apalancamiento expande de manera notable la escala de contratación agregada, el capital crediticio se canaliza preponderantemente a solventar necesidades de capital de trabajo para picos estacionales de siembra y cosecha, perpetuando la dependencia estructural hacia la mano de obra transitoria sin inducir formalización contractual permanente.
 
@@ -463,7 +463,7 @@ Complementariamente, se examinó la transición en la vocación del uso de la ti
 
 #figure(
   chart-vocacion(),
-  caption: [Proporción del Área Destinada a Cultivos vs. Pasturas Naturales.]
+  caption: [Distribución del Uso de la Tierra según Acceso a Financiamiento.]
 ) <fig-pasto>
 
 La @fig-pasto ilustra una reconfiguración estructural en la vocación económica del suelo inducida por el financiamiento. Las fincas financiadas destinan en promedio un 22.9% de su área total a Cultivos Permanentes, superando notablemente el 13.6% registrado en las no financiadas (+9.3 puntos porcentuales). Paralelamente, la superficie asignada a Pasto Natural desciende del 19.1% al 16.8%. En consecuencia, el Ratio Pasto-Cultivo promedio desciende marcadamente de 4.18 a 2.71 (un delta absoluto de -1.47).
