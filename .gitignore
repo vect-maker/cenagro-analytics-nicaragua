@@ -7,3 +7,7 @@ analytics/sources/warehouse/*.wal
 
 **/.env
 **/repomix-output.xml
+
+# Typst output and visual comparison artifacts
+paper/comparison/
+

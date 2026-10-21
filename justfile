@@ -100,8 +100,13 @@ run-pipeline:
     -e OUT_DIR=data \
     localhost/transformer-integrador-3:dev
 
-compile-paper:
+compile-paper: export-paper-data
   typst compile paper/main.typ paper/main.pdf
+
+export-paper-data:
+  mkdir -p paper/data
+  duckdb -dark-mode analytics/sources/warehouse/warehouse.duckdb -init sql/export-paper-data.sql -c ".exit"
+
 
 watch-paper:
   typst watch paper/main.typ paper/main.pdf

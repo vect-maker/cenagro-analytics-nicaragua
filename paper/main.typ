@@ -1,3 +1,12 @@
+#import "charts.typ": (
+  chart-embudo,
+  chart-fuentes,
+  chart-intensidad,
+  chart-estabilidad,
+  chart-complejidad,
+  chart-vocacion,
+)
+
 #set document(
   title: "Impacto del Financiamiento en la Generación de Empleo y Diversificación Productiva de las Explotaciones Agropecuarias de Nicaragua (CENAGRO 2011)",
   author: (
@@ -205,7 +214,7 @@ El análisis transversal segmentó el universo censal en dos cohortes definitiva
 La eficiencia de aprobación de crédito constituye el primer filtro estructural para el desarrollo agropecuario, operando como un indicador directo de la fricción institucional. Al modelar el embudo de acceso al crédito (Credit Funnel), se contrasta el volumen masivo de solicitudes emitidas por los productores frente a los capitales que fueron efectivamente desembolsados. Esta métrica visibiliza las barreras formales que enfrenta el sector rural al intentar capitalizar sus operaciones.
 
 #figure(
-  image("images/image1.png", width: 100%),
+  chart-embudo(),
   caption: [Embudo de Acceso al Crédito.]
 ) <fig-embudo>
 
@@ -214,7 +223,7 @@ Como se demuestra en la @fig-embudo, la contracción más aguda no ocurre en la 
 Paralelamente, el análisis de la matriz de orígenes de financiamiento confirma la estructura del mercado financiero en el sector agrario.
 
 #figure(
-  image("images/image2.png", width: 100%),
+  chart-fuentes(),
   caption: [Principales Fuentes de Financiamiento.]
 ) <fig-fuentes>
 
@@ -229,7 +238,7 @@ En síntesis, los datos prueban que la privación de servicios financieros forma
 Para cuantificar el impacto real de la inyección de capital en la generación de empleo agropecuario, se evaluó la Intensidad Laboral (absorción de trabajadores por manzana). Con el fin de aislar el sesgo generado por las economías de escala y evitar que el comportamiento de los minifundios distorsionara el análisis comparativo, la muestra se segmentó rigurosamente por clase de tamaño (`farm_size_class`). El sector micro no es tomado en cuenta para la métrica de intensidad laboral, agrupando en esa categoria las explotaciones agronomas que poseen menos de una manzana.
 
 #figure(
-  image("images/image3.png", width: 100%),
+  chart-intensidad(),
   caption: [Intensidad Laboral Mediana por Escala y Acceso a Crédito.]
 ) <fig-intensidad>
 
@@ -238,7 +247,7 @@ Como se observa en la @fig-intensidad, los datos demuestran empíricamente que e
 Más allá del volumen absoluto de contrataciones, resulta crítico evaluar la calidad y estabilidad del empleo generado. Se procedió a analizar el Ratio de Trabajo Permanente para determinar si la disponibilidad de liquidez permite a las explotaciones transitar desde un modelo dependiente de mano de obra puramente estacional (ratio 0.0) hacia estructuras de contratación continuas y estables (ratio 1.0).
 
 #figure(
-  image("images/image4.png", width: 100%),
+  chart-estabilidad(),
   caption: [Distribución de la Estabilidad Laboral (Proporción Relativa).]
 ) <fig-estabilidad>
 
@@ -251,7 +260,7 @@ Estos resultados indican que el apalancamiento financiero funciona como un multi
 La resiliencia económica de una unidad productiva frente a la volatilidad climática y de mercado está estrechamente vinculada a su nivel de diversificación. Para evaluar si la inyección de capital promueve la adopción del policultivo como mecanismo de mitigación de riesgo, se contrastó el Índice de Diversificación (conteo de rubros operativos) entre las cohortes analizadas.
 
 #figure(
-  image("images/image8.png", width: 100%),
+  chart-complejidad(),
   caption: [Densidad de Complejidad Productiva (Distribución Normalizada).]
 ) <fig-complejidad>
 
@@ -260,7 +269,7 @@ Al contrastar la distribución en la @fig-complejidad, se evidencia un claro des
 De forma complementaria, el análisis evaluó si el acceso a crédito fomenta una transición desde la ganadería extensiva (modelo de bajo rendimiento dominante a nivel nacional) hacia la intensificación agrícola. Para ello, se contrastó la composición del uso del suelo y el Ratio Pasto-Cultivo. Una ratio menor a 1.0 indica un dominio de la superficie agrícola, mientras que un valor superior refleja una vocación de intensificación ganadera.
 
 #figure(
-  image("images/image6.png", width: 100%),
+  chart-vocacion(),
   caption: [Proporción del Área Destinada a Cultivos vs. Pasturas Naturales.]
 ) <fig-pasto>
 
