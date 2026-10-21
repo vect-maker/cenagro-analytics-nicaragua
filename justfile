@@ -99,7 +99,7 @@ watch-paper:
 
 compare-paper:
   mkdir -p paper/comparison/original paper/comparison/typst
-  pdftoppm -png -r 150 documento.pdf paper/comparison/original/page
+  [ -f documento.pdf ] && pdftoppm -png -r 150 documento.pdf paper/comparison/original/page || true
   pdftoppm -png -r 150 paper/main.pdf paper/comparison/typst/page
 
 

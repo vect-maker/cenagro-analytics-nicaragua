@@ -127,11 +127,11 @@ El acceso al crédito rural es un factor determinante para el desarrollo socioec
 // ==========================================
 = Introducción
 
-En el sector agropecuario, el acceso al financiamiento representa un factor estructural que influye de manera decisiva en el desarrollo productivo y en las condiciones socioeconómicas de las explotaciones. El análisis de la matriz agraria nicaragüense, capturada a través del IV Censo Nacional Agropecuario (CENAGRO 2011), exige comprender un contexto histórico caracterizado por la recuperación económica posterior a la crisis financiera global de 2008-2009. Durante este ciclo agrícola, el país experimentó una reconfiguración radical de sus políticas de fomento productivo, transitando hacia un modelo de mayor intervención y apoyo directo por parte del Estado. Las respuestas de los productores capturadas en la boleta censal reflejan su adaptación a este nuevo ecosistema institucional de crédito (INIDE y MAGFOR, 2012:5).
+En el sector agropecuario, el acceso al financiamiento representa un factor estructural que influye de manera decisiva en el desarrollo productivo y en las condiciones socioeconómicas de las explotaciones. El análisis de la matriz agraria nicaragüense, capturada a través del IV Censo Nacional Agropecuario (CENAGRO 2011), exige comprender un contexto histórico caracterizado por la recuperación económica posterior a la crisis financiera global de 2008-2009. Durante este ciclo agrícola, el país experimentó una reconfiguración de sus políticas de fomento productivo, transitando hacia un modelo de mayor intervención y apoyo directo por parte del Estado. Las respuestas de los productores capturadas en la boleta censal reflejan su adaptación a las condiciones de producción y al ecosistema de financiamiento durante el ciclo agrícola de referencia @cenagro2013[pp. 1-3].
 
 A pesar de la centralidad del crédito rural para dinamizar el campo, existe una limitada evidencia empírica desde un enfoque estrictamente cuantitativo que permita contrastar de manera rigurosa el desempeño de las unidades productivas que acceden a recursos financieros frente a aquellas que operan en la exclusión. Esta falta de análisis estadístico dificulta la comprensión del impacto real del apalancamiento en la dinámica productiva. Por ello, resulta pertinente analizar si existen diferencias estadísticamente significativas en variables críticas como el volumen de absorción de mano de obra y la diversificación del uso del suelo entre ambos grupos de explotaciones.
 
-Este análisis se fundamenta en la premisa de que el acceso al capital no es solo un indicador de rentabilidad, sino un mecanismo para el fortalecimiento de las capacidades productivas y la reducción de la vulnerabilidad socioeconómica. Se postula que el financiamiento actúa como un catalizador que permite a las unidades agropecuarias estabilizar su fuerza laboral y mejorar la eficiencia operativa. Este planteamiento concuerda estratégicamente con los ejes del Plan Nacional de Lucha contra la Pobreza y para el Desarrollo Humano, proveyendo evidencia basada en datos para el diseño de políticas de Soberanía Alimentaria (Gobierno de Reconciliación y Unidad Nacional, 2021:22).
+Este análisis se fundamenta en la premisa de que el acceso al capital no es solo un indicador de rentabilidad, sino un mecanismo para el fortalecimiento de las capacidades productivas y la reducción de la vulnerabilidad socioeconómica. Se postula que el financiamiento actúa como un catalizador que permite a las unidades agropecuarias estabilizar su fuerza laboral y mejorar la eficiencia operativa. Este planteamiento concuerda estratégicamente con los ejes del Plan Nacional de Lucha contra la Pobreza para el Desarrollo Humano, proveyendo evidencia basada en datos para el diseño de políticas de Soberanía Alimentaria y fomento a la producción rural @grun2021[pp. 21, 98-103].
 
 El objetivo general de la presente investigación es analizar el impacto del financiamiento en la generación de empleo y la diversificación productiva de las explotaciones agropecuarias en Nicaragua. Para alcanzar este propósito, se establecieron tres objetivos específicos: primero, comparar el volumen de generación de empleo entre explotaciones financiadas y no financiadas aislando el sesgo de economías de escala; segundo, evaluar el nivel de diversificación productiva frente a la dependencia del monocultivo o la ganadería extensiva; y tercero, contrastar empíricamente la fricción institucional en las tasas de aprobación crediticia.
 
@@ -144,16 +144,16 @@ Para dar respuesta a estos objetivos, el presente artículo se ha estructurado d
 // ==========================================
 = Material y Métodos
 
-Se aplicó un enfoque cuantitativo mixto con un diseño no experimental de corte transversal, tratando la base de datos oficial del IV Censo Nacional Agropecuario (CENAGRO 2011) como un artefacto estático e inmutable. El universo de estudio comprendió más de 226,000 registros correspondientes a las explotaciones agropecuarias operativas durante el ciclo de referencia. El alcance de la investigación es descriptivo-correlacional, orientado a evaluar las brechas relativas generadas por la inyección de capital en el sector rural.
+Se aplicó un enfoque cuantitativo mixto con un diseño no experimental de corte transversal, tratando la base de datos oficial del IV Censo Nacional Agropecuario (CENAGRO 2011) como un artefacto estático e inmutable. El universo de estudio comprendió más de 226,000 registros correspondientes a las explotaciones agropecuarias operativas durante el ciclo de referencia @cenagro2013[p. 12]. El alcance de la investigación es descriptivo-correlacional, orientado a evaluar las brechas relativas generadas por la inyección de capital en el sector rural.
 
 == Referentes conceptuales o marco teórico
 
-Para garantizar el rigor analítico y evitar ambigüedades, los conceptos fundamentales de esta investigación se alinean estrictamente con el manual de aspectos metodológicos del CENAGRO. Estos conceptos constituyen la base semántica sobre la cual se estructuran las variables procesadas por el motor analítico.
+Para garantizar el rigor analítico y evitar ambigüedades, los conceptos fundamentales de esta investigación se alinean estrictamente con el manual de aspectos metodológicos del CENAGRO @cenagro2013. Estos conceptos constituyen la base semántica sobre la cual se estructuran las variables procesadas por el motor analítico:
 
-- *Explotación Agropecuaria (EA):* Se define como toda extensión de tierra utilizada total o parcialmente para la producción agrícola, pecuaria o forestal, bajo una gerencia o administración única. En el modelo computacional implementado, cada registro único en la tabla consolidada representa una EA.
+- *Explotación Agropecuaria (EA):* Se define como toda extensión de tierra utilizada total o parcialmente para la producción agrícola, pecuaria o forestal, bajo una gerencia o administración única (p. 4). En el modelo computacional implementado, cada registro único en la tabla consolidada representa una EA.
 - *Financiamiento Agropecuario:* Se refiere a la provisión de capital líquido o en especie para el desarrollo de actividades productivas. En la arquitectura de datos, este concepto se rastrea mediante la matriz de demanda y acceso, clasificándose según su origen en formal (bancos, cooperativas, gobierno) e informal (prestamistas, acopiadores).
-- *Fuerza Laboral (Generación de Empleo):* Representa la intensidad de la mano de obra absorbida por la unidad productiva. Se clasifica operativamente por su duración en empleo permanente (contratación regular ≥ 6 meses) y empleo temporal (contratación estacional < 6 meses).
-- *Aprovechamiento de la Tierra (Uso de Suelo):* Corresponde a la clasificación física del destino dado a las parcelas durante el año agrícola de referencia, diferenciando la vocación agrícola, pecuaria o forestal.
+- *Fuerza Laboral (Generación de Empleo):* Representa la intensidad de la mano de obra absorbida por la unidad productiva. Se clasifica operativamente por su duración en empleo permanente (contratación regular ≥ 6 meses) y empleo temporal (contratación estacional < 6 meses) (p. 9).
+- *Aprovechamiento de la Tierra (Uso de Suelo):* Corresponde a la clasificación física del destino dado a las parcelas durante el año agrícola de referencia, diferenciando la vocación agrícola, pecuaria o forestal (p. 8).
 
 #pagebreak()
 
@@ -181,7 +181,7 @@ Extracción e Ingesta Cruda: Mediante un script aislado, se procedió a la lectu
 
 Transformación y Tipificación Estricta: El núcleo del procesamiento se ejecutó a través del motor Apache DataFusion, desarrollado en lenguaje Rust. El esquema de datos fue sometido a un proceso agresivo de downcasting, reduciendo los valores por defecto a los tipos enteros mínimos viables. Las variables categóricas de baja cardinalidad se optimizaron mediante codificación de diccionarios (Dictionary Encoding) sobre el formato Apache Arrow, maximizando la velocidad de escaneo en las memorias caché L1/L2 del procesador. Finalmente, se ejecutó una desnormalización completa del modelo relacional, consolidando una única tabla de hechos analítica (Wide-Table OLAP) para eliminar las uniones (joins) costosas en tiempo de ejecución.
 
-Capa Semántica y Modelado Analítico: Se empleó DuckDB como motor analítico in-process, ejecutando lecturas de copia cero (zero-copy reads) directamente sobre los archivos Parquet. Para la materialización de los resultados, se utilizó el framework Evidence.dev. Las funciones de agregación y el cálculo de métricas se ejecutaron en tiempo de compilación (Build-Time), previniendo el colapso de memoria del cliente y asegurando la estabilidad en el análisis de los 226,000 registros.
+Capa Semántica y Modelado Analítico: Se empleó DuckDB como motor analítico in-process, ejecutando lecturas de copia cero (zero-copy reads) directamente sobre los archivos Parquet. Para la materialización de los resultados, se utilizó el framework Evidence.dev. Las funciones de agregación y el cálculo de métricas se ejecutaron en tiempo de compilación (Build-Time), previniendo el colapso de memoria del cliente y asegurando la estabilidad en el análisis de los 226,000 registros. Con el propósito de garantizar la reproducibilidad y el escrutinio científico independiente, el conjunto de datos procesado y desnormalizado resultante de este flujo se encuentra depositado en acceso abierto bajo licencia CC-BY 4.0 en el repositorio Zenodo @miranda2026dataset.
 
 == Métricas, Control de Sesgos y Análisis Comparativo
 
@@ -191,7 +191,7 @@ Debido a que los datos de superficie y producción agraria en Nicaragua presenta
 
 == Publicación de informe completo
 
-Para garantizar la total reproducibilidad, auditoría y transparencia metodológica del estudio, la arquitectura completa del código fuente incluyendo el pipeline de extracción y las transformaciones vectorizadas ha sido liberada en un repositorio público (#link("https://github.com/vect-maker/integrador-III")[https://github.com/vect-maker/integrador-III]). Asimismo, el panel analítico interactivo y las métricas pre-calculadas mediante el framework Evidence.dev se encuentran desplegados para consulta pública en: #link("https://cenagro-analytics-ni.netlify.app/")[https://cenagro-analytics-ni.netlify.app/]
+Para garantizar la total reproducibilidad, auditoría y transparencia metodológica del estudio, la arquitectura completa del código fuente —incluyendo el pipeline de extracción en Rust/DataFusion, las consultas analíticas en DuckDB y las transformaciones vectorizadas— ha sido liberada en un repositorio público (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]). Asimismo, el panel analítico interactivo y las métricas pre-calculadas mediante el framework Evidence.dev se encuentran desplegados para consulta pública en: #link("https://cenagro-analytics-ni.netlify.app/")[https://cenagro-analytics-ni.netlify.app/]
 
 // ==========================================
 // RESULTADOS Y DISCUSIÓN
@@ -286,6 +286,13 @@ El procesamiento determinista y el análisis empírico de los microdatos del CEN
 - *Democratización del crédito:* Se recomienda formular políticas públicas orientadas a reducir las barreras de entrada del sistema bancario formal, estableciendo al financiamiento como un catalizador indispensable para la reducción de la pobreza multidimensional, la fijación de la fuerza laboral rural y la modernización de la matriz productiva.
 - *Optimización basada en datos:* Se sugiere la integración gubernamental de infraestructuras de datos desacopladas y procesamiento analítico de alto rendimiento para mejorar la trazabilidad, focalización y eficiencia en la distribución de los servicios financieros del Estado.
 
+== Disponibilidad de datos y código
+
+Para garantizar la reproducibilidad y el escrutinio científico independiente, los recursos computacionales desarrollados para esta investigación se encuentran disponibles públicamente:
+- *Código fuente y pipeline ETL:* Repositorio en GitHub (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]), implementado por J. D. Miranda Pérez con Apache DataFusion, DuckDB y Evidence.dev.
+- *Portal interactivo:* Panel analítico web para consulta pública (#link("https://cenagro-analytics-ni.netlify.app")[https://cenagro-analytics-ni.netlify.app]).
+- *Dataset procesado:* Base consolidada en formato Parquet depositada en Zenodo bajo licencia CC-BY 4.0 @miranda2026dataset.
+
 #pagebreak()
 
 // ==========================================
@@ -293,6 +300,4 @@ El procesamiento determinista y el análisis empírico de los microdatos del CEN
 // ==========================================
 = Referencias bibliográficas
 
-- *GOBIERNO DE RECONCILIACIÓN Y UNIDAD NACIONAL* (2021). _Plan Nacional de Lucha contra la Pobreza y para el Desarrollo Humano (PNLPDH) 2022-2026_, Managua, Nicaragua, Editorial Nacional.
-- *INSTITUTO NACIONAL DE INFORMACIÓN DE DESARROLLO (INIDE) y MINISTERIO AGROPECUARIO Y FORESTAL (MAGFOR)* (2012). _IV Censo Nacional Agropecuario (CENAGRO 2011): Manual de aspectos metodológicos_, Managua, Nicaragua, INIDE.
-- *MIRANDA, J.* (2026). _Impacto del financiamiento en el empleo y diversificación agropecuaria en Nicaragua (2010-2011)_, Documento de investigación, Managua, UNAN-Managua.
+#bibliography("references.bib", style: "apa", title: none)

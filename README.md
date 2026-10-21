@@ -169,3 +169,9 @@ Para iniciar un entorno de desarrollo integrado con **Zellij** y **Neovim** (NvC
 just enter
 ```
 Este comando activa una sesión de terminal multiplexada con el editor, consola de bash y cliente SQL de **DuckDB** listos para operar.
+
+---
+
+## ⚖️ Licencia y Atribución de Terceros
+* **Dataset de Investigación:** Publicado bajo licencia [Creative Commons Attribution 4.0 International (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/) en Zenodo ([10.5281/zenodo.20652059](https://zenodo.org/records/20652059)).
+* **Documentos Oficiales de Referencia:** Los archivos PDF preservados en `paper/reference_documents/` son publicaciones institucionales del Estado de Nicaragua (INIDE, MAGFOR, PGR/GRUN). Se almacenan exclusivamente con fines académicos, de verificación y reproducibilidad científica sin fines comerciales. Para más detalles, consulte el [descargo de responsabilidad y atribución](paper/reference_documents/README.md).
