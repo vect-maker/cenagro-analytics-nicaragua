@@ -301,29 +301,76 @@ La articulación entre los seis componentes no operó como una suma aislada de m
 // ==========================================
 // CAPÍTULO V: DISEÑO METODOLÓGICO
 // ==========================================
-== Arquitectura del Sistema y Entorno de Ejecución
+= Diseño Metodológico o Procedimiento de Desarrollo
 
-Para procesar el volumen masivo de datos mitigando las limitaciones de hardware (equipo de cómputo con procesador Intel Core i7-1165G7 y 16 GB de RAM), se implementó una arquitectura de Modern Data Stack orientada a la alta eficiencia computacional y la reproducibilidad determinista. El entorno host se desplegó sobre el sistema operativo inmutable Aurora Fedora, utilizando el motor Podman para la orquestación de la infraestructura. La elección de contenedores en modo daemonless y rootless garantizó un ambiente de compilación estéril, predecible y alineado con los estándares de seguridad industrial.
+== Enfoque y Tipo de Investigación
 
-== Pipeline ETL y Procesamiento Vectorizado
+La investigación se desarrolló bajo un enfoque cuantitativo, de diseño no experimental y de corte transversal. El alcance es de carácter descriptivo-analítico y correlacional, orientado a contrastar y evaluar empíricamente las brechas socioeconómicas generadas por el financiamiento en las unidades agrarias durante el ciclo censal. El estudio trata el corpus censal como un artefacto de datos inmutable y cerrado, sobre el cual se ejecutan particiones por cohortes (_A/B testing observacional_) para aislar estadísticamente el impacto del crédito sin manipular el entorno productivo real @cenagro2013[p. 12].
 
-El flujo de ingeniería de datos se diseñó para separar la extracción de entrada/salida (I/O) de la computación intensiva en memoria (CPU), ejecutándose en tres fases secuenciales:
+== Población y Unidades de Análisis
 
-Extracción e Ingesta Cruda: Mediante un script aislado, se procedió a la lectura de los archivos binarios originales (SPSS) y su volcado directo a formato columnar Parquet. Esta conversión estructural redujo el peso de almacenamiento de las bases de aproximadamente 100 MB a 10 MB, optimizando las fases posteriores.
+La población objetivo y universo de estudio está constituida por la totalidad de las explotaciones agropecuarias de Nicaragua empadronadas durante el IV Censo Nacional Agropecuario (CENAGRO 2011). Dicho universo asciende a 227,541 explotaciones agropecuarias oficiales, las cuales, al desnormalizar las múltiples parcelas, rubros de aprovechamiento y módulos productivos, totalizan 262,546 unidades de registro analítico en el almacén de datos consolidado. La unidad de análisis corresponde a la Explotación Agropecuaria (EA), definida como toda extensión de tierra aprovechada para actividades agrícolas, pecuarias o forestales bajo una administración única @cenagro2013[p. 4].
 
-Transformación y Tipificación Estricta: El núcleo del procesamiento se ejecutó a través del motor Apache DataFusion, desarrollado en lenguaje Rust. El esquema de datos fue sometido a un proceso agresivo de downcasting, reduciendo los valores por defecto a los tipos enteros mínimos viables. Las variables categóricas de baja cardinalidad se optimizaron mediante codificación de diccionarios (Dictionary Encoding) sobre el formato Apache Arrow, maximizando la velocidad de escaneo en las memorias caché L1/L2 del procesador. Finalmente, se ejecutó una desnormalización completa del modelo relacional, consolidando una única tabla de hechos analítica (Wide-Table OLAP) para eliminar las uniones (joins) costosas en tiempo de ejecución.
+== Técnicas e Instrumentos de Recolección de Datos
 
-Capa Semántica y Modelado Analítico: Se empleó DuckDB como motor analítico in-process, ejecutando lecturas de copia cero (zero-copy reads) directamente sobre los archivos Parquet. Para la materialización de los resultados, se utilizó el framework Evidence.dev. Las funciones de agregación y el cálculo de métricas se ejecutaron en tiempo de compilación (Build-Time), previniendo el colapso de memoria del cliente y asegurando la estabilidad en el análisis de los 226,000 registros. Con el propósito de garantizar la reproducibilidad y el escrutinio científico independiente, el conjunto de datos procesado y desnormalizado resultante de este flujo se encuentra depositado en acceso abierto bajo licencia CC-BY 4.0 en el repositorio Zenodo @miranda2026dataset.
+La recolección de los datos de base fue ejecutada por el Instituto Nacional de Información de Desarrollo (INIDE) y el Ministerio Agropecuario y Forestal (MAGFOR) mediante entrevista directa al productor o administrador de la explotación, utilizando la boleta censal oficial estandarizada @cenagro2013. Para la presente investigación, la técnica de levantamiento consistió en la extracción y procesamiento directo de los microdatos crudos provistos institucionalmente en archivos relacionales de formato SPSS (`.sav`), garantizando fidelidad e integridad censal al 100% sin recurrir a muestras ni proyecciones agregadas.
 
-== Métricas, Control de Sesgos y Análisis Comparativo
+== Procedimientos y Fases de la Investigación
 
-Para la ejecución del A/B Testing transversal, el universo de explotaciones se dividió en dos cohortes definitivas (Financiadas vs. No Financiadas), utilizando la variable booleana de recepción de crédito como clave de partición principal.
+El desarrollo de la investigación y del producto integrador se estructuró en cinco fases metodológicas secuenciales:
 
-Debido a que los datos de superficie y producción agraria en Nicaragua presentan distribuciones de potencia con una asimetría extrema, se aplicaron técnicas de normalización para estabilizar la varianza. La métrica de Intensidad Laboral (trabajadores por manzana) fue sometida a una transformación logarítmica de base 10 (Log10). Asimismo, para aislar el efecto de las economías de escala y evitar que los micro-fundistas hiper-intensivos distorsionaran el análisis comparativo, las cohortes se segmentaron rigurosamente por clases de tamaño (Micro, Pequeña y Mediana/Grande). Las brechas relativas de absorción laboral, la transición de la vocación económica y los deltas del Índice de Diversificación se calcularon comparando exclusivamente las medianas dentro de segmentos demográficos idénticos.
++ *Fase 1: Ingesta y conversión estructural:* Lectura automatizada de los microdatos binarios de origen y conversión al estándar columnar abierto Apache Parquet, reduciendo el volumen de almacenamiento de 100 MB a 10 MB y habilitando lecturas rápidas sin sobrecarga de entrada/salida.
++ *Fase 2: Limpieza, tipificación y perfilado:* Depuración de anomalías, imputación determinista de tipos de datos de precisión mínima viable mediante _downcasting_ y codificación de diccionarios (_dictionary encoding_) para variables categóricas, eliminando valores inválidos o registros huérfanos.
++ *Fase 3: Modelado dimensional:* Diseño de un esquema analítico en estrella en DuckDB, vinculando tablas de dimensiones geográficas y estructurales con tablas de hechos operativas (`farm_labor`, `farm_credit_access`, `farm_land_use`).
++ *Fase 4: Agregación analítica y partición por cohortes:* Formulación de consultas SQL analíticas para segmentar el universo censal en cohortes (financiadas vs. no financiadas), controlando por estratos de escala y derivando las métricas de empleo, suelo y diversificación.
++ *Fase 5: Síntesis gráfica y comunicación científica:* Implementación de visualizaciones vectoriales nativas en CeTZ y redacción del informe técnico integrado en Typst.
 
-== Publicación de informe completo
+== Materiales, Recursos y Herramientas Computacionales
 
-Para garantizar la total reproducibilidad, auditoría y transparencia metodológica del estudio, la arquitectura completa del código fuente —incluyendo el pipeline de extracción en Rust/DataFusion, las consultas analíticas en DuckDB y las transformaciones vectorizadas— ha sido liberada en un repositorio público (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]). Asimismo, el panel analítico interactivo y las métricas pre-calculadas mediante el framework Evidence.dev se encuentran desplegados para consulta pública en: #link("https://cenagro-analytics-ni.netlify.app/")[https://cenagro-analytics-ni.netlify.app/]
+El flujo de trabajo analítico se desplegó sobre una estación de trabajo con procesador Intel Core i7-1165G7 y 16 GB de RAM, utilizando el sistema operativo inmutable Fedora Silverblue (Aurora OS). Se utilizó una arquitectura de _Modern Data Stack_ orientada a la eficiencia y seguridad mediante contenedores raíz-cero (_rootless_) en Podman:
+- *Lenguaje Rust y Apache DataFusion:* Motor de ejecución vectorizada para las transformaciones analíticas en memoria.
+- *DuckDB:* Sistema de gestión de bases de datos analítico OLAP embebido en memoria.
+- *Typst y CeTZ:* Entorno moderno de maquetación tipográfica científica y motor de renderizado vectorial de gráficos.
+- *Evidence.dev:* Framework de inteligencia de negocios como código para generación de sitios estáticos orientados a datos.
+- *Just:* Ejecutor de tareas deterministas para la orquestación reproducible de todas las etapas del pipeline.
+
+== Control de Sesgos, Validación y Reproducibilidad
+
+Debido a que las distribuciones agrarias presentan una extrema asimetría positiva con colas pesadas (distribuciones de ley de potencia), se aplicaron técnicas estadísticas rigurosas para mitigar el sesgo:
+- *Control del sesgo de economías de escala:* La muestra fue segmentada en clases de tamaño de explotación (`farm_size_class`), aislando las fincas medianas y grandes (_Medium/Large_) y pequeñas (_Small_) de los minifundios (menores a 1 manzana), comparando exclusivamente medianas entre cohortes dentro del mismo estrato.
+- *Uso de estadística no paramétrica:* Se privilegió el uso de medianas y rangos intercuartílicos sobre la media aritmética, evitando distorsiones por valores atípicos extremos.
+- *Garantía de reproducibilidad científica:* Todo el código fuente de extracción, transformación y agregación se encuentra versionado y depositado en acceso abierto en GitHub (#link("https://github.com/vect-maker/cenagro-analytics-nicaragua")[https://github.com/vect-maker/cenagro-analytics-nicaragua]), mientras que el dataset procesado y normalizado cuenta con identificador de objeto digital permanente (DOI: `10.5281/zenodo.20652059`) en Zenodo @miranda2026dataset.
+
+#pagebreak()
+
+// ==========================================
+// CAPÍTULO VI: DESARROLLO DEL PRODUCTO INTEGRADOR
+// ==========================================
+= Desarrollo del Producto Integrador
+
+== Arquitectura Tecnológica del Modern Data Stack
+
+El producto integrador desarrollado consiste en una infraestructura analítica desacoplada y reproducible que procesa, modela y divulga los microdatos del CENAGRO 2011. La arquitectura se diseñó bajo el paradigma de _Modern Data Stack_ (MDS), separando estrictamente la capa de almacenamiento columnar inmutable, el motor de transformación vectorizado en memoria y la capa de presentación semántica. Esta separación permitió procesar más de 260,000 registros censales complejos en hardware estándar de consumo, manteniendo tiempos de respuesta inferiores a un segundo sin depender de clústeres distribuidos costosos.
+
+== Pipeline ETL y Procesamiento Vectorizado en Rust
+
+El núcleo de transformación de datos se implementó en el lenguaje de programación de sistemas Rust, utilizando el motor de consulta vectorizado Apache DataFusion y el estándar de memoria Apache Arrow. El pipeline opera en tres fases:
++ *Ingesta columnar estricta:* Conversión directa de los ficheros de microdatos a tablas Parquet, garantizando compresión eficiente por bloques de columnas.
++ *Tipificación segura y optimización de memoria:* Aplicación de _downcasting_ a tipos de datos enteros mínimos viables (e.g., enteros de 8 y 16 bits para códigos de rubros y banderas lógicas) y codificación de diccionarios (_Dictionary Encoding_) para cadenas de texto de baja cardinalidad, maximizando el aprovechamiento de la memoria caché L1/L2 del CPU.
++ *Desnormalización OLAP:* Construcción de una tabla ancha consolidada (_Wide-Table OLAP_) que integra las variables de crédito, superficie cultivada, inventario pecuario y fuerza laboral en un solo esquema desacoplado.
+
+== Almacén de Datos Analítico en DuckDB
+
+Sobre la base de los archivos Parquet optimizados, se implementó un almacén de datos dimensional administrado mediante el motor DuckDB. La bodega analítica estructura vistas y tablas de agregación pre-calculadas que alimentan directamente las figuras del estudio, ejecutando consultas SQL avanzadas con soporte de _zero-copy reads_:
+- Modelado de las tablas de hechos: `farm_credit_access`, `farm_labor` y `farm_land_use`.
+- Integración de operadores `UNPIVOT` para reorganizar matricialmente las fuentes de crédito y el uso del suelo sin generar duplicidad física de datos.
+- Agregaciones deterministas exportadas automáticamente a formatos ligeros para la alimentación de gráficos científicos.
+
+== Plataforma Interactiva de Inteligencia de Negocios y Publicación Abierta
+
+Como componente de interfaz y divulgación del producto integrador, se desarrolló un portal analítico web interactivo mediante el framework _Evidence.dev_, desplegado públicamente en la web (#link("https://cenagro-analytics-ni.netlify.app")[https://cenagro-analytics-ni.netlify.app]). La plataforma permite al público general, investigadores y tomadores de decisiones explorar dinámicamente las distribuciones censales, filtrar por departamento y verificar de forma interactiva los contrastes cuantitativos reportados en esta investigación.
+
+#pagebreak()
 
 // ==========================================
 // RESULTADOS Y DISCUSIÓN

@@ -72,20 +72,18 @@ Este documento registra el seguimiento y control de versión de la transición d
 - [x] **Matriz de Articulación y Sinergia Interdisciplinaria**: Explicación de la interacción no aislada de los 6 componentes en el proceso de resolución de la problemática agropecuaria.
 
 ### Capítulo V: Diseño Metodológico o Procedimiento de Desarrollo
-- [ ] Estructurar la metodología con los subtítulos solicitados por la guía:
-  - [ ] **Enfoque y Tipo de Investigación**: Cuantitativo, no experimental, descriptivo-analítico de corte transversal.
-  - [ ] **Población y Unidades de Análisis**: Más de 260,000 unidades de explotación agropecuaria censadas en el CENAGRO 2011.
-  - [ ] **Técnicas e Instrumentos de Recolección**: Microdatos censales oficiales provistos por el INIDE y el MAG.
-  - [ ] **Procedimientos y Fases**: Ingesta, limpieza y perfilado, modelado dimensional, agregación analítica y síntesis.
-  - [ ] **Herramientas y Entornos Computacionales**: Rust / Apache DataFusion, DuckDB, Typst, Just y contenedores Podman.
-  - [ ] **Validación y Reproducibilidad**: Control determinista mediante scripts de datos versionados.
+- [x] **Enfoque y Tipo de Investigación**: Cuantitativo, no experimental, de corte transversal, alcance descriptivo-analítico y correlacional.
+- [x] **Población y Unidades de Análisis**: Más de 260,000 unidades de registro analítico consolidadas a partir de las 227,541 explotaciones agropecuarias del CENAGRO 2011.
+- [x] **Técnicas e Instrumentos de Recolección**: Microdatos censales oficiales en archivos SPSS (`.sav`) levantados por INIDE y MAGFOR mediante cédula censal directa.
+- [x] **Procedimientos y Fases**: 5 fases secuenciales (Ingesta/conversión columnar, Limpieza/tipificación/perfilado, Modelado dimensional, Agregación analítica por cohortes, Síntesis gráfica y comunicación científica).
+- [x] **Herramientas y Entornos Computacionales**: Modern Data Stack en Fedora Silverblue (Aurora OS) con Podman: Rust / Apache DataFusion, DuckDB, Typst/CeTZ, Evidence.dev y Just.
+- [x] **Validación y Reproducibilidad**: Control de sesgo de escala mediante segmentación (`farm_size_class`), estadística no paramétrica de medianas, versionado en GitHub y depósito permanente con DOI en Zenodo (`10.5281/zenodo.20652059`).
 
 ### Capítulo VI: Desarrollo del Producto Integrador
-- [ ] Redactar sección principal (= nivel 1) que documente el producto tecnológico y analítico:
-  - [ ] Arquitectura integral del *Modern Data Stack* desacoplado.
-  - [ ] Pipeline ETL vectorizado en Rust y transformación analítica.
-  - [ ] Bodega de datos analítica (*Warehouse* en DuckDB).
-  - [ ] Plataforma web interactiva de Business Intelligence (*Evidence.dev* y despliegue público).
+- [x] **Arquitectura Tecnológica del Modern Data Stack**: Infraestructura analítica desacoplada de alto rendimiento y bajo consumo computacional.
+- [x] **Pipeline ETL y Procesamiento Vectorizado en Rust**: Ingesta columnar, tipificación estricta con downcasting, codificación de diccionarios (Dictionary Encoding) y tabla ancha consolidada (Wide-Table OLAP).
+- [x] **Almacén de Datos Analítico en DuckDB**: Modelado dimensional (esquema estrella), tablas de hechos (`farm_labor`, `farm_credit_access`, `farm_land_use`), operadores UNPIVOT y consultas analíticas.
+- [x] **Plataforma Interactiva de Inteligencia de Negocios y Publicación Abierta**: Portal web interactivo desplegado públicamente en Netlify con Evidence.dev y publicación de dataset abierto.
 
 ### Capítulo VII: Resultados y Análisis
 - [ ] Renombrar sección formalmente a `Resultados y Análisis`.
