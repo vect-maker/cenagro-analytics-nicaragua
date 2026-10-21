@@ -102,10 +102,10 @@ just build-compiler
 # 3. Compilar el ejecutable ETL de Rust en su imagen ligera de producción
 just build-pipeline
 
-# 4. Construir la imagen del entorno del portal de BI (Evidence.dev)
+# 4. Construir la imagen del entorno del portal de BI (Evidence.dev sobre Node.js 24 LTS)
 just build-bi-container
 
-# 5. Instalar dependencias de Node.js en el portal de analytics
+# 5. Instalar dependencias de Node.js en el portal de analytics (ejecuta npm ci dentro del contenedor)
 just setup-bi
 ```
 
@@ -144,8 +144,11 @@ just add-meta-bi
 ```
 
 #### 4. Visualización y Análisis (Evidence.dev)
-Levanta el portal interactivo de Business Intelligence para consultar las métricas e informes:
+Asegúrese de haber ejecutado previamente `just setup-bi` para contar con las dependencias instaladas en `analytics/node_modules`. Luego, levante el portal interactivo de Business Intelligence para consultar las métricas e informes:
 ```bash
+# Sincroniza el catálogo de datos y metadatos con el portal de Evidence
+just add-meta-bi
+
 # Inicia el servidor de desarrollo local en http://localhost:3000 con recarga en vivo
 just run-bi
 

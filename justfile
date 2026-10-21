@@ -41,15 +41,19 @@ ingest-data:
 
 setup-bi:
   podman run -it --rm \
+    --userns=keep-id \
     -p 3000:3000 \
     -v ./analytics:/app:Z \
-    evidence-dev-image /bin/sh -c "npm install"
+    -w /app \
+    evidence-dev-image npm ci
 
 build-bi-container:
   podman build -f infra/evidence.Containerfile -t evidence-dev-image .
 
 add-meta-bi:
+  [ -d analytics/node_modules ] || just setup-bi
   podman run -it --rm \
+    --userns=keep-id \
     -v ./analytics:/app:Z \
     -w /app \
     evidence-dev-image npm run sources -- --changed
@@ -62,15 +66,20 @@ refresh-data:
   just add-meta-bi
 
 run-bi:
+  [ -d analytics/node_modules ] || just setup-bi
   -podman rm -f evidence-dev
   podman run -it --rm \
+    --userns=keep-id \
     --name evidence-dev \
     -p 3000:3000 \
     -v ./analytics:/app:Z \
+    -w /app \
     evidence-dev-image /bin/sh -c "npm run sources -- --watch & npm run dev -- --host 0.0.0.0"
 
 build-bi:
+  [ -d analytics/node_modules ] || just setup-bi
   podman run -it --rm \
+    --userns=keep-id \
     -v ./analytics:/app:Z \
     -w /app \
     evidence-dev-image npm run build
