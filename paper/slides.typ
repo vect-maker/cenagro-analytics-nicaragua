@@ -2,6 +2,7 @@
 #import "charts.typ": *
 #import "metadata.typ": *
 #import "content/objectives.typ": *
+#import "content/figures.typ": fig-caption, fig-ref
 
 #show: cenagro-theme.with()
 
@@ -113,10 +114,9 @@
 
 #slide-chart(
   chart-fn: chart-embudo(),
-  caption: [Figura 1. Embudo de Acceso al Crédito: Tasa de Entrada vs. Resolución Bancaria.],
+  caption: fig-caption("embudo"),
   stat: [15.9% solicitó crédito],
   body: [De 262,546 registros, 41,756 solicitudes. Entre ellas, la aprobación alcanzó el 92.6%.],
-  footnote: [Fuente: CENAGRO 2011. Figura 1 del informe de investigación.],
 )
 
 // ============================================================
@@ -126,10 +126,9 @@
 
 #slide-chart(
   chart-fn: chart-fuentes(),
-  caption: [Figura 2. Principales Fuentes de Financiamiento.],
+  caption: fig-caption("fuentes"),
   stat: [52.6% banca privada],
   body: [La banca privada concentró la mayor proporción de créditos; las cooperativas ocuparon el segundo lugar (28.2%).],
-  footnote: [Fuente: CENAGRO 2011. Figura 2 del informe de investigación.],
 )
 
 // ============================================================
@@ -139,10 +138,9 @@
 
 #slide-chart(
   chart-fn: chart-intensidad(),
-  caption: [Figura 3. Intensidad Laboral Mediana por Escala y Acceso a Crédito.],
+  caption: fig-caption("intensidad"),
   stat: [+171.6%],
   body: [En fincas medianas y grandes con crédito: 0.326 #box[trabajadores/Mz] frente a 0.120 sin crédito.],
-  footnote: [Fuente: CENAGRO 2011. Figura 3 del informe de investigación.],
 )
 
 // ============================================================
@@ -152,10 +150,9 @@
 
 #slide-chart(
   chart-fn: chart-estabilidad(),
-  caption: [Figura 4. Distribución de la Fuerza Laboral por Régimen Contractual.],
+  caption: fig-caption("estabilidad"),
   stat: [68.6% solo temporal],
   body: [Entre las fincas financiadas prevaleció el empleo estacional; más contratación no implicó mayor estabilidad.],
-  footnote: [Fuente: CENAGRO 2011. Figura 4 del informe de investigación.],
 )
 
 // ============================================================
@@ -165,10 +162,9 @@
 
 #slide-chart(
   chart-fn: chart-complejidad(),
-  caption: [Figura 5. Densidad de Complejidad Productiva (Distribución Normalizada).],
+  caption: fig-caption("complejidad"),
   stat: [De 2 a 3 rubros],
   body: [La categoría más frecuente pasó de 2 rubros sin crédito a 3 con crédito. Promedios: 3.36 y 3.65.],
-  footnote: [Fuente: CENAGRO 2011. Figura 5 del informe de investigación.],
 )
 
 // ============================================================
@@ -178,10 +174,9 @@
 
 #slide-chart(
   chart-fn: chart-vocacion(),
-  caption: [Figura 6. Distribución del Uso de la Tierra según Acceso a Financiamiento.],
+  caption: fig-caption("vocacion"),
   stat: [22.9% en permanentes],
   body: [Frente al 13.6% sin crédito. El ratio pasto-cultivo bajó de 4.18 a 2.71.],
-  footnote: [Fuente: CENAGRO 2011. Figura 6 del informe de investigación.],
 )
 
 // ============================================================

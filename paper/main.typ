@@ -30,6 +30,7 @@
   objetivo-especifico-2,
   objetivo-especifico-3,
 )
+#import "content/figures.typ": figures-data
 
 #set document(
   title: title,
@@ -413,7 +414,7 @@ En correspondencia con el tercer objetivo específico, se modeló el embudo de a
 
 #figure(
   chart-embudo(),
-  caption: [Embudo de Acceso al Crédito: Tasa de Entrada vs. Resolución Bancaria.]
+  caption: figures-data.embudo.title
 ) <fig-embudo>
 
 Como se demuestra en la @fig-embudo, la contracción más aguda del sistema no ocurre en la fase de evaluación bancaria en ventanilla, sino en la entrada misma al circuito de financiamiento: de las 262,546 explotaciones censadas en el país, únicamente 41,756 unidades (15.9%) lograron tramitar una solicitud de financiamiento. En marcado contraste, entre los productores que consiguen formalizar su solicitud, la tasa empírica de aprobación asciende a un elevado 92.6% (38,680 créditos concedidos), frente a un rechazo de apenas el 7.4%.
@@ -424,7 +425,7 @@ Paralelamente, se analizó la matriz de orígenes de financiamiento para caracte
 
 #figure(
   chart-fuentes(),
-  caption: [Principales Fuentes de Financiamiento.]
+  caption: figures-data.fuentes.title
 ) <fig-fuentes>
 
 De acuerdo con los datos reflejados en la @fig-fuentes, la banca comercial privada es el proveedor líder absoluto con 18,255 créditos otorgados, duplicando casi el alcance de las estructuras asociativas (cooperativas con 9,793 créditos) y superando con amplitud a las ONGs (2,662 créditos). Por su parte, las vías informales (1,801 prestamistas y 1,618 acopiadores) y la banca estatal de fomento (Banco Produzcamos con 586 créditos) presentan participaciones minoritarias en el volumen censal.
@@ -439,7 +440,7 @@ Para dar respuesta al primer objetivo específico, se evaluó la Intensidad Labo
 
 #figure(
   chart-intensidad(),
-  caption: [Intensidad Laboral Mediana por Escala y Acceso a Crédito.]
+  caption: figures-data.intensidad.title
 ) <fig-intensidad>
 
 Como se observa en la @fig-intensidad, los resultados confirman que el financiamiento actúa como un multiplicador expansivo de la absorción laboral, desestimando la hipótesis de sustitución tecnológica de mano de obra por maquinaria. Las explotaciones medianas y grandes (_Medium/Large_) que recibieron crédito registraron un incremento masivo en su capacidad de absorción, superando en un 171.6% la mediana de intensidad laboral de las fincas homólogas sin crédito (0.326 vs. 0.120 trabajadores/Mz). Asimismo, en las unidades pequeñas (_Small_), la inyección de liquidez generó una brecha positiva del 33.3% (1.667 vs. 1.250 trabajadores/Mz).
@@ -448,7 +449,7 @@ Más allá del volumen absoluto de contratación, se examinó la calidad del emp
 
 #figure(
   chart-estabilidad(),
-  caption: [Distribución de la Fuerza Laboral por Régimen Contractual.]
+  caption: figures-data.estabilidad.title
 ) <fig-estabilidad>
 
 La @fig-estabilidad confirma una estructura polarizada en el mercado laboral rural nicaragüense. El 68.6% de las explotaciones financiadas operan exclusivamente con trabajadores temporales, mientras que un 25.6% combina esquemas temporales y permanentes. En contraposición, las planillas compuestas en un 100% por personal permanente presentan una mayor prevalencia relativa en fincas no financiadas (12.0% frente a 5.9%).
@@ -461,7 +462,7 @@ En correspondencia con el segundo objetivo específico, se contrastó el Índice
 
 #figure(
   chart-complejidad(),
-  caption: [Densidad de Complejidad Productiva (Distribución Normalizada).]
+  caption: figures-data.complejidad.title
 ) <fig-complejidad>
 
 Al evaluar la distribución en la @fig-complejidad, se evidencia un desplazamiento estadístico hacia niveles superiores de diversificación en el grupo financiado. Mientras que las unidades no financiadas concentran su pico modal en apenas 2 rubros (25.1% de las fincas), el grupo que recibió crédito traslada su valor más frecuente hacia los 3 rubros (23.7%) y sostiene una mayor presencia en estratos de alta complejidad (4 a 6 rubros). En términos absolutos, las fincas con crédito incorporan en promedio 0.29 rubros adicionales (media de 3.65 frente a 3.36 rubros), confirmando que el financiamiento mitiga las barreras de entrada para la diversificación de cultivos.
@@ -470,7 +471,7 @@ Complementariamente, se examinó la transición en la vocación del uso de la ti
 
 #figure(
   chart-vocacion(),
-  caption: [Distribución del Uso de la Tierra según Acceso a Financiamiento.]
+  caption: figures-data.vocacion.title
 ) <fig-pasto>
 
 La @fig-pasto ilustra una reconfiguración estructural en la vocación económica del suelo inducida por el financiamiento. Las fincas financiadas destinan en promedio un 22.9% de su área total a Cultivos Permanentes, superando notablemente el 13.6% registrado en las no financiadas (+9.3 puntos porcentuales). Paralelamente, la superficie asignada a Pasto Natural desciende del 19.1% al 16.8%. En consecuencia, el Ratio Pasto-Cultivo promedio desciende marcadamente de 4.18 a 2.71 (un delta absoluto de -1.47).

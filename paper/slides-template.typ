@@ -140,31 +140,33 @@
   caption: [],
   stat: [],
   body: [],
-  footnote: [],
+  footnote: none,
 ) = {
   slide[
-    #grid(
-      columns: (520pt, 1fr),
-      gutter: 24pt,
-      align: (center + horizon, horizon + left),
-      [
-        #block(width: 100%, align(center)[
-          #set text(size: 10pt, font: "Liberation Serif")
-          #chart-fn
-          #if caption != [] [
-            #v(0.5em)
-            #text(size: 10pt, font: "Liberation Serif", caption)
-          ]
-        ])
-      ],
-      [
-        #v(-10pt)
-        #text(size: 24pt, weight: "bold", fill: color-title, font: font-heading, stat)
-        #v(0.8em)
-        #text(size: 16pt, fill: color-body, font: font-body, body)
-      ]
-    )
-    #if footnote != [] [
+    #align(horizon)[
+      #grid(
+        columns: (520pt, 1fr),
+        gutter: 28pt,
+        align: (center + horizon, horizon + left),
+        [
+          #block(width: 100%, align(center)[
+            #set text(size: 10pt, font: "Liberation Serif")
+            #chart-fn
+            #if caption != [] [
+              #v(0.6em)
+              #text(size: 10.5pt, font: "Liberation Serif", caption)
+            ]
+          ])
+        ],
+        [
+          #set par(leading: 0.5em)
+          #text(size: 26pt, weight: "bold", fill: color-title, font: font-heading, stat)
+          #v(0.7em)
+          #text(size: 17.5pt, fill: color-body, font: font-body, body)
+        ]
+      )
+    ]
+    #if footnote != none and footnote != [] [
       #place(
         top + left,
         dx: 11.8pt,
