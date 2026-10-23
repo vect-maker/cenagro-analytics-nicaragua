@@ -34,12 +34,12 @@
 }
 
 /// Styled numbered card for objectives and conclusions
-#let card-numbered(number: 1, text-content: []) = {
+#let card-numbered(number: 1, text-content: [], size: 15pt) = {
   block(
     fill: color-card-bg,
     stroke: 1pt + color-card-stroke,
     radius: 8pt,
-    inset: (x: 16pt, y: 12pt),
+    inset: (x: 16pt, y: 10pt),
     width: 100%,
     grid(
       columns: (28pt, 1fr),
@@ -50,7 +50,7 @@
         fill: color-title,
         text(fill: white, size: 13pt, weight: "bold", font: font-heading)[#number]
       ),
-      text(fill: color-body, size: 16pt, font: font-body, text-content)
+      text(fill: color-body, size: size, font: font-body, text-content)
     )
   )
 }
@@ -178,7 +178,7 @@
 /// Title slide matching Plantilla PPT layout
 #let title-slide(
   title: [Escriba su texto],
-  subtitle: [Escriba el texto],
+  subtitle: none,
   authors: (),
   tutor: none,
   config: (:),
@@ -194,6 +194,40 @@
     ),
   )
 
+  let author-items = if type(authors) == array {
+    authors.map(a => {
+      if type(a) == dictionary {
+        if "formal-name" in a {
+          if "name" in a and a.name.starts-with("Br. ") and not a.formal-name.starts-with("Br. ") {
+            "Br. " + a.formal-name
+          } else {
+            a.formal-name
+          }
+        } else if "name" in a {
+          a.name
+        } else {
+          ""
+        }
+      } else {
+        a
+      }
+    })
+  } else if authors != none and authors != [] and authors != () {
+    (authors,)
+  } else {
+    ()
+  }
+
+  let tutor-name = if type(tutor) == dictionary {
+    if "name" in tutor {
+      tutor.name
+    } else {
+      none
+    }
+  } else {
+    tutor
+  }
+
   touying-slide(
     self: self,
     config: config,
@@ -201,45 +235,62 @@
       place(
         top + left,
         dx: 520pt,
-        dy: 185pt,
+        dy: 135pt,
         block(
           width: 412.8pt,
           [
-            #set par(leading: 0.45em, spacing: 0.6em)
+            #set par(leading: 0.42em, spacing: 0.55em)
             #text(
               fill: color-title,
-              size: 25pt,
+              size: 23pt,
               weight: "bold",
               font: font-heading,
               title,
             )
-            #v(0.8em)
-            #text(
-              fill: color-body,
-              size: 13.5pt,
-              font: font-body,
-              subtitle,
-            )
-            #if authors != none and authors != () [
-              #v(0.5em)
+            #if subtitle != none and subtitle != [] [
+              #v(0.6em)
+              #text(
+                fill: color-body,
+                size: 13.5pt,
+                font: font-body,
+                subtitle,
+              )
+            ]
+            #if author-items.len() > 0 [
+              #v(1.1em)
+              #text(
+                fill: color-title,
+                size: 12pt,
+                weight: "bold",
+                font: font-heading,
+                [Autores:]
+              )
+              #v(0.25em)
+              #grid(
+                columns: 1,
+                row-gutter: 0.35em,
+                ..author-items.map(it => text(
+                  fill: color-body,
+                  size: 11.5pt,
+                  font: font-body,
+                  it
+                ))
+              )
+            ]
+            #if tutor-name != none and tutor-name != [] [
+              #v(0.7em)
+              #text(
+                fill: color-title,
+                size: 12pt,
+                weight: "bold",
+                font: font-heading,
+                [Tutor: ]
+              )
               #text(
                 fill: color-body,
                 size: 11.5pt,
                 font: font-body,
-                if type(authors) == array {
-                  authors.join(" · ")
-                } else {
-                  authors
-                }
-              )
-            ]
-            #if tutor != none [
-              #v(0.3em)
-              #text(
-                fill: color-body.lighten(15%),
-                size: 11.5pt,
-                font: font-body,
-                tutor
+                tutor-name
               )
             ]
           ]

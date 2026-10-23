@@ -1,6 +1,7 @@
 #import "slides-template.typ": *
 #import "charts.typ": *
 #import "metadata.typ": *
+#import "content/objectives.typ": *
 
 #show: cenagro-theme.with()
 
@@ -8,10 +9,9 @@
 // DIAPOSITIVA 1: PORTADA
 // ============================================================
 #title-slide(
-  title: [Impacto del financiamiento en el empleo y la diversificación productiva],
-  subtitle: [Explotaciones agropecuarias nicaragüenses | CENAGRO 2011],
-  authors: [Jose Miranda · Kendall Aguilar · Ricardo Oyarzo · Luis Medrano],
-  tutor: [Tutor: MSc. Deyvi Antonio López Rojas],
+  title: title,
+  authors: authors,
+  tutor: tutor,
 )
 
 // ============================================================
@@ -60,22 +60,22 @@
 #v(0.1em)
 #block(
   fill: color-card-bg,
-  stroke: 1pt + color-card-stroke,
+  stroke: 1.2pt + color-title.lighten(50%),
   radius: 8pt,
-  inset: (x: 16pt, y: 12pt),
+  inset: (x: 16pt, y: 10pt),
   width: 100%,
   [
-    #text(size: 18pt, weight: "bold", fill: color-title)[General:]
-    #text(size: 17pt, fill: color-body)[ evaluar el financiamiento, el empleo y la diversificación productiva.]
+    #text(size: 15.5pt, weight: "bold", fill: color-title, font: font-heading)[Objetivo General: ]
+    #text(size: 14.5pt, fill: color-body, font: font-body)[#objetivo-general]
   ]
 )
 
-#v(0.5em)
+#v(0.4em)
 #stack(
-  spacing: 10pt,
-  card-numbered(number: 1, text-content: [Comparar la intensidad y estabilidad laboral por tamaño de finca.]),
-  card-numbered(number: 2, text-content: [Determinar la variación de cultivos permanentes y diversificación.]),
-  card-numbered(number: 3, text-content: [Analizar aprobación de solicitudes y fuentes de crédito.]),
+  spacing: 8pt,
+  card-numbered(number: 1, text-content: objetivo-especifico-1, size: 14pt),
+  card-numbered(number: 2, text-content: objetivo-especifico-2, size: 14pt),
+  card-numbered(number: 3, text-content: objetivo-especifico-3, size: 14pt),
 )
 
 // ============================================================
