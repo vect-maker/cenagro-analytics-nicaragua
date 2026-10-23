@@ -1,0 +1,3 @@
+# Treat all PDF files as raw binary blob objects and omit them from git diff history
+*.pdf binary -diff
+docs/*.pdf binary -diff

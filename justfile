@@ -103,15 +103,18 @@ run-pipeline:
 compile-paper: export-paper-data compile-monograph compile-abstract compile-slides
 
 compile-monograph:
-  typst compile paper/main.typ paper/main.pdf
+  mkdir -p docs
+  typst compile paper/main.typ docs/main.pdf
 
 compile-abstract:
-  typst compile paper/abstract.typ paper/abstract.pdf
+  mkdir -p docs
+  typst compile paper/abstract.typ docs/abstract.pdf
 
 compile-resumen: compile-abstract
 
 compile-slides:
-  typst compile --font-path paper/fonts paper/slides.typ slides.pdf
+  mkdir -p docs
+  typst compile --font-path paper/fonts paper/slides.typ docs/slides.pdf
 
 
 preview-paper:
@@ -135,15 +138,17 @@ export-paper-data:
 
 
 watch-paper:
-  typst watch paper/main.typ paper/main.pdf
+  mkdir -p docs
+  typst watch paper/main.typ docs/main.pdf
 
 watch-slides:
-  typst watch --font-path paper/fonts paper/slides.typ slides.pdf
+  mkdir -p docs
+  typst watch --font-path paper/fonts paper/slides.typ docs/slides.pdf
 
 compare-paper:
-  mkdir -p paper/comparison/original paper/comparison/typst
+  mkdir -p paper/comparison/original paper/comparison/typst docs
   [ -f documento.pdf ] && pdftoppm -png -r 150 documento.pdf paper/comparison/original/page || true
-  pdftoppm -png -r 150 paper/main.pdf paper/comparison/typst/page
+  pdftoppm -png -r 150 docs/main.pdf paper/comparison/typst/page
 
 compare-slides:
   mkdir -p paper/comparison/slides/original paper/comparison/slides/typst
