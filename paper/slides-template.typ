@@ -216,167 +216,215 @@
   align(center + horizon, text(size: 14pt, fill: color-title, weight: "bold")[#sym.arrow.r])
 ))
 
-/// Horizontal synthesis row for empirical findings vs theoretical contrast (Conclusions)
-#let synthesis-row(
-  icon: none,
-  axis-num: 1,
-  axis-title: [],
-  stat-highlight: [],
-  stat-sub: [],
-  empirical-body: [],
-  theory-author: [],
-  theory-body: [],
-  accent: color-title,
-) = {
-  block(
-    fill: color-card-bg,
-    stroke: 1pt + color-card-stroke,
-    radius: 7pt,
-    inset: (x: 10pt, y: 7pt),
-    width: 100%,
-    grid(
-      columns: (175pt, 1fr, 185pt),
-      gutter: 10pt,
-      align: (top + left, top + left, top + left),
-      // Col 1: Axis & stats
-      stack(
-        dir: ttb,
-        spacing: 3pt,
-        grid(
-          columns: (22pt, 1fr),
-          gutter: 6pt,
-          align: (center + horizon, left + horizon),
-          box(
-            fill: accent,
-            radius: 4pt,
-            width: 22pt,
-            height: 22pt,
-            align(center + horizon, box(width: 16pt, icon))
-          ),
-          text(size: 11.5pt, weight: "bold", fill: accent, font: font-heading)[#axis-num. #axis-title]
-        ),
-        v(1pt),
-        box(
-          fill: accent.lighten(92%),
-          stroke: 0.6pt + accent.lighten(60%),
-          radius: 4pt,
-          inset: (x: 6pt, y: 3.5pt),
-          width: 100%,
-          [
-            #text(size: 11pt, weight: "bold", fill: accent, font: font-heading, stat-highlight) \
-            #text(size: 8.5pt, fill: color-body.lighten(20%), font: font-body, stat-sub)
-          ]
-        )
-      ),
-      // Col 2: Empirical finding
-      stack(
-        dir: ttb,
-        spacing: 2pt,
-        text(size: 9pt, weight: "bold", fill: color-accent, font: font-heading)[EVIDENCIA EMPÍRICA CENAGRO],
-        line(length: 100%, stroke: 0.4pt + rgb("#e2dcf0")),
-        text(size: 10pt, fill: color-body, font: font-body)[#empirical-body]
-      ),
-      // Col 3: Theoretical contrast
-      block(
-        fill: rgb("#f6f3fa"),
-        stroke: 0.6pt + color-card-stroke,
-        radius: 5pt,
-        inset: (x: 7pt, y: 5pt),
-        width: 100%,
-        stack(
-          dir: ttb,
-          spacing: 2pt,
-          text(size: 8.8pt, weight: "bold", fill: accent, font: font-heading)[#theory-author],
-          line(length: 100%, stroke: 0.4pt + accent.lighten(70%)),
-          text(size: 9pt, fill: color-body, font: font-body)[#theory-body]
-        )
-      )
-    )
-  )
-}
-
-/// Actionable policy card for public policy recommendations slide
-#let policy-card(
-  pillar-tag: [],
-  target: [],
-  icon: none,
+/// High-impact analytical conclusion card for Slide 10
+#let conclusion-card(
+  number: "01",
+  tag: [],
   title: [],
-  subtitle: [],
-  actions: (),
-  meta-label: [Impacto estratégico],
-  meta-text: [],
+  icon: none,
+  stat-main: [],
+  stat-label: [],
+  stat-sub: none,
+  stat-sub-label: none,
+  verdict-headline: [],
+  verdict-body: [],
   accent: color-title,
-  height: 335pt,
+  height: 340pt,
 ) = {
   block(
     fill: color-card-bg,
-    stroke: 1pt + color-card-stroke,
-    radius: 9pt,
-    inset: (x: 12pt, y: 10pt),
+    stroke: 1.1pt + color-card-stroke,
+    radius: 10pt,
+    inset: (x: 15pt, y: 16pt),
     width: 100%,
     height: height,
-    [
-      // 1. Pillar tag + Target
-      #grid(
+    breakable: false,
+    stack(
+      dir: ttb,
+      spacing: 0pt,
+      // 1. Tag & Number Header
+      grid(
         columns: (auto, 1fr),
         gutter: 6pt,
         align: (horizon + left, horizon + right),
         box(
           fill: accent,
-          radius: 3pt,
-          inset: (x: 6pt, y: 2.5pt),
-          text(size: 8pt, weight: "bold", fill: white, font: font-heading, pillar-tag)
+          radius: 3.5pt,
+          inset: (x: 7.5pt, y: 3.5pt),
+          text(size: 9pt, weight: "bold", fill: white, font: font-heading)[#number #sym.bar.v #tag]
         ),
-        text(size: 8.2pt, weight: "bold", fill: color-accent, font: font-body, target)
-      )
-      #v(5pt)
-      // 2. Icon + Title + Subtitle
-      #grid(
-        columns: (26pt, 1fr),
-        gutter: 7pt,
-        align: (horizon + center, horizon + left),
-        box(
-          fill: accent,
-          radius: 6pt,
-          width: 26pt,
-          height: 26pt,
-          align(center + horizon, box(width: 18pt, icon))
-        ),
-        [
-          #text(size: 13.5pt, weight: "bold", fill: accent, font: font-heading, title) \
-          #text(size: 9.2pt, fill: color-body.lighten(25%), font: font-body, subtitle)
-        ]
-      )
-      #v(5pt)
-      #line(length: 100%, stroke: 0.6pt + rgb("#eee8f6"))
-      #v(4pt)
-      // 3. Actionable items
-      #set text(size: 10.2pt, fill: color-body, font: font-body)
-      #set par(leading: 0.44em)
-      #for act in actions [
-        #v(0.25em)
-        #grid(
-          columns: (9pt, 1fr),
-          gutter: 4pt,
-          align: (top + left, top + left),
-          text(fill: accent, weight: "bold", size: 8.5pt)[#sym.triangle.filled.r],
-          act
-        )
-      ]
-      #v(1fr)
-      // 4. Meta impact box anchored at bottom
-      #block(
+        if icon != none [
+          #box(
+            fill: accent,
+            radius: 4pt,
+            width: 24pt,
+            height: 24pt,
+            align(center + horizon, box(width: 15pt, icon))
+          )
+        ] else [ ]
+      ),
+      v(11pt),
+      // 2. Title
+      text(size: 17pt, weight: "bold", fill: accent, font: font-heading, title),
+      v(11pt),
+      // 3. Hero Metric Container
+      block(
         fill: accent.lighten(93%),
         stroke: 0.8pt + accent.lighten(65%),
-        radius: 6pt,
-        inset: (x: 8pt, y: 6pt),
+        radius: 8pt,
+        inset: (x: 10pt, y: 12pt),
         width: 100%,
         [
-          #text(size: 8.2pt, weight: "bold", fill: accent, font: font-heading)[#meta-label:] \
-          #text(size: 9.2pt, weight: "medium", fill: color-body, font: font-body, meta-text)
+          #if stat-sub != none [
+            #grid(
+              columns: (1fr, 1fr),
+              gutter: 6pt,
+              align: (center, center),
+              [
+                #text(size: 29pt, weight: "bold", fill: accent, font: font-heading, stat-main) \
+                #v(3pt)
+                #text(size: 9.6pt, weight: "bold", fill: color-body, font: font-body, stat-label)
+              ],
+              [
+                #text(size: 29pt, weight: "bold", fill: color-accent, font: font-heading, stat-sub) \
+                #v(3pt)
+                #text(size: 9.6pt, weight: "bold", fill: color-body, font: font-body, stat-sub-label)
+              ]
+            )
+          ] else [
+            #align(center, [
+              #text(size: 32pt, weight: "bold", fill: accent, font: font-heading, stat-main) \
+              #v(3pt)
+              #text(size: 10.2pt, weight: "bold", fill: color-body, font: font-body, stat-label)
+            ])
+          ]
         ]
+      ),
+      v(15pt),
+      // 4. Punchy Verdict
+      text(size: 14pt, weight: "bold", fill: color-body, font: font-heading, verdict-headline),
+      v(8pt),
+      par(leading: 0.52em)[#text(size: 12.2pt, fill: color-body.lighten(6%), font: font-body, verdict-body)],
+    )
+  )
+}
+
+/// Horizontal policy recommendation pathway row for Slide 11
+#let policy-row(
+  number: "01",
+  pillar-tag: [],
+  target-agency: [],
+  icon: none,
+  title: [],
+  action-1-title: [],
+  action-1-body: [],
+  action-2-title: [],
+  action-2-body: [],
+  impact-label: none,
+  impact-target: [],
+  impact-stat: none,
+  accent: color-title,
+) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1.1pt + color-card-stroke,
+    radius: 9pt,
+    inset: (x: 15pt, y: 10pt),
+    width: 100%,
+    breakable: false,
+    grid(
+      columns: (215pt, 1fr, 185pt),
+      gutter: 14pt,
+      align: (horizon + left, horizon + left, horizon + center),
+      // Columna 1: Pilar, Título y Entidad Ejecutora
+      stack(
+        dir: ttb,
+        spacing: 0pt,
+        grid(
+          columns: (auto, 1fr),
+          gutter: 6pt,
+          align: (horizon + left, horizon + left),
+          box(
+            fill: accent,
+            radius: 3pt,
+            inset: (x: 6pt, y: 2.5pt),
+            text(size: 8pt, weight: "bold", fill: white, font: font-heading)[#number #sym.bar.v #pillar-tag]
+          ),
+          if icon != none [
+            #box(
+              fill: accent,
+              radius: 4pt,
+              width: 20pt,
+              height: 20pt,
+              align(center + horizon, box(width: 13pt, icon))
+            )
+          ] else [ ]
+        ),
+        v(4.5pt),
+        text(size: 14pt, weight: "bold", fill: accent, font: font-heading, title),
+        v(3pt),
+        text(size: 8.2pt, weight: "bold", fill: color-accent, font: font-body, target-agency),
+      ),
+      // Columna 2: Acciones Estratégicas (Inmediata y Estructural) en dos columnas internas
+      grid(
+        columns: (1fr, 1fr),
+        gutter: 13pt,
+        // Acción Inmediata
+        stack(
+          dir: ttb,
+          spacing: 2.5pt,
+          box(
+            fill: accent.lighten(92%),
+            radius: 2.5pt,
+            inset: (x: 4.5pt, y: 2pt),
+            text(size: 7.2pt, weight: "bold", fill: accent, font: font-heading)[ACCIÓN INMEDIATA]
+          ),
+          text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-1-title),
+          par(leading: 0.40em)[#text(size: 9.2pt, fill: color-body, font: font-body, action-1-body)],
+        ),
+        // Reforma Estructural
+        stack(
+          dir: ttb,
+          spacing: 2.5pt,
+          box(
+            fill: accent.lighten(92%),
+            radius: 2.5pt,
+            inset: (x: 4.5pt, y: 2pt),
+            text(size: 7.2pt, weight: "bold", fill: accent, font: font-heading)[REFORMA ESTRUCTURAL]
+          ),
+          text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-2-title),
+          par(leading: 0.40em)[#text(size: 9.2pt, fill: color-body, font: font-body, action-2-body)],
+        ),
+      ),
+      // Columna 3: Indicador de Impacto / Contexto Cuantitativo
+      block(
+        fill: accent.lighten(94%),
+        stroke: 0.8pt + accent.lighten(65%),
+        radius: 8pt,
+        inset: (x: 9pt, y: 8pt),
+        width: 100%,
+        stack(
+          dir: ttb,
+          spacing: 0pt,
+          align(center, [
+            #if impact-label != none and impact-label != [] [
+              #box(
+                fill: accent.lighten(88%),
+                radius: 2.5pt,
+                inset: (x: 5.5pt, y: 1.8pt),
+                text(size: 7pt, weight: "bold", fill: accent, font: font-heading, impact-label)
+              )
+              #v(2.5pt)
+            ]
+            #if impact-stat != none [
+              #text(size: 20pt, weight: "bold", fill: accent, font: font-heading, impact-stat) \
+              #v(2pt)
+            ]
+            #par(leading: 0.38em)[#text(size: 8.2pt, fill: color-body, font: font-body, impact-target)]
+          ])
+        )
       )
-    ]
+    )
   )
 }
 

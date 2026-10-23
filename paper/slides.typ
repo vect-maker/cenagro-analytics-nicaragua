@@ -659,57 +659,49 @@
 
 #speaker-marker("D")
 
-#stack(
-  dir: ttb,
-  spacing: 7pt,
-  synthesis-row(
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 13pt,
+  conclusion-card(
+    number: "01",
+    tag: [ACCESO AL CRÉDITO],
+    title: [Inclusión y Riesgo],
     icon: slide-icons.credit-card,
-    axis-num: 1,
-    axis-title: [Acceso al Crédito],
-    stat-highlight: [92.6% Aprobación],
-    stat-sub: [vs. 84.1% de autoexclusión inicial],
-    empirical-body: [
-      *Falla de entrada, no de ventanilla:* Quienes solicitan obtienen aprobación masiva (92.6%); la exclusión ocurre antes de postular por falta de garantías. La banca privada concentra el 52.6% y el fomento estatal fue marginal (1.7%).
-    ],
-    theory-author: [Boucher et al. (2008)],
-    theory-body: [
-      *Racionamiento por riesgo:* Productores con colateral se autoexcluyen voluntariamente por aversión a perder su tierra ante choques productivos o climáticos.
-    ],
+    stat-main: [92.6%],
+    stat-label: [Aprobación bancaria],
+    stat-sub: [84.1%],
+    stat-sub-label: [Sin postular (exclusión)],
+    verdict-headline: [Falla de entrada, no de ventanilla],
+    verdict-body: [La banca comercial aprueba masivamente las solicitudes recibidas. La barrera crítica es la autoexclusión previa por aversión al riesgo y temor a la pérdida patrimonial.],
+    accent: color-title,
   ),
-  synthesis-row(
+  conclusion-card(
+    number: "02",
+    tag: [DINÁMICA LABORAL],
+    title: [Demanda y Empleo],
     icon: slide-icons.trending-up,
-    axis-num: 2,
-    axis-title: [Dinámica Laboral],
-    stat-highlight: [+171.6% Intensidad],
-    stat-sub: [68.6% opera con solo temporal],
-    empirical-body: [
-      *Multiplicador de jornales, pero precario:* El crédito dispara la demanda de mano de obra en fincas medianas/grandes (+171.6%) y pequeñas (+33.3%), pero el 68.6% de las fincas no genera contratos permanentes.
-    ],
-    theory-author: [Dualismo Agrario (Sen / Lewis)],
-    theory-body: [
-      *Financiamiento de cosechas:* La liquidez absorbe picos estacionales de siembra y corte sin alterar la estructura contractual informal tradicional.
-    ],
+    stat-main: [+171.6%],
+    stat-label: [Intensidad jornalera],
+    stat-sub: [68.6%],
+    stat-sub-label: [Fincas solo temporal],
+    verdict-headline: [Multiplicador estacional, no empleo fijo],
+    verdict-body: [El crédito dinamiza con fuerza la absorción de mano de obra en picos de siembra y zafra, pero no genera relaciones contractuales permanentes ni estabilidad laboral.],
+    accent: color-accent,
   ),
-  synthesis-row(
+  conclusion-card(
+    number: "03",
+    tag: [USO DEL SUELO],
+    title: [Transición Productiva],
     icon: slide-icons.layers,
-    axis-num: 3,
-    axis-title: [Uso del Suelo],
-    stat-highlight: [22.9% Permanentes],
-    stat-sub: [Ratio pasto/cultivo: 4.18 -> 2.71],
-    empirical-body: [
-      *Ruptura del estancamiento ganadero:* Fincas con crédito reducen significativamente el monocultivo de pastos (ratio 2.71 vs 4.18) y diversifican su canasta hacia una moda de 3 rubros con mayor resiliencia.
-    ],
-    theory-author: [Ester Boserup (1965)],
-    theory-body: [
-      *Intensificación por capital:* El acceso a financiamiento vence la inercia extensiva y viabiliza la adopción de cultivos permanentes de mayor valor agregado.
-    ],
+    stat-main: [22.9%],
+    stat-label: [Cultivos permanentes],
+    stat-sub: [2.71],
+    stat-sub-label: [Ratio pasto/cultivo (vs 4.18)],
+    verdict-headline: [Ruptura de la trampa extensiva],
+    verdict-body: [El capital impulsa la reconversión productiva hacia rubros perennes de mayor valor agregado y diversifica la canasta modal de la explotación hacia 3 rubros.],
+    accent: rgb("#008080"),
   ),
 )
-
-#v(4pt)
-#caution-box[
-  #text(weight: "bold")[Aporte metodológico y rigor de Ciencia de Datos:] Arquitectura de microdatos exhaustiva (262,546 EA) procesada con Rust + DuckDB. Hallazgos descriptivos de corte transversal que no asumen causalidad contrafactual estricta.
-]
 
 // ============================================================
 // DIAPOSITIVA: RECOMENDACIONES
@@ -718,53 +710,53 @@
 
 #speaker-marker("D")
 
-#grid(
-  columns: (1fr, 1fr, 1fr),
-  gutter: 12pt,
-  policy-card(
-    pillar-tag: [PILAR 1],
-    target: [PRODUZCAMOS / COOPERATIVAS],
+#stack(
+  dir: ttb,
+  spacing: 10pt,
+  policy-row(
+    number: "01",
+    pillar-tag: [CRÉDITO INCLUSIVO],
+    target-agency: [PRODUZCAMOS / COOPERATIVAS],
     icon: slide-icons.shield,
-    title: [Crédito Inclusivo],
-    subtitle: [Garantías y mitigación de riesgo],
-    height: 335pt,
-    actions: (
-      [*Fondos de aval solidario:* Establecer garantías recíprocas mancomunadas para derribar la exigencia de hipotecas que frena la postulación.],
-      [*Microseguros agrícolas:* Crear instrumentos indexados al clima para amortiguar choques climáticos y desactivar la autoexclusión por riesgo patrimonial.],
-      [*Ventanilla rural territorial:* Descentralizar sucursales hacia municipios desatendidos (la banca pública solo cubrió 1.7% en 2011).],
-    ),
-    meta-label: [Impacto estratégico],
-    meta-text: [Desactivar la autoexclusión y movilizar al 84.1% de productores excluidos de la banca comercial.],
+    title: [Garantías y Seguros],
+    action-1-title: [Fondos de Aval Solidario],
+    action-1-body: [Sustituir hipotecas de fincas por garantías mancomunadas para derribar la barrera de postulación.],
+    action-2-title: [Microseguros Climáticos],
+    action-2-body: [Pólizas indexadas ante sequías que neutralicen el temor a la pérdida patrimonial.],
+    impact-label: [POBLACIÓN OBJETIVO],
+    impact-stat: [84.1%],
+    impact-target: [Productores autoexcluidos por riesgo de pérdida patrimonial.],
+    accent: color-title,
   ),
-  policy-card(
-    pillar-tag: [PILAR 2],
-    target: [MAG • MITRAB • INSS],
+  policy-row(
+    number: "02",
+    pillar-tag: [EMPLEO DIGNO],
+    target-agency: [MAG • MITRAB • INSS],
     icon: slide-icons.users,
-    title: [Empleo Digno],
-    subtitle: [Incentivos a la formalización],
-    height: 335pt,
-    actions: (
-      [*Tasas bonificadas condicionadas:* Premiar con menores tasas de interés a fincas que formalicen cuadrillas y conviertan jornales estacionales en contratos fijos.],
-      [*Seguridad social rural adaptada:* Diseñar un régimen de cotización simplificado acorde a la estacionalidad de cosechas para incorporar al seguro social a los peones.],
-      [*Capacitación y asistencia técnica:* Programas continuos de formación agronómica en manejo tecnificado para elevar la productividad laboral de cultivos permanentes.],
-    ),
-    meta-label: [Impacto estratégico],
-    meta-text: [Transformar el multiplicador de jornales en trabajo rural digno, superando el 68.6% de empleo solo temporal.],
+    title: [Formalización Laboral],
+    action-1-title: [Tasas Bonificadas],
+    action-1-body: [Crédito preferencial a fincas que conviertan jornales temporales en contratos continuos.],
+    action-2-title: [Seguridad Social Adaptada],
+    action-2-body: [Régimen contributivo flexible adaptado a ciclos estacionales de cosecha y siembra.],
+    impact-label: [LÍNEA BASE LABORAL],
+    impact-stat: [68.6%],
+    impact-target: [Fincas dependientes de empleo exclusivamente temporal.],
+    accent: color-accent,
   ),
-  policy-card(
-    pillar-tag: [PILAR 3],
-    target: [INIDE • MAG • BANCO CENTRAL],
+  policy-row(
+    number: "03",
+    pillar-tag: [DATOS & TRANSICIÓN],
+    target-agency: [INIDE • MAG • BANCO CENTRAL],
     icon: slide-icons.database,
-    title: [Datos & Transición],
-    subtitle: [Gestión pública y crédito verde],
-    height: 335pt,
-    actions: (
-      [*Líneas de crédito verde:* Financiamiento atado a metas de reconversión de pastizales degradados hacia sistemas agroforestales y silvopastoriles.],
-      [*Modern Data Stack en el Estado:* Adoptar formatos Parquet y DuckDB en INIDE/MAG para auditar microdatos censales de forma continua.],
-      [*Analítica predictiva:* Construir scoring crediticio adaptativo con Machine Learning y paneles sintéticos intercensales.],
-    ),
-    meta-label: [Impacto estratégico],
-    meta-text: [Soberanía de datos abiertos, reconversión ecológica y toma de decisiones públicas en tiempo real.],
+    title: [Crédito Verde y Analítica],
+    action-1-title: [Financiamiento Silvopastoril],
+    action-1-body: [Líneas verdes atadas a planes de reconversión de pastizales degradados a silvopastoreo.],
+    action-2-title: [Modern Data Stack Estatal],
+    action-2-body: [Adopción de Parquet y DuckDB para auditoría pública y analítica censal en segundos.],
+    impact-label: [ACCESO CIUDADANO],
+    impact-stat: [100%],
+    impact-target: [Soberanía de microdatos censales abiertos y auditables.],
+    accent: rgb("#008080"),
   ),
 )
 
