@@ -6,9 +6,83 @@
 #let color-title = rgb("#7030A0")
 #let color-body = rgb("#133454")
 #let color-accent = rgb("#1a4d8f")
+#let color-card-bg = rgb("#f8f7fc")
+#let color-card-stroke = rgb("#e0d7f0")
+#let color-badge-bg = rgb("#ede8f7")
 
 #let font-heading = ("Montserrat", "Liberation Sans")
 #let font-body = ("Liberation Sans",)
+
+// ==========================================
+// REUSABLE COMPONENTS
+// ==========================================
+
+/// Metric highlight card for analytical chart slides
+#let metric-card(stat: [], body: []) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1.2pt + color-card-stroke,
+    radius: 10pt,
+    inset: (x: 18pt, y: 18pt),
+    width: 100%,
+    [
+      #text(size: 22pt, weight: "bold", fill: color-title, font: font-heading, stat)
+      #v(0.6em)
+      #text(size: 15pt, fill: color-body, font: font-body, body)
+    ]
+  )
+}
+
+/// Styled numbered card for objectives and conclusions
+#let card-numbered(number: 1, text-content: []) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 8pt,
+    inset: (x: 16pt, y: 12pt),
+    width: 100%,
+    grid(
+      columns: (28pt, 1fr),
+      gutter: 12pt,
+      align: (center + horizon, left + horizon),
+      circle(
+        radius: 12pt,
+        fill: color-title,
+        text(fill: white, size: 13pt, weight: "bold", font: font-heading)[#number]
+      ),
+      text(fill: color-body, size: 16pt, font: font-body, text-content)
+    )
+  )
+}
+
+/// Pipeline badge box for methodology slide
+#let pipeline-badge(title: [], tool: []) = {
+  block(
+    fill: color-badge-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 8pt,
+    inset: (x: 14pt, y: 10pt),
+    width: 100%,
+    align(center, [
+      #text(fill: color-title, size: 15pt, weight: "bold", font: font-heading, title)
+      #if tool != [] [
+        \ #text(fill: color-body, size: 12pt, font: font-body, tool)
+      ]
+    ])
+  )
+}
+
+/// Caution / disclaimer container
+#let caution-box(body) = {
+  block(
+    fill: rgb("#fff9f0"),
+    stroke: 1pt + rgb("#f5d0a9"),
+    radius: 8pt,
+    inset: (x: 14pt, y: 10pt),
+    width: 100%,
+    text(fill: rgb("#8a4b08"), size: 13pt, font: font-body, body)
+  )
+}
 
 // ==========================================
 // SLIDE FUNCTIONS (TOUYING 0.8.0)
@@ -46,7 +120,7 @@
     config-page(
       background: place(top + left, image("images/presentation/background-content.png", width: 960pt, height: 540pt)),
       header: header,
-      margin: (left: 66pt, right: 66pt, top: 143.8pt, bottom: 40pt),
+      margin: (left: 66pt, right: 66pt, top: 130pt, bottom: 35pt),
     ),
   )
 
@@ -60,11 +134,53 @@
   )
 })
 
+/// High-level slide generator for the 6 chart slides
+#let slide-chart(
+  chart-fn: none,
+  caption: [],
+  stat: [],
+  body: [],
+  footnote: [],
+) = {
+  slide[
+    #grid(
+      columns: (520pt, 1fr),
+      gutter: 24pt,
+      align: (center + horizon, horizon + left),
+      [
+        #block(width: 100%, align(center)[
+          #set text(size: 10pt, font: "Liberation Serif")
+          #chart-fn
+          #if caption != [] [
+            #v(0.5em)
+            #text(size: 10pt, font: "Liberation Serif", caption)
+          ]
+        ])
+      ],
+      [
+        #v(-10pt)
+        #text(size: 24pt, weight: "bold", fill: color-title, font: font-heading, stat)
+        #v(0.8em)
+        #text(size: 16pt, fill: color-body, font: font-body, body)
+      ]
+    )
+    #if footnote != [] [
+      #place(
+        top + left,
+        dx: 11.8pt,
+        dy: 320pt,
+        text(size: 10.5pt, fill: luma(100), font: font-body, footnote)
+      )
+    ]
+  ]
+}
+
 /// Title slide matching Plantilla PPT layout
 #let title-slide(
   title: [Escriba su texto],
   subtitle: [Escriba el texto],
-  extra: none,
+  authors: (),
+  tutor: none,
   config: (:),
 ) = touying-slide-wrapper(self => {
   let self = utils.merge-dicts(
@@ -84,43 +200,49 @@
     {
       place(
         top + left,
-        dx: 520.6pt,
-        dy: 197.8pt,
+        dx: 520pt,
+        dy: 185pt,
         block(
           width: 412.8pt,
-          text(
-            fill: color-title,
-            size: 44pt,
-            weight: "semibold",
-            font: font-heading,
-            title,
-          )
-        )
-      )
-
-      place(
-        top + left,
-        dx: 520.6pt,
-        dy: 286.2pt,
-        block(
-          width: 412.8pt,
-          {
-            text(
+          [
+            #set par(leading: 0.45em, spacing: 0.6em)
+            #text(
+              fill: color-title,
+              size: 25pt,
+              weight: "bold",
+              font: font-heading,
+              title,
+            )
+            #v(0.8em)
+            #text(
               fill: color-body,
-              size: 28pt,
+              size: 13.5pt,
               font: font-body,
               subtitle,
             )
-            if extra != none {
-              v(0.8em)
-              text(
-                fill: color-body.lighten(20%),
-                size: 16pt,
+            #if authors != none and authors != () [
+              #v(0.5em)
+              #text(
+                fill: color-body,
+                size: 11.5pt,
                 font: font-body,
-                extra,
+                if type(authors) == array {
+                  authors.join(" · ")
+                } else {
+                  authors
+                }
               )
-            }
-          }
+            ]
+            #if tutor != none [
+              #v(0.3em)
+              #text(
+                fill: color-body.lighten(15%),
+                size: 11.5pt,
+                font: font-body,
+                tutor
+              )
+            ]
+          ]
         )
       )
     }
@@ -129,8 +251,8 @@
 
 /// Ending / conclusion slide
 #let ending-slide(
+  message: [Muchas gracias],
   config: (:),
-  body: none,
 ) = touying-slide-wrapper(self => {
   let self = utils.merge-dicts(
     self,
@@ -146,11 +268,15 @@
   touying-slide(
     self: self,
     config: config,
-    if body != none {
-      align(center + horizon, text(fill: white, size: 32pt, font: font-heading, body))
-    } else {
-      none
-    }
+    place(
+      top + left,
+      dx: 0pt,
+      dy: 385pt,
+      block(
+        width: 960pt,
+        align(center, text(fill: white, size: 36pt, weight: "bold", font: font-heading, message))
+      )
+    )
   )
 })
 
@@ -163,13 +289,13 @@
   set text(
     font: font-body,
     fill: color-body,
-    size: 24pt,
+    size: 20pt,
     lang: "es",
   )
 
   set list(
     marker: ([•], [–], [·]),
-    spacing: 1.2em,
+    spacing: 1.1em,
   )
 
   show: touying-slides.with(

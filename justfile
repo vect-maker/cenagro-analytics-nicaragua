@@ -111,7 +111,8 @@ compile-abstract:
 compile-resumen: compile-abstract
 
 compile-slides:
-  typst compile --font-path paper/fonts paper/slides.typ
+  typst compile --font-path paper/fonts paper/slides.typ slides.pdf
+
 
 preview-paper:
   mkdir -p paper/preview
@@ -125,6 +126,7 @@ preview-resumen: preview-abstract
 
 preview-slides:
   mkdir -p paper/preview/slides
+  rm -f paper/preview/slides/*.png
   typst compile --font-path paper/fonts --format png --ppi 150 paper/slides.typ paper/preview/slides/slide-{n}.png
 
 export-paper-data:
@@ -136,7 +138,7 @@ watch-paper:
   typst watch paper/main.typ paper/main.pdf
 
 watch-slides:
-  typst watch --font-path paper/fonts paper/slides.typ paper/slides.pdf
+  typst watch --font-path paper/fonts paper/slides.typ slides.pdf
 
 compare-paper:
   mkdir -p paper/comparison/original paper/comparison/typst
@@ -145,5 +147,7 @@ compare-paper:
 
 compare-slides:
   mkdir -p paper/comparison/slides/original paper/comparison/slides/typst
-  pdftoppm -png -r 150 "Plantilla de Presentación PPT.pdf" paper/comparison/slides/original/slide
+  rm -f paper/comparison/slides/original/*.png paper/comparison/slides/typst/*.png
+  pdftoppm -png -r 150 "diapositivaJUDC.pdf" paper/comparison/slides/original/slide
   typst compile --font-path paper/fonts --format png --ppi 150 paper/slides.typ paper/comparison/slides/typst/slide-{n}.png
+
