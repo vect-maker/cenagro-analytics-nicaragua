@@ -85,7 +85,12 @@
   body: [],
   height: 330pt,
   inset: (x: 13pt, y: 11pt),
+  badge-fill: auto,
+  badge-stroke: auto,
+  badge-size: 26pt,
 ) = {
+  let b-fill = if badge-fill != auto { badge-fill } else { color-badge-bg }
+  let b-stroke = if badge-stroke != auto { badge-stroke } else { color-badge-stroke }
   block(
     fill: color-card-bg,
     stroke: 1pt + color-card-stroke,
@@ -97,17 +102,17 @@
       dir: ttb,
       spacing: 5pt,
       grid(
-        columns: if icon != none { (26pt, 1fr) } else { (1fr,) },
+        columns: if icon != none { (badge-size, 1fr) } else { (1fr,) },
         gutter: 8pt,
         align: (horizon + center, horizon + left),
         if icon != none {
           box(
-            fill: color-badge-bg,
-            stroke: 0.8pt + color-badge-stroke,
+            fill: b-fill,
+            stroke: 0.8pt + b-stroke,
             radius: 6pt,
-            width: 26pt,
-            height: 26pt,
-            align(center + horizon, box(width: 15pt, height: 15pt, icon))
+            width: badge-size,
+            height: badge-size,
+            align(center + horizon, box(width: badge-size * 0.78, align(center + horizon, icon)))
           )
         },
         [
@@ -128,6 +133,79 @@
     )
   )
 }
+
+/// Node box for methodology visual pipelines
+#let pipeline-node(
+  logo: none,
+  title: [],
+  subtitle: none,
+  tag: none,
+  details: (),
+  width: 100%,
+  accent: color-title,
+  fill: color-card-bg,
+) = {
+  block(
+    fill: fill,
+    stroke: 1.1pt + color-card-stroke,
+    radius: 8pt,
+    inset: (x: 10pt, y: 7pt),
+    width: width,
+    stack(
+      dir: ttb,
+      spacing: 3.5pt,
+      grid(
+        columns: if logo != none { (24pt, 1fr) } else { (1fr,) },
+        gutter: 7pt,
+        align: (horizon + center, horizon + left),
+        if logo != none {
+          box(
+            fill: white,
+            stroke: 0.8pt + color-card-stroke,
+            radius: 5pt,
+            width: 24pt,
+            height: 24pt,
+            align(center + horizon, box(width: 19pt, align(center + horizon, logo)))
+          )
+        },
+        [
+          #text(size: 11.5pt, weight: "bold", fill: accent, font: font-heading, title)
+          #if subtitle != none [
+            #v(0.08em)
+            #text(size: 8.8pt, fill: color-accent, font: font-body, subtitle)
+          ]
+        ]
+      ),
+      if tag != none [
+        #box(
+          fill: accent.lighten(88%),
+          radius: 3pt,
+          inset: (x: 4.5pt, y: 1.5pt),
+          text(size: 7.5pt, weight: "bold", fill: accent, font: font-heading, tag)
+        )
+      ],
+      if details.len() > 0 [
+        #line(length: 100%, stroke: 0.4pt + rgb("#eee8f6"))
+        #set text(size: 8.2pt, fill: color-body, font: font-body)
+        #set par(leading: 0.3em)
+        #for d in details [
+          #text(fill: accent, [•]) #d \
+        ]
+      ]
+    )
+  )
+}
+
+/// Pipeline flow arrow indicator
+#let flow-arrow = align(center + horizon, box(
+  fill: rgb("#f3eef8"),
+  stroke: 0.8pt + rgb("#d8d0e8"),
+  radius: 12pt,
+  width: 22pt,
+  height: 22pt,
+  align(center + horizon, text(size: 13pt, fill: color-title, weight: "bold")[#sym.arrow.r])
+))
+
 
 /// Caution / disclaimer container
 #let caution-box(body) = {

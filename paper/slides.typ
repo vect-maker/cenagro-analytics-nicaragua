@@ -95,15 +95,53 @@
 )
 
 // ============================================================
-// METODOLOGÍA 1: ARQUITECTURA DEL MODERN DATA STACK
+// METODOLOGÍA 1: ENFOQUE, POBLACIÓN E INGESTA CENSAL
 // ============================================================
-= Arquitectura del Modern Data Stack y reproducibilidad
+= Enfoque de investigación, población e ingesta censal
 
 #speaker-marker("B")
 
-#align(center)[
-  #image("images/presentation/diagram-architecture.png", width: 92%)
-]
+#grid(
+  columns: (1fr, 24pt, 1.15fr, 24pt, 1fr),
+  align: horizon,
+  pipeline-node(
+    logo: image("images/presentation/logos/spss.png"),
+    title: [CENAGRO 2011],
+    subtitle: [Microdato oficial (.sav)],
+    tag: [Universo Censal],
+    accent: rgb("#8a4b08"),
+    fill: rgb("#fffaf3"),
+  ),
+  flow-arrow,
+  pipeline-node(
+    logo: image("images/presentation/logos/python.svg"),
+    title: [Python (pyreadstat)],
+    subtitle: [Script de extracción e ingesta],
+    tag: [Motor de Ingesta],
+    accent: color-title,
+    fill: color-card-bg,
+  ),
+  flow-arrow,
+  stack(
+    spacing: 6pt,
+    pipeline-node(
+      logo: image("images/presentation/logos/parquet.svg"),
+      title: [raw_farms.parquet],
+      subtitle: [Datos columnares crudos],
+      tag: [Almacén Columnar],
+      accent: rgb("#198754"),
+      fill: rgb("#f0faf3"),
+    ),
+    pipeline-node(
+      logo: box(fill: color-accent, radius: 4pt, width: 22pt, height: 22pt, align(center + horizon, box(width: 14pt, height: 14pt, slide-icons.file-text))),
+      title: [metadata.json],
+      subtitle: [Diccionario censal estructurado],
+      tag: [Semántica & Codebook],
+      accent: color-accent,
+      fill: rgb("#f5f8fc"),
+    )
+  )
+)
 
 #v(8pt)
 
@@ -111,38 +149,43 @@
   columns: (1fr, 1fr, 1fr),
   gutter: 12pt,
   feature-card(
-    icon: slide-icons.database,
-    title: [Universo Censal],
-    subtitle: [CENAGRO 2011],
+    icon: slide-icons.target,
+    title: [Enfoque y Tipo],
+    subtitle: [Cuantitativo y transversal],
     height: auto,
     body: [
       #list(
-        [*262,546 registros:* Microdatos censales oficiales consolidados (227,541 fincas).],
-        [*Enfoque cuantitativo:* Corte transversal y comparativo sin sesgos muestrales.],
+        [*Enfoque cuantitativo:* Diseño no experimental y de corte transversal con alcance descriptivo-correlacional.],
+        [*Método comparativo:* Evaluación empírica de brechas entre fincas con y sin financiamiento crediticio.],
+        [*Sin intervención:* Análisis observacional riguroso sobre el ciclo censal oficial de Nicaragua.],
       )
     ]
   ),
   feature-card(
-    icon: slide-icons.layers,
-    title: [Desacoplamiento],
-    subtitle: [Capas modulares],
+    icon: image("images/presentation/logos/spss.png"),
+    badge-fill: white,
+    title: [Población Censal],
+    subtitle: [227,541 fincas (universo exhaustivo)],
     height: auto,
     body: [
       #list(
-        [*Separación estricta:* Storage inmutable, cómputo en memoria y motor OLAP.],
-        [*Multi-target:* Generación de informe en Typst y portal interactivo en Evidence.dev.],
+        [*Población objetivo:* Totalidad de las explotaciones agropecuarias del IV CENAGRO 2011 (INIDE / MAGFOR).],
+        [*262,546 registros:* Microdatos consolidados por parcelas, tenencia y aprovechamiento de tierra.],
+        [*Sin sesgo muestral:* Cobertura censal exhaustiva que supera las distorsiones de muestras acotadas.],
       )
     ]
   ),
   feature-card(
-    icon: slide-icons.trending-up,
-    title: [Eficiencia & Entorno],
-    subtitle: [Hardware estándar],
+    icon: image("images/presentation/logos/parquet.svg"),
+    badge-fill: white,
+    title: [Unidad de Análisis],
+    subtitle: [Explotación Agropecuaria (EA)],
     height: auto,
     body: [
       #list(
-        [*Hardware de consumo:* Procesamiento sub-segundo (Intel i7, 16 GB RAM).],
-        [*Reproducibilidad:* Entorno inmutable con Podman *rootless* sobre Fedora Silverblue.],
+        [*Definición censal:* Extensión de tierra para actividades agropecuarias bajo una administración única.],
+        [*Desacoplamiento:* Extracción con Python (`pyreadstat`) a Parquet crudo y diccionario a JSON estructurado.],
+        [*Integridad semántica:* Preservación de 100% de categorías, encodings y etiquetas sin alteración.],
       )
     ]
   )
@@ -151,13 +194,40 @@
 // ============================================================
 // METODOLOGÍA 2: PIPELINE ETL EN RUST
 // ============================================================
-= Pipeline ETL en Rust y optimización columnar
+= Pipeline de transformación vectorizada en Rust
 
 #speaker-marker("B")
 
-#align(center)[
-  #image("images/presentation/diagram-etl.png", width: 90%)
-]
+#grid(
+  columns: (1fr, 24pt, 1.25fr, 24pt, 1fr),
+  align: horizon,
+  pipeline-node(
+    logo: image("images/presentation/logos/parquet.svg"),
+    title: [Parquet Crudo],
+    subtitle: [Input desacoplado],
+    tag: [Microdato Base],
+    accent: rgb("#8a4b08"),
+    fill: rgb("#fffaf3"),
+  ),
+  flow-arrow,
+  pipeline-node(
+    logo: image("images/presentation/logos/rust.svg"),
+    title: [Rust + DataFusion],
+    subtitle: [Motor vectorizado Apache Arrow],
+    tag: [Transformación Zero-GC],
+    accent: color-title,
+    fill: color-card-bg,
+  ),
+  flow-arrow,
+  pipeline-node(
+    logo: image("images/presentation/logos/parquet.svg"),
+    title: [farms.parquet],
+    subtitle: [Compresión Snappy],
+    tag: [-90% Espacio en Disco],
+    accent: rgb("#198754"),
+    fill: rgb("#f0faf3"),
+  )
+)
 
 #v(8pt)
 
@@ -165,101 +235,153 @@
   columns: (1fr, 1fr, 1fr),
   gutter: 12pt,
   feature-card(
-    icon: slide-icons.shield,
+    icon: image("images/presentation/logos/rust.svg"),
+    badge-fill: white,
     title: [Seguridad en Rust],
     subtitle: [Zero-GC & Type-Safe],
     height: auto,
     body: [
       #list(
-        [*Gestión de memoria:* Cero pausas de *Garbage Collector* y tipado estricto.],
-        [*Vectores en memoria:* Procesamiento vectorizado mediante Apache Arrow.],
+        [*Gestión determinista:* Cero pausas de *Garbage Collector* y cero fugas de memoria.],
+        [*Tipado en compilación:* Verificación estricta de esquemas antes de ejecución.],
+        [*Vectores Apache Arrow:* Procesamiento columnar contiguo en registros de CPU.],
       )
     ]
   ),
   feature-card(
-    icon: slide-icons.trending-up,
-    title: [Downcasting],
-    subtitle: [Caché CPU L1/L2],
+    icon: image("images/presentation/logos/datafusion.svg"),
+    badge-fill: white,
+    title: [Downcasting y Caché],
+    subtitle: [Alineación con CPU L1/L2],
     height: auto,
     body: [
       #list(
-        [*Tipos mínimos viables:* Enteros `i8` e `i16` para códigos y banderas booleanas.],
-        [*Aprovechamiento de caché:* Menor huella en memoria y alto rendimiento de CPU.],
+        [*Tipos mínimos viables:* Downcasting a enteros `i8`/`i16` y banderas booleanas.],
+        [*Hash Join masivo:* Cruce vectorizado de fincas y parcelas con alta tasa de caché.],
+        [*Eficiencia energética:* Ejecución en hardware estándar sin clusters distribuidos.],
       )
     ]
   ),
   feature-card(
-    icon: slide-icons.pie-chart,
-    title: [Compresión Parquet],
-    subtitle: [Lectura selectiva],
+    icon: image("images/presentation/logos/parquet.svg"),
+    badge-fill: white,
+    title: [Compresión y Métricas],
+    subtitle: [Artefacto farms.parquet],
     height: auto,
     body: [
       #list(
         [*Dictionary Encoding:* Cadenas categóricas comprimidas a diccionarios de enteros.],
-        [*-90% en disco:* De 100 MB crudos a 10 MB Parquet con *projection pushdown*.],
+        [*-90% en disco:* De 100 MB crudos a 10 MB Parquet con compresión Snappy.],
+        [*Métricas derivadas:* Estratos censales (`farm_size_class`) e intensidades listos.],
       )
     ]
   )
 )
 
 // ============================================================
-// METODOLOGÍA 3: MODELADO DIMENSIONAL EN DUCKDB
+// METODOLOGÍA 3: HUB ANALÍTICO OLAP Y ENTREGA MULTI-TARGET
 // ============================================================
-= Modelado dimensional en DuckDB y rigor analítico
+= Hub analítico OLAP y reproducibilidad multi-target
 
 #speaker-marker("B")
 
 #grid(
-  columns: (410pt, 1fr),
-  gutter: 16pt,
-  align: (center + horizon, horizon + left),
-  [
-    #image("images/presentation/diagram-warehouse.png", width: 95%)
-  ],
-  [
-    #stack(
-      spacing: 7pt,
-      feature-card(
-        icon: slide-icons.database,
-        title: [Esquema en Estrella OLAP],
-        subtitle: [Hechos y dimensiones desacopladas],
-        height: auto,
-        inset: (x: 12pt, y: 7pt),
-        body: [
-          #list(
-            [3 tablas de hechos (`credit`, `labor`, `land_use`) unidas a dimensiones.],
-            [Integridad referencial y lecturas analíticas *zero-copy* sobre Parquet.],
-          )
-        ]
-      ),
-      feature-card(
-        icon: slide-icons.layers,
-        title: [Operador UNPIVOT Matricial],
-        subtitle: [Transformaciones dinámicas en SQL],
-        height: auto,
-        inset: (x: 12pt, y: 7pt),
-        body: [
-          #list(
-            [Pivotado dinámico de fuentes y rubros sin duplicar almacenamiento físico.],
-            [Vistas materializadas para alimentar gráficos científicos en tiempo real.],
-          )
-        ]
-      ),
-      feature-card(
-        icon: slide-icons.target,
-        title: [Control de Sesgo por Escala],
-        subtitle: [Métricas robustas no paramétricas],
-        height: auto,
-        inset: (x: 12pt, y: 7pt),
-        body: [
-          #list(
-            [Medianas y rangos intercuartílicos (IQR) inmunes a *outliers* extremos.],
-            [Estratificación censal obligatoria (`Small` vs `Med/Large`) para aislar escala.],
-          )
-        ]
+  columns: (1fr, 22pt, 1.15fr, 22pt, 1.25fr),
+  align: horizon,
+  pipeline-node(
+    logo: image("images/presentation/logos/parquet.svg"),
+    title: [farms.parquet],
+    subtitle: [Artefacto canónico],
+    tag: [Almacén Inmutable],
+    accent: rgb("#198754"),
+    fill: rgb("#f0faf3"),
+  ),
+  flow-arrow,
+  pipeline-node(
+    logo: image("images/presentation/logos/duckdb-icon.svg"),
+    title: [DuckDB OLAP],
+    subtitle: [Motor analítico embebido],
+    tag: [Cálculo en Memoria],
+    accent: color-title,
+    fill: color-card-bg,
+  ),
+  flow-arrow,
+  stack(
+    spacing: 5pt,
+    pipeline-node(
+      logo: box(fill: rgb("#1F4E79"), radius: 4pt, width: 22pt, height: 22pt, align(center + horizon, box(width: 14pt, height: 14pt, slide-icons.terminal))),
+      title: [DuckDB CLI],
+      subtitle: [Exploración interactiva y ad-hoc],
+      tag: [EDA Ágil],
+      accent: rgb("#1F4E79"),
+      fill: rgb("#f5f8fc"),
+    ),
+    pipeline-node(
+      logo: image("images/presentation/logos/evidence.svg"),
+      title: [Evidence.dev],
+      subtitle: [Portal BI web interactivo],
+      tag: [Markdown + SQL],
+      accent: rgb("#7030A0"),
+      fill: rgb("#fbfafc"),
+    ),
+    pipeline-node(
+      logo: image("images/presentation/logos/typst.svg"),
+      title: [Typst + CeTZ],
+      subtitle: [Paper y diapositivas (via CSVs)],
+      tag: [Paper-as-Code],
+      accent: rgb("#008080"),
+      fill: rgb("#f0faf8"),
+    ),
+  )
+)
+
+#v(6pt)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 12pt,
+  feature-card(
+    icon: image("images/presentation/logos/duckdb-icon.svg"),
+    badge-fill: white,
+    title: [Motor OLAP Embebido],
+    subtitle: [Rigor estadístico sin sesgos],
+    height: auto,
+    body: [
+      #list(
+        [*Lecturas Zero-Copy:* Consultas analíticas en memoria directo sobre Parquet.],
+        [*UNPIVOT matricial:* Pivotado dinámico de fuentes y rubros sin duplicar datos.],
+        [*Estadística robusta:* Medianas e IQR inmunes a distorsiones por fincas gigantes.],
       )
-    )
-  ]
+    ]
+  ),
+  feature-card(
+    icon: image("images/presentation/logos/evidence.svg"),
+    badge-fill: white,
+    title: [Trifecta de Consumo],
+    subtitle: [CLI, Portal BI y Publicación],
+    height: auto,
+    body: [
+      #list(
+        [*DuckDB CLI:* Exploración ágil, validación de hipótesis y auditoría de microdatos.],
+        [*Portal Evidence:* Tablero web interactivo reactivo con consultas SQL directas.],
+        [*Publicación Typst:* Generación canónica de datos (`export-paper-data.sql`).],
+      )
+    ]
+  ),
+  feature-card(
+    icon: image("images/presentation/logos/typst.svg"),
+    badge-fill: white,
+    title: [Paper-as-Code],
+    subtitle: [Reproducibilidad absoluta],
+    height: auto,
+    body: [
+      #list(
+        [*Fuente única de verdad:* Cero discrepancias entre paper, diapositivas y portal.],
+        [*Cero copy-paste:* Gráficos CeTZ generados automáticamente desde CSVs de DuckDB.],
+        [*Entorno inmutable:* Pipeline reproducible en hardware común (`just compile-paper`).],
+      )
+    ]
+  )
 )
 
 // ============================================================
