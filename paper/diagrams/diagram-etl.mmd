@@ -1,0 +1,17 @@
+flowchart LR
+    classDef raw fill:#fff8f0,stroke:#8a4b08,stroke-width:1.5px,color:#133454;
+    classDef rust fill:#ede8f7,stroke:#7030A0,stroke-width:2px,color:#7030A0,font-weight:bold;
+    classDef opt fill:#eef3fa,stroke:#1a4d8f,stroke-width:1.5px,color:#1a4d8f;
+    classDef parquet fill:#f0faf3,stroke:#198754,stroke-width:2px,color:#198754,font-weight:bold;
+
+    A["<b>Microdato Crudo SPSS</b><br/>• Registros heterogéneos<br/>• Tipos f64/i64 sobredimensionados"]:::raw
+    
+    subgraph RustPipeline["<b>Motor de Transformación en Rust (Apache DataFusion)</b>"]
+        B["<b>Seguridad de Memoria:</b><br/>Zero-GC & Type-Safe"]:::rust
+        C["<b>Downcasting:</b><br/>Enteros mínimos (i8 / i16)"]:::opt
+        D["<b>Dictionary Encoding:</b><br/>Cadenas categóricas a índices"]:::opt
+    end
+
+    E[("<b>Apache Parquet</b><br/>• Compresión Columnar Snappy<br/>• 10 MB en disco (-90%)<br/>• Projection Pushdown")]:::parquet
+
+    A --> B --> C --> D --> E

@@ -91,29 +91,163 @@
 )
 
 // ============================================================
-// DIAPOSITIVA 4: METODOLOGÍA
+// METODOLOGÍA 1: ARQUITECTURA DEL MODERN DATA STACK
 // ============================================================
-= Metodología y procesamiento de datos
+= Arquitectura del Modern Data Stack y reproducibilidad
+
+#align(center)[
+  #image("images/presentation/diagram-architecture.png", width: 92%)
+]
+
+#v(8pt)
 
 #grid(
-  columns: (1fr, 250pt),
-  gutter: 24pt,
-  align: (top + left, top + center),
+  columns: (1fr, 1fr, 1fr),
+  gutter: 12pt,
+  feature-card(
+    icon: slide-icons.database,
+    title: [Universo Censal],
+    subtitle: [CENAGRO 2011],
+    height: auto,
+    body: [
+      #list(
+        [*262,546 registros:* Microdatos censales oficiales consolidados (227,541 fincas).],
+        [*Enfoque cuantitativo:* Corte transversal y comparativo sin sesgos muestrales.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.layers,
+    title: [Desacoplamiento],
+    subtitle: [Capas modulares],
+    height: auto,
+    body: [
+      #list(
+        [*Separación estricta:* Storage inmutable, cómputo en memoria y motor OLAP.],
+        [*Multi-target:* Generación de informe en Typst y portal interactivo en Evidence.dev.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.trending-up,
+    title: [Eficiencia & Entorno],
+    subtitle: [Hardware estándar],
+    height: auto,
+    body: [
+      #list(
+        [*Hardware de consumo:* Procesamiento sub-segundo (Intel i7, 16 GB RAM).],
+        [*Reproducibilidad:* Entorno inmutable con Podman *rootless* sobre Fedora Silverblue.],
+      )
+    ]
+  )
+)
+
+// ============================================================
+// METODOLOGÍA 2: PIPELINE ETL EN RUST
+// ============================================================
+= Pipeline ETL en Rust y optimización columnar
+
+#align(center)[
+  #image("images/presentation/diagram-etl.png", width: 90%)
+]
+
+#v(8pt)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 12pt,
+  feature-card(
+    icon: slide-icons.shield,
+    title: [Seguridad en Rust],
+    subtitle: [Zero-GC & Type-Safe],
+    height: auto,
+    body: [
+      #list(
+        [*Gestión de memoria:* Cero pausas de *Garbage Collector* y tipado estricto.],
+        [*Vectores en memoria:* Procesamiento vectorizado mediante Apache Arrow.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.trending-up,
+    title: [Downcasting],
+    subtitle: [Caché CPU L1/L2],
+    height: auto,
+    body: [
+      #list(
+        [*Tipos mínimos viables:* Enteros `i8` e `i16` para códigos y banderas booleanas.],
+        [*Aprovechamiento de caché:* Menor huella en memoria y alto rendimiento de CPU.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.pie-chart,
+    title: [Compresión Parquet],
+    subtitle: [Lectura selectiva],
+    height: auto,
+    body: [
+      #list(
+        [*Dictionary Encoding:* Cadenas categóricas comprimidas a diccionarios de enteros.],
+        [*-90% en disco:* De 100 MB crudos a 10 MB Parquet con *projection pushdown*.],
+      )
+    ]
+  )
+)
+
+// ============================================================
+// METODOLOGÍA 3: MODELADO DIMENSIONAL EN DUCKDB
+// ============================================================
+= Modelado dimensional en DuckDB y rigor analítico
+
+#grid(
+  columns: (410pt, 1fr),
+  gutter: 16pt,
+  align: (center + horizon, horizon + left),
   [
-    #v(0.4em)
-    #list(
-      [Enfoque cuantitativo, no experimental, transversal.],
-      [*227,541* explotaciones oficiales; *262,546* registros analíticos.],
-      [Comparación con/sin financiamiento y por tamaño de finca.],
-      [Medianas, porcentajes e índices de uso de suelo.],
-    )
+    #image("images/presentation/diagram-warehouse.png", width: 95%)
   ],
   [
     #stack(
-      spacing: 12pt,
-      pipeline-badge(title: [SPSS → Parquet]),
-      pipeline-badge(title: [Rust / DataFusion]),
-      pipeline-badge(title: [DuckDB → Gráficos]),
+      spacing: 7pt,
+      feature-card(
+        icon: slide-icons.database,
+        title: [Esquema en Estrella OLAP],
+        subtitle: [Hechos y dimensiones desacopladas],
+        height: auto,
+        inset: (x: 12pt, y: 7pt),
+        body: [
+          #list(
+            [3 tablas de hechos (`credit`, `labor`, `land_use`) unidas a dimensiones.],
+            [Integridad referencial y lecturas analíticas *zero-copy* sobre Parquet.],
+          )
+        ]
+      ),
+      feature-card(
+        icon: slide-icons.layers,
+        title: [Operador UNPIVOT Matricial],
+        subtitle: [Transformaciones dinámicas en SQL],
+        height: auto,
+        inset: (x: 12pt, y: 7pt),
+        body: [
+          #list(
+            [Pivotado dinámico de fuentes y rubros sin duplicar almacenamiento físico.],
+            [Vistas materializadas para alimentar gráficos científicos en tiempo real.],
+          )
+        ]
+      ),
+      feature-card(
+        icon: slide-icons.target,
+        title: [Control de Sesgo por Escala],
+        subtitle: [Métricas robustas no paramétricas],
+        height: auto,
+        inset: (x: 12pt, y: 7pt),
+        body: [
+          #list(
+            [Medianas y rangos intercuartílicos (IQR) inmunes a *outliers* extremos.],
+            [Estratificación censal obligatoria (`Small` vs `Med/Large`) para aislar escala.],
+          )
+        ]
+      )
     )
   ]
 )

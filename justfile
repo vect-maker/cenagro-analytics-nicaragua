@@ -112,6 +112,12 @@ compile-abstract:
 
 compile-resumen: compile-abstract
 
+render-diagrams:
+  mkdir -p paper/images/presentation
+  podman run --rm -u 0:0 -v $(pwd)/paper:/data:Z ghcr.io/mermaid-js/mermaid-cli/mermaid-cli -i /data/diagrams/diagram-architecture.mmd -o /data/images/presentation/diagram-architecture.png -b transparent -s 2.5
+  podman run --rm -u 0:0 -v $(pwd)/paper:/data:Z ghcr.io/mermaid-js/mermaid-cli/mermaid-cli -i /data/diagrams/diagram-etl.mmd -o /data/images/presentation/diagram-etl.png -b transparent -s 2.5
+  podman run --rm -u 0:0 -v $(pwd)/paper:/data:Z ghcr.io/mermaid-js/mermaid-cli/mermaid-cli -i /data/diagrams/diagram-warehouse.mmd -o /data/images/presentation/diagram-warehouse.png -b transparent -s 2.5
+
 compile-slides:
   mkdir -p docs
   typst compile --font-path paper/fonts paper/slides.typ docs/slides.pdf

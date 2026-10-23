@@ -84,16 +84,19 @@
   subtitle: none,
   body: [],
   height: 330pt,
+  inset: (x: 13pt, y: 11pt),
 ) = {
   block(
     fill: color-card-bg,
     stroke: 1pt + color-card-stroke,
     radius: 10pt,
-    inset: (x: 13pt, y: 11pt),
+    inset: inset,
     width: 100%,
     height: height,
-    [
-      #grid(
+    stack(
+      dir: ttb,
+      spacing: 5pt,
+      grid(
         columns: if icon != none { (26pt, 1fr) } else { (1fr,) },
         gutter: 8pt,
         align: (horizon + center, horizon + left),
@@ -114,14 +117,15 @@
             #text(size: 9.5pt, fill: color-accent, font: font-body, subtitle)
           ]
         ]
-      )
-      #v(5pt)
-      #line(length: 100%, stroke: 0.6pt + rgb("#eee8f6"))
-      #v(3pt)
-      #set text(size: 10.3pt, fill: color-body, font: font-body)
-      #set par(leading: 0.46em)
-      #body
-    ]
+      ),
+      line(length: 100%, stroke: 0.6pt + rgb("#eee8f6")),
+      [
+        #set text(size: 10.3pt, fill: color-body, font: font-body)
+        #set par(leading: 0.46em)
+        #set list(spacing: 0.6em)
+        #body
+      ]
+    )
   )
 }
 

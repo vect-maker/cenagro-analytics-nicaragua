@@ -1,0 +1,19 @@
+flowchart LR
+    classDef fact fill:#ede8f7,stroke:#7030A0,stroke-width:2px,color:#7030A0,font-weight:bold;
+    classDef dim fill:#fbfafc,stroke:#1a4d8f,stroke-width:1.5px,color:#133454;
+    classDef analysis fill:#f0faf3,stroke:#198754,stroke-width:1.5px,color:#198754,font-weight:bold;
+
+    subgraph Dims["<b>Tablas de Dimensiones</b>"]
+        D_SCALE["<b>dim_farm_scale</b><br/>• farm_size_class (Small / Med-Large)"]:::dim
+        D_GEO["<b>dim_geography</b><br/>• departamento / municipio"]:::dim
+    end
+
+    subgraph Facts["<b>Tablas de Hechos (Facts)</b>"]
+        F_CREDIT["<b>fact_farm_credit</b><br/>• solicito / recibio_credito<br/>• fuente_financiamiento"]:::fact
+        F_LABOR["<b>fact_farm_labor</b><br/>• trab_permanentes / temporales<br/>• intensidad_laboral"]:::fact
+        F_LAND["<b>fact_farm_land_use</b><br/>• anuales / perennes / pastos<br/>• indice_diversificacion"]:::fact
+    end
+
+    ANALYSIS["<b>Motor Analítico DuckDB</b><br/>• UNPIVOT Matricial dinámico<br/>• Medianas e IQR robustos<br/>• Control de sesgo por escala"]:::analysis
+
+    Dims --> Facts --> ANALYSIS

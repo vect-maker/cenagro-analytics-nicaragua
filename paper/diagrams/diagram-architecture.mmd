@@ -1,0 +1,14 @@
+flowchart LR
+    classDef source fill:#fbfafc,stroke:#7030A0,stroke-width:1.5px,color:#133454;
+    classDef engine fill:#ede8f7,stroke:#7030A0,stroke-width:2px,color:#7030A0,font-weight:bold;
+    classDef storage fill:#eef3fa,stroke:#1a4d8f,stroke-width:1.5px,color:#1a4d8f;
+    classDef warehouse fill:#ede8f7,stroke:#7030A0,stroke-width:2px,color:#7030A0,font-weight:bold;
+    classDef delivery fill:#fbfafc,stroke:#1a4d8f,stroke-width:1.5px,color:#133454;
+
+    A["<b>Microdatos Crudos</b><br/>CENAGRO 2011<br/>SPSS (.sav) 100 MB"]:::source
+    B["<b>Motor ETL</b><br/>Rust + DataFusion<br/>Apache Arrow Vector"]:::engine
+    C[("<b>Almacén Inmutable</b><br/>Apache Parquet<br/>10 MB (-90% disco)")]:::storage
+    D[("<b>Almacén OLAP</b><br/>DuckDB Embebido<br/>Esquema en Estrella")]:::warehouse
+    E["<b>Capa de Salida</b><br/>Typst / CeTZ (Papel)<br/>Evidence.dev (BI Portal)"]:::delivery
+
+    A --> B --> C --> D --> E
