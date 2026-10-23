@@ -90,7 +90,7 @@ build-compiler:
 build-pipeline:
   podman build -f infra/transformer.Containerfile -t localhost/transformer-integrador-3:dev ./etl
 
-run-pipeline: 
+run-pipeline:
   podman run -it --rm \
     --userns=keep-id \
     --security-opt label=disable \
@@ -100,7 +100,7 @@ run-pipeline:
     -e OUT_DIR=data \
     localhost/transformer-integrador-3:dev
 
-compile-paper: export-paper-data compile-monograph compile-abstract
+compile-paper: export-paper-data compile-monograph compile-abstract compile-slides
 
 compile-monograph:
   typst compile paper/main.typ paper/main.pdf
@@ -109,6 +109,9 @@ compile-abstract:
   typst compile paper/abstract.typ paper/abstract.pdf
 
 compile-resumen: compile-abstract
+
+compile-slides:
+  typst compile --font-path paper/fonts paper/slides.typ
 
 preview-paper:
   mkdir -p paper/preview
@@ -120,6 +123,10 @@ preview-abstract:
 
 preview-resumen: preview-abstract
 
+preview-slides:
+  mkdir -p paper/preview/slides
+  typst compile --font-path paper/fonts --format png --ppi 150 paper/slides.typ paper/preview/slides/slide-{n}.png
+
 export-paper-data:
   mkdir -p paper/data
   duckdb -dark-mode analytics/sources/warehouse/warehouse.duckdb -init sql/export-paper-data.sql -c ".exit"
@@ -128,9 +135,15 @@ export-paper-data:
 watch-paper:
   typst watch paper/main.typ paper/main.pdf
 
+watch-slides:
+  typst watch --font-path paper/fonts paper/slides.typ paper/slides.pdf
+
 compare-paper:
   mkdir -p paper/comparison/original paper/comparison/typst
   [ -f documento.pdf ] && pdftoppm -png -r 150 documento.pdf paper/comparison/original/page || true
   pdftoppm -png -r 150 paper/main.pdf paper/comparison/typst/page
 
-
+compare-slides:
+  mkdir -p paper/comparison/slides/original paper/comparison/slides/typst
+  pdftoppm -png -r 150 "Plantilla de Presentación PPT.pdf" paper/comparison/slides/original/slide
+  typst compile --font-path paper/fonts --format png --ppi 150 paper/slides.typ paper/comparison/slides/typst/slide-{n}.png

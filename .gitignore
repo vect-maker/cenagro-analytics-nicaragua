@@ -12,3 +12,7 @@ analytics/sources/warehouse/*.wal
 paper/comparison/
 paper/preview/
 
+# Office lock files
+.~lock.*#
+
+
