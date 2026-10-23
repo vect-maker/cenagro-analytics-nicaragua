@@ -334,7 +334,7 @@ La articulación entre los seis componentes no operó como una suma aislada de m
 
 == Enfoque y Tipo de Investigación
 
-La investigación se desarrolló bajo un enfoque cuantitativo, de diseño no experimental y de corte transversal. El alcance es de carácter descriptivo-analítico y correlacional, orientado a contrastar y evaluar empíricamente las brechas socioeconómicas generadas por el financiamiento en las unidades agrarias durante el ciclo censal. El estudio aborda los datos del censo como una base analítica consolidada, sobre la cual se clasifica y compara a las fincas en dos grupos principales (con financiamiento y sin financiamiento), aislando estadísticamente el impacto del crédito sin intervenir en el entorno productivo real @cenagro2013[p. 12].
+La investigación se desarrolló bajo un enfoque mixto (predominio cuantitativo con interpretación teórica y cualitativa), de diseño no experimental y de corte transversal. El alcance es de carácter descriptivo-analítico y correlacional, orientado a contrastar y evaluar empíricamente las brechas socioeconómicas generadas por el financiamiento en las unidades agrarias durante el ciclo censal, complementado con el análisis cualitativo y contextual de los marcos teóricos y las políticas de desarrollo rural. El estudio aborda los datos del censo como una base analítica consolidada, sobre la cual se clasifica y compara a las fincas en dos grupos principales (con financiamiento y sin financiamiento), aislando estadísticamente el impacto del crédito sin intervenir en el entorno productivo real @cenagro2013[p. 12].
 
 == Población y Unidades de Análisis
 

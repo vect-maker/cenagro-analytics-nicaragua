@@ -39,23 +39,31 @@
 }
 
 /// Styled numbered card for objectives and conclusions
-#let card-numbered(number: 1, text-content: [], size: 15pt) = {
+#let card-numbered(number: 1, title: none, text-content: [], size: 15pt) = {
   block(
     fill: color-card-bg,
-    stroke: 1pt + color-card-stroke,
-    radius: 8pt,
-    inset: (x: 16pt, y: 10pt),
+    stroke: 1.1pt + color-card-stroke,
+    radius: 9pt,
+    inset: (x: 18pt, y: 12pt),
     width: 100%,
+    breakable: false,
     grid(
-      columns: (28pt, 1fr),
-      gutter: 12pt,
+      columns: (32pt, 1fr),
+      gutter: 14pt,
       align: (center + horizon, left + horizon),
       circle(
-        radius: 12pt,
+        radius: 15pt,
         fill: color-title,
-        text(fill: white, size: 13pt, weight: "bold", font: font-heading)[#number]
+        text(fill: white, size: 14pt, weight: "bold", font: font-heading)[#number]
       ),
-      text(fill: color-body, size: size, font: font-body, text-content)
+      stack(
+        dir: ttb,
+        spacing: 3pt,
+        if title != none [
+          #text(fill: color-title, size: 13.5pt, weight: "bold", font: font-heading, title)
+        ],
+        par(leading: 0.46em)[#text(fill: color-body, size: size, font: font-body, text-content)]
+      )
     )
   )
 }
@@ -300,11 +308,11 @@
           ]
         ]
       ),
-      v(15pt),
+      v(16pt),
       // 4. Punchy Verdict
-      text(size: 14pt, weight: "bold", fill: color-body, font: font-heading, verdict-headline),
+      text(size: 14.5pt, weight: "bold", fill: color-body, font: font-heading, verdict-headline),
       v(8pt),
-      par(leading: 0.52em)[#text(size: 12.2pt, fill: color-body.lighten(6%), font: font-body, verdict-body)],
+      par(leading: 0.54em)[#text(size: 12.8pt, fill: color-body.lighten(6%), font: font-body, verdict-body)],
     )
   )
 }
@@ -329,71 +337,83 @@
     fill: color-card-bg,
     stroke: 1.1pt + color-card-stroke,
     radius: 9pt,
-    inset: (x: 15pt, y: 10pt),
+    inset: (x: 14pt, y: 10pt),
     width: 100%,
     breakable: false,
     grid(
-      columns: (215pt, 1fr, 185pt),
+      columns: (165pt, 1fr, 145pt),
       gutter: 14pt,
       align: (horizon + left, horizon + left, horizon + center),
       // Columna 1: Pilar, Título y Entidad Ejecutora
       stack(
         dir: ttb,
-        spacing: 0pt,
+        spacing: 5pt,
         grid(
           columns: (auto, 1fr),
-          gutter: 6pt,
+          gutter: 5pt,
           align: (horizon + left, horizon + left),
           box(
             fill: accent,
             radius: 3pt,
-            inset: (x: 6pt, y: 2.5pt),
+            inset: (x: 5.5pt, y: 2.5pt),
             text(size: 8pt, weight: "bold", fill: white, font: font-heading)[#number #sym.bar.v #pillar-tag]
           ),
           if icon != none [
             #box(
               fill: accent,
               radius: 4pt,
-              width: 20pt,
-              height: 20pt,
-              align(center + horizon, box(width: 13pt, icon))
+              width: 19pt,
+              height: 19pt,
+              align(center + horizon, box(width: 12pt, icon))
             )
           ] else [ ]
         ),
-        v(4.5pt),
-        text(size: 14pt, weight: "bold", fill: accent, font: font-heading, title),
-        v(3pt),
-        text(size: 8.2pt, weight: "bold", fill: color-accent, font: font-body, target-agency),
+        block(
+          text(size: 13.8pt, weight: "bold", fill: accent, font: font-heading, title)
+        ),
+        block(
+          text(size: 8.2pt, weight: "bold", fill: color-accent, font: font-body, target-agency)
+        ),
       ),
-      // Columna 2: Acciones Estratégicas (Inmediata y Estructural) en dos columnas internas
+      // Columna 2: Acciones Estratégicas (Inmediata y Estructural) con mayor ancho
       grid(
         columns: (1fr, 1fr),
-        gutter: 13pt,
+        gutter: 14pt,
         // Acción Inmediata
         stack(
           dir: ttb,
-          spacing: 2.5pt,
+          spacing: 5pt,
           box(
             fill: accent.lighten(92%),
             radius: 2.5pt,
-            inset: (x: 4.5pt, y: 2pt),
+            inset: (x: 5pt, y: 2.2pt),
             text(size: 7.2pt, weight: "bold", fill: accent, font: font-heading)[ACCIÓN INMEDIATA]
           ),
-          text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-1-title),
-          par(leading: 0.40em)[#text(size: 9.2pt, fill: color-body, font: font-body, action-1-body)],
+          block(
+            text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-1-title)
+          ),
+          block[
+            #set par(leading: 0.38em)
+            #text(size: 9.1pt, fill: color-body, font: font-body, action-1-body)
+          ],
         ),
         // Reforma Estructural
         stack(
           dir: ttb,
-          spacing: 2.5pt,
+          spacing: 5pt,
           box(
             fill: accent.lighten(92%),
             radius: 2.5pt,
-            inset: (x: 4.5pt, y: 2pt),
+            inset: (x: 5pt, y: 2.2pt),
             text(size: 7.2pt, weight: "bold", fill: accent, font: font-heading)[REFORMA ESTRUCTURAL]
           ),
-          text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-2-title),
-          par(leading: 0.40em)[#text(size: 9.2pt, fill: color-body, font: font-body, action-2-body)],
+          block(
+            text(size: 10.4pt, weight: "bold", fill: color-title, font: font-heading, action-2-title)
+          ),
+          block[
+            #set par(leading: 0.38em)
+            #text(size: 9.1pt, fill: color-body, font: font-body, action-2-body)
+          ],
         ),
       ),
       // Columna 3: Indicador de Impacto / Contexto Cuantitativo
@@ -401,28 +421,27 @@
         fill: accent.lighten(94%),
         stroke: 0.8pt + accent.lighten(65%),
         radius: 8pt,
-        inset: (x: 9pt, y: 8pt),
+        inset: (x: 8pt, y: 8pt),
         width: 100%,
-        stack(
+        align(center, stack(
           dir: ttb,
-          spacing: 0pt,
-          align(center, [
-            #if impact-label != none and impact-label != [] [
-              #box(
-                fill: accent.lighten(88%),
-                radius: 2.5pt,
-                inset: (x: 5.5pt, y: 1.8pt),
-                text(size: 7pt, weight: "bold", fill: accent, font: font-heading, impact-label)
-              )
-              #v(2.5pt)
-            ]
-            #if impact-stat != none [
-              #text(size: 20pt, weight: "bold", fill: accent, font: font-heading, impact-stat) \
-              #v(2pt)
-            ]
-            #par(leading: 0.38em)[#text(size: 8.2pt, fill: color-body, font: font-body, impact-target)]
-          ])
-        )
+          spacing: 4pt,
+          if impact-label != none and impact-label != [] [
+            #box(
+              fill: accent.lighten(88%),
+              radius: 2.5pt,
+              inset: (x: 5.5pt, y: 2pt),
+              text(size: 7.2pt, weight: "bold", fill: accent, font: font-heading, impact-label)
+            )
+          ] else [ ],
+          if impact-stat != none [
+            #block(text(size: 19.5pt, weight: "bold", fill: accent, font: font-heading, impact-stat))
+          ] else [ ],
+          block[
+            #set par(leading: 0.36em)
+            #text(size: 8.2pt, fill: color-body, font: font-body, impact-target)
+          ]
+        ))
       )
     )
   )

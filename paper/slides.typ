@@ -30,25 +30,25 @@
     fill: color-card-bg,
     stroke: 1pt + color-card-stroke,
     radius: 10pt,
-    inset: (x: 14pt, y: 12pt),
-    height: 335pt,
+    inset: (x: 15pt, y: 13pt),
+    height: 356pt,
     stack(
       dir: ttb,
       spacing: 8pt,
       grid(
-        columns: (26pt, 1fr),
+        columns: (28pt, 1fr),
         gutter: 8pt,
         align: (center + horizon, left + horizon),
         box(
           fill: color-title,
           radius: 6pt,
-          width: 26pt,
-          height: 26pt,
-          align(center + horizon, box(width: 18pt, slide-icons.database))
+          width: 28pt,
+          height: 28pt,
+          align(center + horizon, box(width: 19pt, slide-icons.database))
         ),
         [
-          #text(size: 14.5pt, weight: "bold", fill: color-title, font: font-heading)[Contexto y Universo Censal] \
-          #text(size: 9.5pt, fill: color-accent, font: font-body)[Base productiva y fuente oficial IV CENAGRO]
+          #text(size: 15pt, weight: "bold", fill: color-title, font: font-heading)[Contexto y Universo Censal] \
+          #text(size: 9.8pt, fill: color-accent, font: font-body)[Base productiva y fuente oficial IV CENAGRO]
         ]
       ),
       line(length: 100%, stroke: 0.6pt + rgb("#eee8f6")),
@@ -60,28 +60,28 @@
           fill: rgb("#f3eef8"),
           stroke: 0.6pt + rgb("#d8d0e8"),
           radius: 6pt,
-          inset: (x: 8pt, y: 7pt),
+          inset: (x: 8pt, y: 8pt),
           align(center, [
-            #text(size: 18pt, weight: "bold", fill: color-title, font: font-heading)[227,541] \
-            #text(size: 8.8pt, weight: "bold", fill: color-accent, font: font-body)[Fincas censadas]
+            #text(size: 19pt, weight: "bold", fill: color-title, font: font-heading)[227,541] \
+            #text(size: 9pt, weight: "bold", fill: color-accent, font: font-body)[Fincas censadas]
           ])
         ),
         block(
           fill: rgb("#f3eef8"),
           stroke: 0.6pt + rgb("#d8d0e8"),
           radius: 6pt,
-          inset: (x: 8pt, y: 7pt),
+          inset: (x: 8pt, y: 8pt),
           align(center, [
-            #text(size: 18pt, weight: "bold", fill: color-title, font: font-heading)[262,546] \
-            #text(size: 8.8pt, weight: "bold", fill: color-accent, font: font-body)[Registros analíticos]
+            #text(size: 19pt, weight: "bold", fill: color-title, font: font-heading)[262,546] \
+            #text(size: 9pt, weight: "bold", fill: color-accent, font: font-body)[Registros analíticos]
           ])
         )
       ),
       [
-        #set text(size: 10.8pt, fill: color-body, font: font-body)
-        #set par(leading: 0.44em)
+        #set text(size: 11pt, fill: color-body, font: font-body)
+        #set par(leading: 0.46em)
         #list(
-          spacing: 0.6em,
+          spacing: 0.72em,
           [*Pilar macroeconómico:* Base fundamental del empleo rural, generación de divisas y soberanía alimentaria nacional.],
           [*Coyuntura de fomento:* Post-crisis 2008-2009 con reactivación de banca de desarrollo estatal (*Banco Produzcamos*).],
           [*Marco de desarrollo:* Pobreza multidimensional (*Amartya Sen*) y Plan Nacional de Lucha contra la Pobreza.],
@@ -99,8 +99,8 @@
       fill: color-card-bg,
       stroke: 1pt + color-card-stroke,
       radius: 9pt,
-      inset: (x: 13pt, y: 10pt),
-      height: 148pt,
+      inset: (x: 14pt, y: 11pt),
+      height: 156pt,
       stack(
         dir: ttb,
         spacing: 5pt,
@@ -116,16 +116,16 @@
             align(center + horizon, box(width: 15pt, slide-icons.alert-circle))
           ),
           [
-            #text(size: 12.8pt, weight: "bold", fill: color-title, font: font-heading)[La Brecha Empírica en la Literatura] \
-            #text(size: 9pt, fill: color-accent, font: font-body)[Limitaciones metodológicas del análisis previo]
+            #text(size: 13.5pt, weight: "bold", fill: color-title, font: font-heading)[La Brecha Empírica en la Literatura] \
+            #text(size: 9.2pt, fill: color-accent, font: font-body)[Limitaciones metodológicas del análisis previo]
           ]
         ),
         line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
         [
-          #set text(size: 10.2pt, fill: color-body, font: font-body)
-          #set par(leading: 0.4em)
+          #set text(size: 10.4pt, fill: color-body, font: font-body)
+          #set par(leading: 0.42em)
           #list(
-            spacing: 0.45em,
+            spacing: 0.52em,
             [*Sesgo de agregación:* Estudios previos basados en muestras acotadas que ocultaban la heterogeneidad de escalas.],
             [*Falso dilema de ventanilla:* Se atribuía la exclusión a rechazo bancario sin medir la tasa de postulación real.],
             [*Necesidad técnica:* Ausencia de un *Modern Data Stack* capaz de procesar microdatos censales sin muestreo.],
@@ -138,8 +138,8 @@
       fill: color-card-bg,
       stroke: 1pt + color-card-stroke,
       radius: 9pt,
-      inset: (x: 13pt, y: 10pt),
-      height: 177pt,
+      inset: (x: 14pt, y: 11pt),
+      height: 190pt,
       stack(
         dir: ttb,
         spacing: 6pt,
@@ -155,8 +155,8 @@
             align(center + horizon, box(width: 15pt, slide-icons.help-circle))
           ),
           [
-            #text(size: 12.8pt, weight: "bold", fill: color-title, font: font-heading)[Las Tres Paradojas a Contrastar] \
-            #text(size: 9pt, fill: color-accent, font: font-body)[Preguntas científicas formuladas sobre el microdato]
+            #text(size: 13.5pt, weight: "bold", fill: color-title, font: font-heading)[Las Tres Paradojas a Contrastar] \
+            #text(size: 9.2pt, fill: color-accent, font: font-body)[Preguntas científicas formuladas sobre el microdato]
           ]
         ),
         line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
@@ -167,7 +167,7 @@
             fill: rgb("#f6f3fa"),
             stroke: 0.6pt + color-card-stroke,
             radius: 6pt,
-            inset: (x: 8pt, y: 7pt),
+            inset: (x: 8.5pt, y: 8pt),
             stack(
               dir: ttb,
               spacing: 3pt,
@@ -175,18 +175,18 @@
                 fill: color-title,
                 radius: 3pt,
                 inset: (x: 5pt, y: 2pt),
-                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[1. ACCESO]
+                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[1. ACCESO]
               ),
-              text(size: 9.8pt, weight: "bold", fill: color-title, font: font-heading)[¿Fricción o Riesgo?],
+              text(size: 10.2pt, weight: "bold", fill: color-title, font: font-heading)[¿Fricción o Riesgo?],
               line(length: 100%, stroke: 0.4pt + color-title.lighten(70%)),
-              text(size: 8.6pt, fill: color-body, font: font-body)[¿Rechazo en ventanilla bancaria o autoexclusión por aversión a la pérdida patrimonial? (*Boucher*)]
+              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Rechazo en ventanilla bancaria o autoexclusión por aversión a la pérdida patrimonial? (*Boucher*)]]
             )
           ),
           block(
             fill: rgb("#f6f3fa"),
             stroke: 0.6pt + color-card-stroke,
             radius: 6pt,
-            inset: (x: 8pt, y: 7pt),
+            inset: (x: 8.5pt, y: 8pt),
             stack(
               dir: ttb,
               spacing: 3pt,
@@ -194,18 +194,18 @@
                 fill: color-accent,
                 radius: 3pt,
                 inset: (x: 5pt, y: 2pt),
-                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[2. EMPLEO]
+                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[2. EMPLEO]
               ),
-              text(size: 9.8pt, weight: "bold", fill: color-accent, font: font-heading)[¿Digno o Temporal?],
+              text(size: 10.2pt, weight: "bold", fill: color-accent, font: font-heading)[¿Digno o Temporal?],
               line(length: 100%, stroke: 0.4pt + color-accent.lighten(70%)),
-              text(size: 8.6pt, fill: color-body, font: font-body)[¿Multiplicador de empleo formal continuo o mayor dependencia de jornales temporales de zafra?]
+              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Multiplicador de empleo formal continuo o mayor dependencia de jornales temporales de zafra?]]
             )
           ),
           block(
             fill: rgb("#f6f3fa"),
             stroke: 0.6pt + color-card-stroke,
             radius: 6pt,
-            inset: (x: 8pt, y: 7pt),
+            inset: (x: 8.5pt, y: 8pt),
             stack(
               dir: ttb,
               spacing: 3pt,
@@ -213,11 +213,11 @@
                 fill: rgb("#008080"),
                 radius: 3pt,
                 inset: (x: 5pt, y: 2pt),
-                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[3. SUELO]
+                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[3. SUELO]
               ),
-              text(size: 9.8pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[¿Diversificación?],
+              text(size: 10.2pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[¿Diversificación?],
               line(length: 100%, stroke: 0.4pt + rgb("#008080").lighten(70%)),
-              text(size: 8.6pt, fill: color-body, font: font-body)[¿Reconversión hacia cultivos perennes de mayor valor o persistencia en pastos ganaderos? (*Boserup*)]
+              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Reconversión hacia cultivos perennes de mayor valor o persistencia en pastos ganaderos? (*Boserup*)]]
             )
           )
         )
@@ -233,25 +233,42 @@
 
 #speaker-marker("A")
 
-#v(0.1em)
+#v(4pt)
 #block(
   fill: color-card-bg,
   stroke: 1.2pt + color-title.lighten(50%),
-  radius: 8pt,
-  inset: (x: 16pt, y: 10pt),
+  radius: 9pt,
+  inset: (x: 18pt, y: 13pt),
   width: 100%,
-  [
-    #text(size: 15.5pt, weight: "bold", fill: color-title, font: font-heading)[Objetivo General: ]
-    #text(size: 14.5pt, fill: color-body, font: font-body)[#objetivo-general]
-  ]
+  stack(
+    dir: ttb,
+    spacing: 4pt,
+    text(size: 16pt, weight: "bold", fill: color-title, font: font-heading)[Objetivo General],
+    par(leading: 0.48em)[#text(size: 14.5pt, fill: color-body, font: font-body)[#objetivo-general]]
+  )
 )
 
-#v(0.4em)
+#v(10pt)
 #stack(
-  spacing: 8pt,
-  card-numbered(number: 1, text-content: objetivo-especifico-1, size: 14pt),
-  card-numbered(number: 2, text-content: objetivo-especifico-2, size: 14pt),
-  card-numbered(number: 3, text-content: objetivo-especifico-3, size: 14pt),
+  spacing: 11pt,
+  card-numbered(
+    number: 1,
+    title: [Eje 1: Inclusión y Fuentes de Financiamiento],
+    text-content: objetivo-especifico-1,
+    size: 14pt,
+  ),
+  card-numbered(
+    number: 2,
+    title: [Eje 2: Dinámica e Intensidad Laboral],
+    text-content: objetivo-especifico-2,
+    size: 14pt,
+  ),
+  card-numbered(
+    number: 3,
+    title: [Eje 3: Uso del Suelo y Diversificación Productiva],
+    text-content: objetivo-especifico-3,
+    size: 14pt,
+  ),
 )
 
 // ============================================================
@@ -311,17 +328,17 @@
   feature-card(
     icon: slide-icons.target,
     title: [Enfoque y Tipo],
-    subtitle: [Cuantitativo y transversal],
+    subtitle: [Enfoque mixto y corte transversal],
     height: auto,
     inset: (x: 14pt, y: 13pt),
-    body-size: 11.8pt,
-    spacing: 0.85em,
-    leading: 0.52em,
+    body-size: 11.5pt,
+    spacing: 0.82em,
+    leading: 0.50em,
     body: [
       #list(
-        [*Enfoque cuantitativo:* Diseño no experimental y de corte transversal con alcance descriptivo-correlacional.],
-        [*Método comparativo:* Evaluación empírica de brechas entre fincas con y sin financiamiento crediticio.],
-        [*Sin intervención:* Análisis observacional riguroso sobre el ciclo censal oficial de Nicaragua.],
+        [*Enfoque mixto:* Articulación de microdatos cuantitativos censales con análisis e interpretación cualitativa socioeconómica.],
+        [*Tipo de investigación:* No experimental, transversal de alcance descriptivo, analítico y correlacional.],
+        [*Método comparativo:* Contraste observacional de brechas estructurales entre fincas con y sin financiamiento.],
       )
     ]
   ),
@@ -712,7 +729,7 @@
 
 #stack(
   dir: ttb,
-  spacing: 10pt,
+  spacing: 9pt,
   policy-row(
     number: "01",
     pillar-tag: [CRÉDITO INCLUSIVO],
