@@ -22,205 +22,310 @@
 
 #speaker-marker("A")
 
+#let universe-data = csv("data/census_universe.csv").slice(1).at(0)
+
+// --- SECCIÓN SUPERIOR: UNIVERSO CENSAL Y BRECHA EMPÍRICA ---
 #grid(
-  columns: (0.92fr, 1.38fr),
+  columns: (382pt, 1fr),
   gutter: 14pt,
-  // Columna Izquierda: Universo Censal y Contexto Nacional
-  block(
-    fill: color-card-bg,
-    stroke: 1pt + color-card-stroke,
-    radius: 10pt,
-    inset: (x: 15pt, y: 13pt),
-    height: 356pt,
-    stack(
-      dir: ttb,
-      spacing: 8pt,
-      grid(
-        columns: (28pt, 1fr),
-        gutter: 8pt,
-        align: (center + horizon, left + horizon),
-        box(
-          fill: color-title,
-          radius: 6pt,
-          width: 28pt,
-          height: 28pt,
-          align(center + horizon, box(width: 19pt, slide-icons.database))
-        ),
-        [
-          #text(size: 15pt, weight: "bold", fill: color-title, font: font-heading)[Contexto y Universo Censal] \
-          #text(size: 9.8pt, fill: color-accent, font: font-body)[Base productiva y fuente oficial IV CENAGRO]
-        ]
-      ),
-      line(length: 100%, stroke: 0.6pt + rgb("#eee8f6")),
-      // Callout estadístico dual
-      grid(
-        columns: (1fr, 1fr),
-        gutter: 8pt,
-        block(
-          fill: rgb("#f3eef8"),
-          stroke: 0.6pt + rgb("#d8d0e8"),
-          radius: 6pt,
-          inset: (x: 8pt, y: 8pt),
-          align(center, [
-            #text(size: 19pt, weight: "bold", fill: color-title, font: font-heading)[227,541] \
-            #text(size: 9pt, weight: "bold", fill: color-accent, font: font-body)[Fincas censadas]
-          ])
-        ),
-        block(
-          fill: rgb("#f3eef8"),
-          stroke: 0.6pt + rgb("#d8d0e8"),
-          radius: 6pt,
-          inset: (x: 8pt, y: 8pt),
-          align(center, [
-            #text(size: 19pt, weight: "bold", fill: color-title, font: font-heading)[262,546] \
-            #text(size: 9pt, weight: "bold", fill: color-accent, font: font-body)[Registros analíticos]
-          ])
-        )
-      ),
-      [
-        #set text(size: 11pt, fill: color-body, font: font-body)
-        #set par(leading: 0.46em)
-        #list(
-          spacing: 0.72em,
-          [*Pilar macroeconómico:* Base fundamental del empleo rural, generación de divisas y soberanía alimentaria nacional.],
-          [*Coyuntura de fomento:* Post-crisis 2008-2009 con reactivación de banca de desarrollo estatal (*Banco Produzcamos*).],
-          [*Marco de desarrollo:* Pobreza multidimensional (*Amartya Sen*) y Plan Nacional de Lucha contra la Pobreza.],
-          [*Cobertura:* IV CENAGRO (INIDE / MAGFOR), universo exhaustivo sin sesgo de muestra.],
-        )
-      ]
-    )
-  ),
-  // Columna Derecha: Stack de Brecha Empírica + Paradojas
-  stack(
-    dir: ttb,
-    spacing: 10pt,
-    // Panel Superior: Brecha Empírica
+  // 1. Métricas del Universo Censal (obtenidas directamente de DuckDB vía CSV)
+  grid(
+    columns: (1fr, 1fr),
+    gutter: 10pt,
+    // Métrica 1: Universo Censal Total
     block(
-      fill: color-card-bg,
-      stroke: 1pt + color-card-stroke,
+      fill: rgb("#f6f3fa"),
+      stroke: 1.1pt + color-title.lighten(65%),
       radius: 9pt,
-      inset: (x: 14pt, y: 11pt),
-      height: 156pt,
+      inset: (x: 12pt, y: 10pt),
+      height: 106pt,
       stack(
         dir: ttb,
-        spacing: 5pt,
-        grid(
-          columns: (22pt, 1fr),
-          gutter: 7pt,
-          align: (center + horizon, left + horizon),
-          box(
-            fill: rgb("#c0392b"),
-            radius: 5pt,
-            width: 22pt,
-            height: 22pt,
-            align(center + horizon, box(width: 15pt, slide-icons.alert-circle))
-          ),
-          [
-            #text(size: 13.5pt, weight: "bold", fill: color-title, font: font-heading)[La Brecha Empírica en la Literatura] \
-            #text(size: 9.2pt, fill: color-accent, font: font-body)[Limitaciones metodológicas del análisis previo]
-          ]
+        spacing: 4pt,
+        box(
+          fill: color-title.lighten(88%),
+          radius: 3pt,
+          inset: (x: 5pt, y: 2pt),
+          text(size: 7.8pt, weight: "bold", fill: color-title, font: font-heading)[UNIVERSO CENSAL]
         ),
-        line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
-        [
-          #set text(size: 10.4pt, fill: color-body, font: font-body)
-          #set par(leading: 0.42em)
-          #list(
-            spacing: 0.52em,
-            [*Sesgo de agregación:* Estudios previos basados en muestras acotadas que ocultaban la heterogeneidad de escalas.],
-            [*Falso dilema de ventanilla:* Se atribuía la exclusión a rechazo bancario sin medir la tasa de postulación real.],
-            [*Necesidad técnica:* Ausencia de un *Modern Data Stack* capaz de procesar microdatos censales sin muestreo.],
-          )
-        ]
+        v(1pt),
+        block(
+          text(size: 24pt, weight: "bold", fill: color-title, font: font-heading)[262,546]
+        ),
+        block(
+          text(size: 10.5pt, weight: "bold", fill: color-accent, font: font-body)[Fincas censadas]
+        ),
+        block(
+          text(size: 8.8pt, fill: rgb("#556270"), font: font-body)[100% cobertura en 153 municipios]
+        )
       )
     ),
-    // Panel Inferior: Tres Paradojas a Contrastar
+    // Métrica 2: Subconjunto Financiado (Contraste empírico del estudio)
     block(
-      fill: color-card-bg,
-      stroke: 1pt + color-card-stroke,
+      fill: rgb("#f4f7fc"),
+      stroke: 1.1pt + color-accent.lighten(65%),
       radius: 9pt,
-      inset: (x: 14pt, y: 11pt),
-      height: 190pt,
+      inset: (x: 12pt, y: 10pt),
+      height: 106pt,
       stack(
         dir: ttb,
-        spacing: 6pt,
-        grid(
-          columns: (22pt, 1fr),
-          gutter: 7pt,
-          align: (center + horizon, left + horizon),
-          box(
-            fill: color-accent,
-            radius: 5pt,
-            width: 22pt,
-            height: 22pt,
-            align(center + horizon, box(width: 15pt, slide-icons.help-circle))
-          ),
-          [
-            #text(size: 13.5pt, weight: "bold", fill: color-title, font: font-heading)[Las Tres Paradojas a Contrastar] \
-            #text(size: 9.2pt, fill: color-accent, font: font-body)[Preguntas científicas formuladas sobre el microdato]
-          ]
+        spacing: 4pt,
+        box(
+          fill: color-accent.lighten(88%),
+          radius: 3pt,
+          inset: (x: 5pt, y: 2pt),
+          text(size: 7.8pt, weight: "bold", fill: color-accent, font: font-heading)[GRUPO FINANCIADO]
         ),
-        line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
-        grid(
-          columns: (1fr, 1fr, 1fr),
-          gutter: 8pt,
-          block(
-            fill: rgb("#f6f3fa"),
-            stroke: 0.6pt + color-card-stroke,
-            radius: 6pt,
-            inset: (x: 8.5pt, y: 8pt),
-            stack(
-              dir: ttb,
-              spacing: 3pt,
-              box(
-                fill: color-title,
-                radius: 3pt,
-                inset: (x: 5pt, y: 2pt),
-                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[1. ACCESO]
-              ),
-              text(size: 10.2pt, weight: "bold", fill: color-title, font: font-heading)[¿Fricción o Riesgo?],
-              line(length: 100%, stroke: 0.4pt + color-title.lighten(70%)),
-              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Rechazo en ventanilla bancaria o autoexclusión por aversión a la pérdida patrimonial? (*Boucher*)]]
-            )
-          ),
-          block(
-            fill: rgb("#f6f3fa"),
-            stroke: 0.6pt + color-card-stroke,
-            radius: 6pt,
-            inset: (x: 8.5pt, y: 8pt),
-            stack(
-              dir: ttb,
-              spacing: 3pt,
-              box(
-                fill: color-accent,
-                radius: 3pt,
-                inset: (x: 5pt, y: 2pt),
-                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[2. EMPLEO]
-              ),
-              text(size: 10.2pt, weight: "bold", fill: color-accent, font: font-heading)[¿Digno o Temporal?],
-              line(length: 100%, stroke: 0.4pt + color-accent.lighten(70%)),
-              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Multiplicador de empleo formal continuo o mayor dependencia de jornales temporales de zafra?]]
-            )
-          ),
-          block(
-            fill: rgb("#f6f3fa"),
-            stroke: 0.6pt + color-card-stroke,
-            radius: 6pt,
-            inset: (x: 8.5pt, y: 8pt),
-            stack(
-              dir: ttb,
-              spacing: 3pt,
-              box(
-                fill: rgb("#008080"),
-                radius: 3pt,
-                inset: (x: 5pt, y: 2pt),
-                text(size: 8pt, weight: "bold", fill: white, font: font-heading)[3. SUELO]
-              ),
-              text(size: 10.2pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[¿Diversificación?],
-              line(length: 100%, stroke: 0.4pt + rgb("#008080").lighten(70%)),
-              par(leading: 0.40em)[#text(size: 8.8pt, fill: color-body, font: font-body)[¿Reconversión hacia cultivos perennes de mayor valor o persistencia en pastos ganaderos? (*Boserup*)]]
-            )
-          )
+        v(1pt),
+        block(
+          text(size: 24pt, weight: "bold", fill: color-accent, font: font-heading)[38,680]
+        ),
+        block(
+          text(size: 10.5pt, weight: "bold", fill: color-title, font: font-body)[Fincas con crédito (14.7%)]
+        ),
+        block(
+          text(size: 8.8pt, fill: rgb("#556270"), font: font-body)[Población de contraste del estudio]
         )
+      )
+    )
+  ),
+  // 2. Tarjeta de Vacío Empírico en la Literatura (alineada en altura exacta con las métricas)
+  block(
+    fill: color-card-bg,
+    stroke: 1.1pt + color-card-stroke,
+    radius: 9pt,
+    inset: (x: 14pt, y: 10pt),
+    height: 106pt,
+    stack(
+      dir: ttb,
+      spacing: 5pt,
+      grid(
+        columns: (22pt, 1fr),
+        gutter: 7pt,
+        align: (center + horizon, left + horizon),
+        box(
+          fill: rgb("#c0392b"),
+          radius: 5pt,
+          width: 22pt,
+          height: 22pt,
+          align(center + horizon, box(width: 14pt, slide-icons.alert-circle))
+        ),
+        [
+          #text(size: 13.2pt, weight: "bold", fill: color-title, font: font-heading)[Vacío Empírico en la Literatura] \
+          #text(size: 8.8pt, fill: color-accent, font: font-body)[Limitaciones del análisis agrario previo en Nicaragua]
+        ]
+      ),
+      line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
+      block[
+        #set text(size: 10.2pt, fill: color-body, font: font-body)
+        #set par(leading: 0.40em)
+        Superación del *sesgo de agregación* de muestras reducidas y del *falso dilema de ventanilla*, demostrando que la exclusión surge por autoexclusión y riesgo patrimonial (*Sen*).
+      ],
+      v(3pt),
+      // Pills metodológicos de rigor
+      grid(
+        columns: (auto, auto, auto),
+        gutter: 6pt,
+        box(
+          fill: rgb("#f3eef8"),
+          radius: 3pt,
+          inset: (x: 5.5pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: color-title, font: font-heading)[Microdatos Censales]
+        ),
+        box(
+          fill: rgb("#eef3f8"),
+          radius: 3pt,
+          inset: (x: 5.5pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: color-accent, font: font-heading)[Heterogeneidad Real]
+        ),
+        box(
+          fill: rgb("#eaf5f5"),
+          radius: 3pt,
+          inset: (x: 5.5pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[Sin Sesgo Muestral]
+        )
+      )
+    )
+  )
+)
+
+#v(14pt)
+
+// --- SECCIÓN INFERIOR: TRES PARADOJAS CIENTÍFICAS A CONTRASTAR ---
+#grid(
+  columns: (22pt, 1fr),
+  gutter: 7pt,
+  align: (center + horizon, left + horizon),
+  box(
+    fill: color-accent,
+    radius: 4pt,
+    width: 22pt,
+    height: 22pt,
+    align(center + horizon, box(width: 14pt, slide-icons.help-circle))
+  ),
+  [
+    #text(size: 14pt, weight: "bold", fill: color-title, font: font-heading)[Las Tres Paradojas Científicas a Contrastar]
+  ]
+)
+
+#v(8pt)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 12pt,
+  // Paradoja 1: Crédito
+  block(
+    fill: rgb("#fbfafc"),
+    stroke: 1.1pt + color-title.lighten(60%),
+    radius: 9pt,
+    inset: (x: 13pt, y: 12pt),
+    height: 152pt,
+    stack(
+      dir: ttb,
+      spacing: 6pt,
+      grid(
+        columns: (auto, 1fr),
+        align: (horizon + left, horizon + right),
+        box(
+          fill: color-title,
+          radius: 3pt,
+          inset: (x: 6pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: white, font: font-heading)[01 #sym.bar.v CRÉDITO]
+        ),
+        box(
+          fill: color-title.lighten(90%),
+          radius: 3pt,
+          inset: (x: 5pt, y: 2pt),
+          text(size: 7.5pt, weight: "bold", fill: color-title, font: font-heading)[Paradoja Asignación]
+        )
+      ),
+      block(
+        text(size: 15pt, weight: "bold", fill: color-title, font: font-heading)[¿Fricción o Riesgo?]
+      ),
+      line(length: 100%, stroke: 0.5pt + color-title.lighten(70%)),
+      block[
+        #set par(leading: 0.44em)
+        #text(size: 11.5pt, fill: color-body, font: font-body)[
+          ¿Rechazo bancario en ventanilla o autoexclusión previa por temor a la pérdida patrimonial de la tierra?
+        ]
+      ],
+      v(2pt),
+      block(
+        fill: rgb("#f3eef8"),
+        stroke: 0.6pt + rgb("#d8d0e8"),
+        radius: 5pt,
+        inset: (x: 8pt, y: 6.5pt),
+        width: 100%,
+        [
+          #set par(leading: 0.40em)
+          #text(size: 9.8pt, fill: color-title, font: font-body)[
+            *Hipótesis:* La exclusión no opera en ventanilla sino en el racionamiento por riesgo colateral.
+          ]
+        ]
+      )
+    )
+  ),
+  // Paradoja 2: Empleo
+  block(
+    fill: rgb("#fbfafc"),
+    stroke: 1.1pt + color-accent.lighten(60%),
+    radius: 9pt,
+    inset: (x: 13pt, y: 12pt),
+    height: 152pt,
+    stack(
+      dir: ttb,
+      spacing: 6pt,
+      grid(
+        columns: (auto, 1fr),
+        align: (horizon + left, horizon + right),
+        box(
+          fill: color-accent,
+          radius: 3pt,
+          inset: (x: 6pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: white, font: font-heading)[02 #sym.bar.v EMPLEO]
+        ),
+        box(
+          fill: color-accent.lighten(90%),
+          radius: 3pt,
+          inset: (x: 5pt, y: 2pt),
+          text(size: 7.5pt, weight: "bold", fill: color-accent, font: font-heading)[Dualismo Laboral]
+        )
+      ),
+      block(
+        text(size: 15pt, weight: "bold", fill: color-accent, font: font-heading)[¿Digno o Temporal?]
+      ),
+      line(length: 100%, stroke: 0.5pt + color-accent.lighten(70%)),
+      block[
+        #set par(leading: 0.44em)
+        #text(size: 11.5pt, fill: color-body, font: font-body)[
+          ¿Multiplicador de empleo formal continuo o mayor dependencia de jornales temporales de zafra y cosecha?
+        ]
+      ],
+      v(2pt),
+      block(
+        fill: rgb("#f0f4fa"),
+        stroke: 0.6pt + rgb("#cbd9ec"),
+        radius: 5pt,
+        inset: (x: 8pt, y: 6.5pt),
+        width: 100%,
+        [
+          #set par(leading: 0.40em)
+          #text(size: 9.8pt, fill: color-accent, font: font-body)[
+            *Hipótesis:* El crédito absorbe mano de obra estacional pero sin estabilidad contractual continua.
+          ]
+        ]
+      )
+    )
+  ),
+  // Paradoja 3: Suelo
+  block(
+    fill: rgb("#fbfafc"),
+    stroke: 1.1pt + rgb("#008080").lighten(60%),
+    radius: 9pt,
+    inset: (x: 13pt, y: 12pt),
+    height: 152pt,
+    stack(
+      dir: ttb,
+      spacing: 6pt,
+      grid(
+        columns: (auto, 1fr),
+        align: (horizon + left, horizon + right),
+        box(
+          fill: rgb("#008080"),
+          radius: 3pt,
+          inset: (x: 6pt, y: 2.2pt),
+          text(size: 8pt, weight: "bold", fill: white, font: font-heading)[03 #sym.bar.v SUELO]
+        ),
+        box(
+          fill: rgb("#008080").lighten(90%),
+          radius: 3pt,
+          inset: (x: 5pt, y: 2pt),
+          text(size: 7.5pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[Restricción Boserup]
+        )
+      ),
+      block(
+        text(size: 15pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[¿Diversificación?]
+      ),
+      line(length: 100%, stroke: 0.5pt + rgb("#008080").lighten(70%)),
+      block[
+        #set par(leading: 0.44em)
+        #text(size: 11.5pt, fill: color-body, font: font-body)[
+          ¿Reconversión hacia cultivos perennes de alto valor o persistencia en pastos ganaderos extensivos?
+        ]
+      ],
+      v(2pt),
+      block(
+        fill: rgb("#eff8f8"),
+        stroke: 0.6pt + rgb("#c3e5e5"),
+        radius: 5pt,
+        inset: (x: 8pt, y: 6.5pt),
+        width: 100%,
+        [
+          #set par(leading: 0.40em)
+          #text(size: 9.8pt, fill: rgb("#008080"), font: font-body)[
+            *Hipótesis:* El crédito impulsa diversificación perenne rompiendo la inercia ganadera extensiva.
+          ]
+        ]
       )
     )
   )

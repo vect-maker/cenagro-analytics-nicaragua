@@ -1,5 +1,19 @@
 -- Export queries for paper figures into paper/data/
 
+-- Table 0: Census Universe & General Scale
+COPY (
+    SELECT 
+        COUNT(*) AS total_farms,
+        COUNT(DISTINCT municipality) AS total_municipalities,
+        COUNT(DISTINCT department) AS total_departments,
+        SUM(CASE WHEN received_loan THEN 1 ELSE 0 END) AS financed_farms,
+        ROUND(SUM(CASE WHEN received_loan THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) AS financed_pct,
+        SUM(CASE WHEN NOT received_loan THEN 1 ELSE 0 END) AS unfinanced_farms,
+        ROUND(SUM(CASE WHEN NOT received_loan THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) AS unfinanced_pct,
+        ROUND(SUM(total_area_mz), 0) AS total_area_mz
+    FROM farms
+) TO 'paper/data/census_universe.csv' (HEADER, DELIMITER ',');
+
 -- Fig 1: Credit Funnel (Two-stage conversion data)
 COPY (
     SELECT '1. Universo Censal' AS stage, COUNT(*) AS count_val, 100.0 AS pct FROM farm_credit_access
