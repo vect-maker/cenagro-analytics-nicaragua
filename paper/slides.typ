@@ -23,46 +23,206 @@
 #speaker-marker("A")
 
 #grid(
-  columns: (1fr, 1fr, 1fr),
+  columns: (0.92fr, 1.38fr),
   gutter: 14pt,
-  feature-card(
-    icon: slide-icons.database,
-    title: [Contexto y Datos],
-    subtitle: [Pilar agrario y universo censal],
-    body: [
-      #list(
-        [*Pilar socioeconómico:* Base del empleo rural, divisas y seguridad alimentaria en Nicaragua.],
-        [*CENAGRO 2011:* 227,541 fincas consolidadas en *262,546 registros analíticos* (INIDE / MAGFOR).],
-        [*Coyuntura de fomento:* Transición post-crisis 2008-2009 e impulso de banca de desarrollo (*Banco Produzcamos*).],
-        [*Relevancia:* Pobreza multidimensional (*Sen*) y Plan Nacional de Lucha contra la Pobreza.],
-      )
-    ]
+  // Columna Izquierda: Universo Censal y Contexto Nacional
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 10pt,
+    inset: (x: 14pt, y: 12pt),
+    height: 335pt,
+    stack(
+      dir: ttb,
+      spacing: 8pt,
+      grid(
+        columns: (26pt, 1fr),
+        gutter: 8pt,
+        align: (center + horizon, left + horizon),
+        box(
+          fill: color-title,
+          radius: 6pt,
+          width: 26pt,
+          height: 26pt,
+          align(center + horizon, box(width: 18pt, slide-icons.database))
+        ),
+        [
+          #text(size: 14.5pt, weight: "bold", fill: color-title, font: font-heading)[Contexto y Universo Censal] \
+          #text(size: 9.5pt, fill: color-accent, font: font-body)[Base productiva y fuente oficial IV CENAGRO]
+        ]
+      ),
+      line(length: 100%, stroke: 0.6pt + rgb("#eee8f6")),
+      // Callout estadístico dual
+      grid(
+        columns: (1fr, 1fr),
+        gutter: 8pt,
+        block(
+          fill: rgb("#f3eef8"),
+          stroke: 0.6pt + rgb("#d8d0e8"),
+          radius: 6pt,
+          inset: (x: 8pt, y: 7pt),
+          align(center, [
+            #text(size: 18pt, weight: "bold", fill: color-title, font: font-heading)[227,541] \
+            #text(size: 8.8pt, weight: "bold", fill: color-accent, font: font-body)[Fincas censadas]
+          ])
+        ),
+        block(
+          fill: rgb("#f3eef8"),
+          stroke: 0.6pt + rgb("#d8d0e8"),
+          radius: 6pt,
+          inset: (x: 8pt, y: 7pt),
+          align(center, [
+            #text(size: 18pt, weight: "bold", fill: color-title, font: font-heading)[262,546] \
+            #text(size: 8.8pt, weight: "bold", fill: color-accent, font: font-body)[Registros analíticos]
+          ])
+        )
+      ),
+      [
+        #set text(size: 10.8pt, fill: color-body, font: font-body)
+        #set par(leading: 0.44em)
+        #list(
+          spacing: 0.6em,
+          [*Pilar macroeconómico:* Base fundamental del empleo rural, generación de divisas y soberanía alimentaria nacional.],
+          [*Coyuntura de fomento:* Post-crisis 2008-2009 con reactivación de banca de desarrollo estatal (*Banco Produzcamos*).],
+          [*Marco de desarrollo:* Pobreza multidimensional (*Amartya Sen*) y Plan Nacional de Lucha contra la Pobreza.],
+          [*Cobertura:* IV CENAGRO (INIDE / MAGFOR), universo exhaustivo sin sesgo de muestra.],
+        )
+      ]
+    )
   ),
-  feature-card(
-    icon: slide-icons.alert-circle,
-    title: [La Brecha Empírica],
-    subtitle: [Limitaciones del análisis previo],
-    body: [
-      #list(
-        [*Sesgo de agregación:* Literatura previa basada en encuestas muestrales acotadas que omitían la heterogeneidad de fincas.],
-        [*Supuesto de ventanilla:* Se atribuía la exclusión a denegación bancaria sin verificar la tasa real de postulación.],
-        [*Ingeniería de datos:* Necesidad de un *Modern Data Stack* (Rust + DuckDB) para procesar el microdato censal exhaustivo.],
-        [*Aporte analítico:* Comparación controlada con/sin crédito estratificada por escala de finca (`farm_size_class`).],
+  // Columna Derecha: Stack de Brecha Empírica + Paradojas
+  stack(
+    dir: ttb,
+    spacing: 10pt,
+    // Panel Superior: Brecha Empírica
+    block(
+      fill: color-card-bg,
+      stroke: 1pt + color-card-stroke,
+      radius: 9pt,
+      inset: (x: 13pt, y: 10pt),
+      height: 148pt,
+      stack(
+        dir: ttb,
+        spacing: 5pt,
+        grid(
+          columns: (22pt, 1fr),
+          gutter: 7pt,
+          align: (center + horizon, left + horizon),
+          box(
+            fill: rgb("#c0392b"),
+            radius: 5pt,
+            width: 22pt,
+            height: 22pt,
+            align(center + horizon, box(width: 15pt, slide-icons.alert-circle))
+          ),
+          [
+            #text(size: 12.8pt, weight: "bold", fill: color-title, font: font-heading)[La Brecha Empírica en la Literatura] \
+            #text(size: 9pt, fill: color-accent, font: font-body)[Limitaciones metodológicas del análisis previo]
+          ]
+        ),
+        line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
+        [
+          #set text(size: 10.2pt, fill: color-body, font: font-body)
+          #set par(leading: 0.4em)
+          #list(
+            spacing: 0.45em,
+            [*Sesgo de agregación:* Estudios previos basados en muestras acotadas que ocultaban la heterogeneidad de escalas.],
+            [*Falso dilema de ventanilla:* Se atribuía la exclusión a rechazo bancario sin medir la tasa de postulación real.],
+            [*Necesidad técnica:* Ausencia de un *Modern Data Stack* capaz de procesar microdatos censales sin muestreo.],
+          )
+        ]
       )
-    ]
-  ),
-  feature-card(
-    icon: slide-icons.help-circle,
-    title: [Preguntas Clave],
-    subtitle: [Paradojas a contrastar],
-    body: [
-      #list(
-        [*Acceso:* ¿Fricción en ventanilla bancaria o autoexclusión previa por riesgo y colateral? (*Boucher et al.*).],
-        [*Empleo:* ¿Multiplicador de empleo formal o financiamiento de picos temporales precarios?],
-        [*Producción:* ¿Rompe la trampa del pastoreo extensivo hacia cultivos perennes diversificados?],
-        [*Impacto:* Evidencia cuantitativa microeconómica para informar políticas de crédito rural focalizado.],
+    ),
+    // Panel Inferior: Tres Paradojas a Contrastar
+    block(
+      fill: color-card-bg,
+      stroke: 1pt + color-card-stroke,
+      radius: 9pt,
+      inset: (x: 13pt, y: 10pt),
+      height: 177pt,
+      stack(
+        dir: ttb,
+        spacing: 6pt,
+        grid(
+          columns: (22pt, 1fr),
+          gutter: 7pt,
+          align: (center + horizon, left + horizon),
+          box(
+            fill: color-accent,
+            radius: 5pt,
+            width: 22pt,
+            height: 22pt,
+            align(center + horizon, box(width: 15pt, slide-icons.help-circle))
+          ),
+          [
+            #text(size: 12.8pt, weight: "bold", fill: color-title, font: font-heading)[Las Tres Paradojas a Contrastar] \
+            #text(size: 9pt, fill: color-accent, font: font-body)[Preguntas científicas formuladas sobre el microdato]
+          ]
+        ),
+        line(length: 100%, stroke: 0.5pt + rgb("#eee8f6")),
+        grid(
+          columns: (1fr, 1fr, 1fr),
+          gutter: 8pt,
+          block(
+            fill: rgb("#f6f3fa"),
+            stroke: 0.6pt + color-card-stroke,
+            radius: 6pt,
+            inset: (x: 8pt, y: 7pt),
+            stack(
+              dir: ttb,
+              spacing: 3pt,
+              box(
+                fill: color-title,
+                radius: 3pt,
+                inset: (x: 5pt, y: 2pt),
+                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[1. ACCESO]
+              ),
+              text(size: 9.8pt, weight: "bold", fill: color-title, font: font-heading)[¿Fricción o Riesgo?],
+              line(length: 100%, stroke: 0.4pt + color-title.lighten(70%)),
+              text(size: 8.6pt, fill: color-body, font: font-body)[¿Rechazo en ventanilla bancaria o autoexclusión por aversión a la pérdida patrimonial? (*Boucher*)]
+            )
+          ),
+          block(
+            fill: rgb("#f6f3fa"),
+            stroke: 0.6pt + color-card-stroke,
+            radius: 6pt,
+            inset: (x: 8pt, y: 7pt),
+            stack(
+              dir: ttb,
+              spacing: 3pt,
+              box(
+                fill: color-accent,
+                radius: 3pt,
+                inset: (x: 5pt, y: 2pt),
+                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[2. EMPLEO]
+              ),
+              text(size: 9.8pt, weight: "bold", fill: color-accent, font: font-heading)[¿Digno o Temporal?],
+              line(length: 100%, stroke: 0.4pt + color-accent.lighten(70%)),
+              text(size: 8.6pt, fill: color-body, font: font-body)[¿Multiplicador de empleo formal continuo o mayor dependencia de jornales temporales de zafra?]
+            )
+          ),
+          block(
+            fill: rgb("#f6f3fa"),
+            stroke: 0.6pt + color-card-stroke,
+            radius: 6pt,
+            inset: (x: 8pt, y: 7pt),
+            stack(
+              dir: ttb,
+              spacing: 3pt,
+              box(
+                fill: rgb("#008080"),
+                radius: 3pt,
+                inset: (x: 5pt, y: 2pt),
+                text(size: 7.8pt, weight: "bold", fill: white, font: font-heading)[3. SUELO]
+              ),
+              text(size: 9.8pt, weight: "bold", fill: rgb("#008080"), font: font-heading)[¿Diversificación?],
+              line(length: 100%, stroke: 0.4pt + rgb("#008080").lighten(70%)),
+              text(size: 8.6pt, fill: color-body, font: font-body)[¿Reconversión hacia cultivos perennes de mayor valor o persistencia en pastos ganaderos? (*Boserup*)]
+            )
+          )
+        )
       )
-    ]
+    )
   )
 )
 
@@ -143,16 +303,20 @@
   )
 )
 
-#v(8pt)
+#v(14pt)
 
 #grid(
   columns: (1fr, 1fr, 1fr),
-  gutter: 12pt,
+  gutter: 14pt,
   feature-card(
     icon: slide-icons.target,
     title: [Enfoque y Tipo],
     subtitle: [Cuantitativo y transversal],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Enfoque cuantitativo:* Diseño no experimental y de corte transversal con alcance descriptivo-correlacional.],
@@ -167,6 +331,10 @@
     title: [Población Censal],
     subtitle: [227,541 fincas (universo exhaustivo)],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Población objetivo:* Totalidad de las explotaciones agropecuarias del IV CENAGRO 2011 (INIDE / MAGFOR).],
@@ -181,6 +349,10 @@
     title: [Unidad de Análisis],
     subtitle: [Explotación Agropecuaria (EA)],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Definición censal:* Extensión de tierra para actividades agropecuarias bajo una administración única.],
@@ -229,17 +401,21 @@
   )
 )
 
-#v(8pt)
+#v(14pt)
 
 #grid(
   columns: (1fr, 1fr, 1fr),
-  gutter: 12pt,
+  gutter: 14pt,
   feature-card(
     icon: image("images/presentation/logos/rust.svg"),
     badge-fill: white,
     title: [Seguridad en Rust],
     subtitle: [Zero-GC & Type-Safe],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Gestión determinista:* Cero pausas de *Garbage Collector* y cero fugas de memoria.],
@@ -254,6 +430,10 @@
     title: [Downcasting y Caché],
     subtitle: [Alineación con CPU L1/L2],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Tipos mínimos viables:* Downcasting a enteros `i8`/`i16` y banderas booleanas.],
@@ -268,6 +448,10 @@
     title: [Compresión y Métricas],
     subtitle: [Artefacto farms.parquet],
     height: auto,
+    inset: (x: 14pt, y: 13pt),
+    body-size: 11.8pt,
+    spacing: 0.85em,
+    leading: 0.52em,
     body: [
       #list(
         [*Dictionary Encoding:* Cadenas categóricas comprimidas a diccionarios de enteros.],
@@ -307,35 +491,50 @@
   ),
   flow-arrow,
   stack(
-    spacing: 5pt,
+    spacing: 3pt,
     pipeline-node(
-      logo: box(fill: rgb("#1F4E79"), radius: 4pt, width: 22pt, height: 22pt, align(center + horizon, box(width: 14pt, height: 14pt, slide-icons.terminal))),
+      logo: box(fill: rgb("#1F4E79"), radius: 3pt, width: 20pt, height: 20pt, align(center + horizon, box(width: 13pt, height: 13pt, slide-icons.terminal))),
       title: [DuckDB CLI],
-      subtitle: [Exploración interactiva y ad-hoc],
+      subtitle: [Exploración ad-hoc],
       tag: [EDA Ágil],
       accent: rgb("#1F4E79"),
       fill: rgb("#f5f8fc"),
+      badge-size: 20pt,
+      title-size: 11pt,
+      subtitle-size: 8.5pt,
+      tag-size: 7.5pt,
+      inset: (x: 8pt, y: 4pt),
     ),
     pipeline-node(
       logo: image("images/presentation/logos/evidence.svg"),
       title: [Evidence.dev],
-      subtitle: [Portal BI web interactivo],
+      subtitle: [Portal BI interactivo],
       tag: [Markdown + SQL],
       accent: rgb("#7030A0"),
       fill: rgb("#fbfafc"),
+      badge-size: 20pt,
+      title-size: 11pt,
+      subtitle-size: 8.5pt,
+      tag-size: 7.5pt,
+      inset: (x: 8pt, y: 4pt),
     ),
     pipeline-node(
       logo: image("images/presentation/logos/typst.svg"),
       title: [Typst + CeTZ],
-      subtitle: [Paper y diapositivas (via CSVs)],
+      subtitle: [Paper y diapositivas],
       tag: [Paper-as-Code],
       accent: rgb("#008080"),
       fill: rgb("#f0faf8"),
+      badge-size: 20pt,
+      title-size: 11pt,
+      subtitle-size: 8.5pt,
+      tag-size: 7.5pt,
+      inset: (x: 8pt, y: 4pt),
     ),
   )
 )
 
-#v(6pt)
+#v(10pt)
 
 #grid(
   columns: (1fr, 1fr, 1fr),
@@ -346,6 +545,10 @@
     title: [Motor OLAP Embebido],
     subtitle: [Rigor estadístico sin sesgos],
     height: auto,
+    inset: (x: 13pt, y: 10pt),
+    body-size: 11pt,
+    spacing: 0.6em,
+    leading: 0.46em,
     body: [
       #list(
         [*Lecturas Zero-Copy:* Consultas analíticas en memoria directo sobre Parquet.],
@@ -360,6 +563,10 @@
     title: [Trifecta de Consumo],
     subtitle: [CLI, Portal BI y Publicación],
     height: auto,
+    inset: (x: 13pt, y: 10pt),
+    body-size: 11pt,
+    spacing: 0.6em,
+    leading: 0.46em,
     body: [
       #list(
         [*DuckDB CLI:* Exploración ágil, validación de hipótesis y auditoría de microdatos.],
@@ -374,6 +581,10 @@
     title: [Paper-as-Code],
     subtitle: [Reproducibilidad absoluta],
     height: auto,
+    inset: (x: 13pt, y: 10pt),
+    body-size: 11pt,
+    spacing: 0.6em,
+    leading: 0.46em,
     body: [
       #list(
         [*Fuente única de verdad:* Cero discrepancias entre paper, diapositivas y portal.],
@@ -444,108 +655,117 @@
 // ============================================================
 // DIAPOSITIVA: CONCLUSIONES
 // ============================================================
-= Conclusiones científicas y respuestas al problema
+= Conclusiones
 
 #speaker-marker("D")
 
-#grid(
-  columns: (1fr, 1fr, 1fr),
-  gutter: 14pt,
-  feature-card(
+#stack(
+  dir: ttb,
+  spacing: 7pt,
+  synthesis-row(
     icon: slide-icons.credit-card,
-    title: [1. Acceso al Crédito],
-    subtitle: [Exclusión de entrada vs ventanilla],
-    height: 275pt,
-    body: [
-      #list(
-        [*Falla de entrada, no de ventanilla:* Tasa de aprobación bancaria de *92.6%* frente a *84.1%* que ni siquiera postula.],
-        [*Mecanismos de fricción:* Autoexclusión por aversión al riesgo de pérdida patrimonial y falta de garantías (*Boucher et al.*).],
-        [*Concentración institucional:* Dominio de la banca privada (*52.6%*), con banca estatal marginal (*1.7%*).],
-      )
-    ]
+    axis-num: 1,
+    axis-title: [Acceso al Crédito],
+    stat-highlight: [92.6% Aprobación],
+    stat-sub: [vs. 84.1% de autoexclusión inicial],
+    empirical-body: [
+      *Falla de entrada, no de ventanilla:* Quienes solicitan obtienen aprobación masiva (92.6%); la exclusión ocurre antes de postular por falta de garantías. La banca privada concentra el 52.6% y el fomento estatal fue marginal (1.7%).
+    ],
+    theory-author: [Boucher et al. (2008)],
+    theory-body: [
+      *Racionamiento por riesgo:* Productores con colateral se autoexcluyen voluntariamente por aversión a perder su tierra ante choques productivos o climáticos.
+    ],
   ),
-  feature-card(
+  synthesis-row(
     icon: slide-icons.trending-up,
-    title: [2. Dinámica Laboral],
-    subtitle: [Expansión y estacionalidad],
-    height: 275pt,
-    body: [
-      #list(
-        [*Multiplicador de jornales:* Fuerte alza de intensidad laboral (*+171.6%* medianas/grandes, *+33.3%* pequeñas); refuta mecanización excluyente.],
-        [*Paradoja de precariedad:* El *68.6%* de las fincas con crédito opera exclusivamente con mano de obra temporal.],
-        [*Destino del crédito:* Absorbe picos de zafra y siembra sin traducirse en formalización contractual fija.],
-      )
-    ]
+    axis-num: 2,
+    axis-title: [Dinámica Laboral],
+    stat-highlight: [+171.6% Intensidad],
+    stat-sub: [68.6% opera con solo temporal],
+    empirical-body: [
+      *Multiplicador de jornales, pero precario:* El crédito dispara la demanda de mano de obra en fincas medianas/grandes (+171.6%) y pequeñas (+33.3%), pero el 68.6% de las fincas no genera contratos permanentes.
+    ],
+    theory-author: [Dualismo Agrario (Sen / Lewis)],
+    theory-body: [
+      *Financiamiento de cosechas:* La liquidez absorbe picos estacionales de siembra y corte sin alterar la estructura contractual informal tradicional.
+    ],
   ),
-  feature-card(
+  synthesis-row(
     icon: slide-icons.layers,
-    title: [3. Uso del Suelo],
-    subtitle: [Intensificación y diversificación],
-    height: 275pt,
-    body: [
-      #list(
-        [*Ruptura de la trampa extensiva:* Aumento de cultivos permanentes al *22.9%* (vs 13.6%) y caída del ratio pasto/cultivo a *2.71* (vs 4.18).],
-        [*Diversificación modal:* Desplazamiento del pico modal de 2 a *3 rubros*, mejorando la resiliencia productiva.],
-        [*Intensificación:* Validación empírica de Boserup: el capital viabiliza reconversión hacia rubros perennes.],
-      )
-    ]
-  )
+    axis-num: 3,
+    axis-title: [Uso del Suelo],
+    stat-highlight: [22.9% Permanentes],
+    stat-sub: [Ratio pasto/cultivo: 4.18 -> 2.71],
+    empirical-body: [
+      *Ruptura del estancamiento ganadero:* Fincas con crédito reducen significativamente el monocultivo de pastos (ratio 2.71 vs 4.18) y diversifican su canasta hacia una moda de 3 rubros con mayor resiliencia.
+    ],
+    theory-author: [Ester Boserup (1965)],
+    theory-body: [
+      *Intensificación por capital:* El acceso a financiamiento vence la inercia extensiva y viabiliza la adopción de cultivos permanentes de mayor valor agregado.
+    ],
+  ),
 )
 
-#v(8pt)
+#v(4pt)
 #caution-box[
-  #text(weight: "bold")[Aporte metodológico y de Ciencia de Datos:] Análisis censal exhaustivo (262,546 microdatos) mediante arquitectura reproducible en Rust y DuckDB. Hallazgos descriptivos de corte transversal que no asumen causalidad contrafactual estricta.
+  #text(weight: "bold")[Aporte metodológico y rigor de Ciencia de Datos:] Arquitectura de microdatos exhaustiva (262,546 EA) procesada con Rust + DuckDB. Hallazgos descriptivos de corte transversal que no asumen causalidad contrafactual estricta.
 ]
 
 // ============================================================
-// DIAPOSITIVA: RECOMENDACIONES Y PROYECCIONES
+// DIAPOSITIVA: RECOMENDACIONES
 // ============================================================
-= Recomendaciones de política pública y proyecciones
+= Recomendaciones
 
 #speaker-marker("D")
 
 #grid(
   columns: (1fr, 1fr, 1fr),
-  gutter: 14pt,
-  feature-card(
+  gutter: 12pt,
+  policy-card(
+    pillar-tag: [PILAR 1],
+    target: [PRODUZCAMOS / COOPERATIVAS],
     icon: slide-icons.shield,
-    title: [1. Crédito Inclusivo],
+    title: [Crédito Inclusivo],
     subtitle: [Garantías y mitigación de riesgo],
-    height: 330pt,
-    body: [
-      #list(
-        [*Garantías recíprocas:* Fondos de aval solidario mediante Banco Produzcamos y cooperativas para mitigar la exigencia de hipotecas.],
-        [*Microseguros agrícolas:* Instrumentos de cobertura ante choques climáticos para atenuar la autoexclusión por riesgo patrimonial.],
-        [*Cobertura territorial:* Expandir ventanillas financieras en municipios de menor penetración bancaria.],
-      )
-    ]
+    height: 335pt,
+    actions: (
+      [*Fondos de aval solidario:* Establecer garantías recíprocas mancomunadas para derribar la exigencia de hipotecas que frena la postulación.],
+      [*Microseguros agrícolas:* Crear instrumentos indexados al clima para amortiguar choques climáticos y desactivar la autoexclusión por riesgo patrimonial.],
+      [*Ventanilla rural territorial:* Descentralizar sucursales hacia municipios desatendidos (la banca pública solo cubrió 1.7% en 2011).],
+    ),
+    meta-label: [Impacto estratégico],
+    meta-text: [Desactivar la autoexclusión y movilizar al 84.1% de productores excluidos de la banca comercial.],
   ),
-  feature-card(
+  policy-card(
+    pillar-tag: [PILAR 2],
+    target: [MAG • MITRAB • INSS],
     icon: slide-icons.users,
-    title: [2. Empleo Digno],
+    title: [Empleo Digno],
     subtitle: [Incentivos a la formalización],
-    height: 330pt,
-    body: [
-      #list(
-        [*Líneas preferenciales:* Bonificar tasas de interés para fincas que contraten mano de obra continua y estable.],
-        [*Seguridad social rural:* Vincular financiamiento productivo a esquemas simplificados de formalización laboral.],
-        [*Asistencia técnica:* Programas de capacitación especializada para el manejo de cultivos permanentes.],
-      )
-    ]
+    height: 335pt,
+    actions: (
+      [*Tasas bonificadas condicionadas:* Premiar con menores tasas de interés a fincas que formalicen cuadrillas y conviertan jornales estacionales en contratos fijos.],
+      [*Seguridad social rural adaptada:* Diseñar un régimen de cotización simplificado acorde a la estacionalidad de cosechas para incorporar al seguro social a los peones.],
+      [*Capacitación y asistencia técnica:* Programas continuos de formación agronómica en manejo tecnificado para elevar la productividad laboral de cultivos permanentes.],
+    ),
+    meta-label: [Impacto estratégico],
+    meta-text: [Transformar el multiplicador de jornales en trabajo rural digno, superando el 68.6% de empleo solo temporal.],
   ),
-  feature-card(
+  policy-card(
+    pillar-tag: [PILAR 3],
+    target: [INIDE • MAG • BANCO CENTRAL],
     icon: slide-icons.database,
-    title: [3. Datos & Transición],
+    title: [Datos & Transición],
     subtitle: [Gestión pública y crédito verde],
-    height: 330pt,
-    body: [
-      #list(
-        [*Crédito verde:* Financiamiento condicionado a reconversión de pastos degradados a sistemas agroforestales.],
-        [*Modern Data Stack en el Estado:* Adoptar formatos abiertos (Parquet) y DuckDB en INIDE/MAG para auditar microdatos censales.],
-        [*Proyección analítica:* Modelado predictivo de riesgo crediticio con Machine Learning y seguimiento por paneles sintéticos.],
-      )
-    ]
-  )
+    height: 335pt,
+    actions: (
+      [*Líneas de crédito verde:* Financiamiento atado a metas de reconversión de pastizales degradados hacia sistemas agroforestales y silvopastoriles.],
+      [*Modern Data Stack en el Estado:* Adoptar formatos Parquet y DuckDB en INIDE/MAG para auditar microdatos censales de forma continua.],
+      [*Analítica predictiva:* Construir scoring crediticio adaptativo con Machine Learning y paneles sintéticos intercensales.],
+    ),
+    meta-label: [Impacto estratégico],
+    meta-text: [Soberanía de datos abiertos, reconversión ecológica y toma de decisiones públicas en tiempo real.],
+  ),
 )
 
 // ============================================================

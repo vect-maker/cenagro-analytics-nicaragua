@@ -84,10 +84,15 @@
   subtitle: none,
   body: [],
   height: 330pt,
-  inset: (x: 13pt, y: 11pt),
+  inset: (x: 14pt, y: 12pt),
   badge-fill: auto,
   badge-stroke: auto,
-  badge-size: 26pt,
+  badge-size: 28pt,
+  title-size: 15pt,
+  subtitle-size: 10pt,
+  body-size: 11.2pt,
+  leading: 0.48em,
+  spacing: 0.65em,
 ) = {
   let b-fill = if badge-fill != auto { badge-fill } else { color-badge-bg }
   let b-stroke = if badge-stroke != auto { badge-stroke } else { color-badge-stroke }
@@ -116,18 +121,18 @@
           )
         },
         [
-          #text(size: 14.5pt, weight: "bold", fill: color-title, font: font-heading, title)
+          #text(size: title-size, weight: "bold", fill: color-title, font: font-heading, title)
           #if subtitle != none [
             #v(0.12em)
-            #text(size: 9.5pt, fill: color-accent, font: font-body, subtitle)
+            #text(size: subtitle-size, fill: color-accent, font: font-body, subtitle)
           ]
         ]
       ),
       line(length: 100%, stroke: 0.6pt + rgb("#eee8f6")),
       [
-        #set text(size: 10.3pt, fill: color-body, font: font-body)
-        #set par(leading: 0.46em)
-        #set list(spacing: 0.6em)
+        #set text(size: body-size, fill: color-body, font: font-body)
+        #set par(leading: leading)
+        #set list(spacing: spacing)
         #body
       ]
     )
@@ -144,18 +149,23 @@
   width: 100%,
   accent: color-title,
   fill: color-card-bg,
+  title-size: 12.5pt,
+  subtitle-size: 9.8pt,
+  tag-size: 8.5pt,
+  badge-size: 26pt,
+  inset: (x: 11pt, y: 8pt),
 ) = {
   block(
     fill: fill,
     stroke: 1.1pt + color-card-stroke,
     radius: 8pt,
-    inset: (x: 10pt, y: 7pt),
+    inset: inset,
     width: width,
     stack(
       dir: ttb,
-      spacing: 3.5pt,
+      spacing: 4pt,
       grid(
-        columns: if logo != none { (24pt, 1fr) } else { (1fr,) },
+        columns: if logo != none { (badge-size, 1fr) } else { (1fr,) },
         gutter: 7pt,
         align: (horizon + center, horizon + left),
         if logo != none {
@@ -163,16 +173,16 @@
             fill: white,
             stroke: 0.8pt + color-card-stroke,
             radius: 5pt,
-            width: 24pt,
-            height: 24pt,
-            align(center + horizon, box(width: 19pt, align(center + horizon, logo)))
+            width: badge-size,
+            height: badge-size,
+            align(center + horizon, box(width: badge-size * 0.78, align(center + horizon, logo)))
           )
         },
         [
-          #text(size: 11.5pt, weight: "bold", fill: accent, font: font-heading, title)
+          #text(size: title-size, weight: "bold", fill: accent, font: font-heading, title)
           #if subtitle != none [
             #v(0.08em)
-            #text(size: 8.8pt, fill: color-accent, font: font-body, subtitle)
+            #text(size: subtitle-size, fill: color-accent, font: font-body, subtitle)
           ]
         ]
       ),
@@ -180,13 +190,13 @@
         #box(
           fill: accent.lighten(88%),
           radius: 3pt,
-          inset: (x: 4.5pt, y: 1.5pt),
-          text(size: 7.5pt, weight: "bold", fill: accent, font: font-heading, tag)
+          inset: (x: 5pt, y: 2pt),
+          text(size: tag-size, weight: "bold", fill: accent, font: font-heading, tag)
         )
       ],
       if details.len() > 0 [
         #line(length: 100%, stroke: 0.4pt + rgb("#eee8f6"))
-        #set text(size: 8.2pt, fill: color-body, font: font-body)
+        #set text(size: 8.8pt, fill: color-body, font: font-body)
         #set par(leading: 0.3em)
         #for d in details [
           #text(fill: accent, [•]) #d \
@@ -201,10 +211,174 @@
   fill: rgb("#f3eef8"),
   stroke: 0.8pt + rgb("#d8d0e8"),
   radius: 12pt,
-  width: 22pt,
-  height: 22pt,
-  align(center + horizon, text(size: 13pt, fill: color-title, weight: "bold")[#sym.arrow.r])
+  width: 24pt,
+  height: 24pt,
+  align(center + horizon, text(size: 14pt, fill: color-title, weight: "bold")[#sym.arrow.r])
 ))
+
+/// Horizontal synthesis row for empirical findings vs theoretical contrast (Conclusions)
+#let synthesis-row(
+  icon: none,
+  axis-num: 1,
+  axis-title: [],
+  stat-highlight: [],
+  stat-sub: [],
+  empirical-body: [],
+  theory-author: [],
+  theory-body: [],
+  accent: color-title,
+) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 7pt,
+    inset: (x: 10pt, y: 7pt),
+    width: 100%,
+    grid(
+      columns: (175pt, 1fr, 185pt),
+      gutter: 10pt,
+      align: (top + left, top + left, top + left),
+      // Col 1: Axis & stats
+      stack(
+        dir: ttb,
+        spacing: 3pt,
+        grid(
+          columns: (22pt, 1fr),
+          gutter: 6pt,
+          align: (center + horizon, left + horizon),
+          box(
+            fill: accent,
+            radius: 4pt,
+            width: 22pt,
+            height: 22pt,
+            align(center + horizon, box(width: 16pt, icon))
+          ),
+          text(size: 11.5pt, weight: "bold", fill: accent, font: font-heading)[#axis-num. #axis-title]
+        ),
+        v(1pt),
+        box(
+          fill: accent.lighten(92%),
+          stroke: 0.6pt + accent.lighten(60%),
+          radius: 4pt,
+          inset: (x: 6pt, y: 3.5pt),
+          width: 100%,
+          [
+            #text(size: 11pt, weight: "bold", fill: accent, font: font-heading, stat-highlight) \
+            #text(size: 8.5pt, fill: color-body.lighten(20%), font: font-body, stat-sub)
+          ]
+        )
+      ),
+      // Col 2: Empirical finding
+      stack(
+        dir: ttb,
+        spacing: 2pt,
+        text(size: 9pt, weight: "bold", fill: color-accent, font: font-heading)[EVIDENCIA EMPÍRICA CENAGRO],
+        line(length: 100%, stroke: 0.4pt + rgb("#e2dcf0")),
+        text(size: 10pt, fill: color-body, font: font-body)[#empirical-body]
+      ),
+      // Col 3: Theoretical contrast
+      block(
+        fill: rgb("#f6f3fa"),
+        stroke: 0.6pt + color-card-stroke,
+        radius: 5pt,
+        inset: (x: 7pt, y: 5pt),
+        width: 100%,
+        stack(
+          dir: ttb,
+          spacing: 2pt,
+          text(size: 8.8pt, weight: "bold", fill: accent, font: font-heading)[#theory-author],
+          line(length: 100%, stroke: 0.4pt + accent.lighten(70%)),
+          text(size: 9pt, fill: color-body, font: font-body)[#theory-body]
+        )
+      )
+    )
+  )
+}
+
+/// Actionable policy card for public policy recommendations slide
+#let policy-card(
+  pillar-tag: [],
+  target: [],
+  icon: none,
+  title: [],
+  subtitle: [],
+  actions: (),
+  meta-label: [Impacto estratégico],
+  meta-text: [],
+  accent: color-title,
+  height: 335pt,
+) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 9pt,
+    inset: (x: 12pt, y: 10pt),
+    width: 100%,
+    height: height,
+    [
+      // 1. Pillar tag + Target
+      #grid(
+        columns: (auto, 1fr),
+        gutter: 6pt,
+        align: (horizon + left, horizon + right),
+        box(
+          fill: accent,
+          radius: 3pt,
+          inset: (x: 6pt, y: 2.5pt),
+          text(size: 8pt, weight: "bold", fill: white, font: font-heading, pillar-tag)
+        ),
+        text(size: 8.2pt, weight: "bold", fill: color-accent, font: font-body, target)
+      )
+      #v(5pt)
+      // 2. Icon + Title + Subtitle
+      #grid(
+        columns: (26pt, 1fr),
+        gutter: 7pt,
+        align: (horizon + center, horizon + left),
+        box(
+          fill: accent,
+          radius: 6pt,
+          width: 26pt,
+          height: 26pt,
+          align(center + horizon, box(width: 18pt, icon))
+        ),
+        [
+          #text(size: 13.5pt, weight: "bold", fill: accent, font: font-heading, title) \
+          #text(size: 9.2pt, fill: color-body.lighten(25%), font: font-body, subtitle)
+        ]
+      )
+      #v(5pt)
+      #line(length: 100%, stroke: 0.6pt + rgb("#eee8f6"))
+      #v(4pt)
+      // 3. Actionable items
+      #set text(size: 10.2pt, fill: color-body, font: font-body)
+      #set par(leading: 0.44em)
+      #for act in actions [
+        #v(0.25em)
+        #grid(
+          columns: (9pt, 1fr),
+          gutter: 4pt,
+          align: (top + left, top + left),
+          text(fill: accent, weight: "bold", size: 8.5pt)[#sym.triangle.filled.r],
+          act
+        )
+      ]
+      #v(1fr)
+      // 4. Meta impact box anchored at bottom
+      #block(
+        fill: accent.lighten(93%),
+        stroke: 0.8pt + accent.lighten(65%),
+        radius: 6pt,
+        inset: (x: 8pt, y: 6pt),
+        width: 100%,
+        [
+          #text(size: 8.2pt, weight: "bold", fill: accent, font: font-heading)[#meta-label:] \
+          #text(size: 9.2pt, weight: "medium", fill: color-body, font: font-body, meta-text)
+        ]
+      )
+    ]
+  )
+}
 
 
 /// Caution / disclaimer container
