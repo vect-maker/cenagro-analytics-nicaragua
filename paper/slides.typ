@@ -108,75 +108,57 @@
 )
 
 // ============================================================
-// DIAPOSITIVA 5: OBJETIVO 3 - ACCESO
+// RESULTADOS 1: CRÉDITO (EMBUDO + FUENTES)
 // ============================================================
-= Objetivo 3 | Acceso al financiamiento
+= Ecosistema crediticio: acceso y fuentes de financiamiento
 
-#slide-chart(
-  chart-fn: chart-embudo(),
-  caption: fig-caption("embudo"),
-  stat: [15.9% solicitó crédito],
-  body: [De 262,546 registros, 41,756 solicitudes. Entre ellas, la aprobación alcanzó el 92.6%.],
+#slide-dual-chart(
+  icon-1: slide-icons.credit-card,
+  chart-fn-1: chart-embudo(),
+  caption-1: fig-caption("embudo"),
+  stat-1: [15.9% solicitó crédito],
+  body-1: [De 262,546 explotaciones censadas, solo 41,756 solicitaron crédito. Sin embargo, la tasa de aprobación bancaria alcanzó un elevado 92.6%.],
+  icon-2: slide-icons.dollar-sign,
+  stat-2: [52.6% banca privada],
+  body-2: [La banca comercial concentró la mayoría de créditos (18,255), seguida por cooperativas (28.2%) y ONGs (7.7%). Canales estatales e informales fueron minoritarios.],
+  chart-fn-2: chart-fuentes(),
+  caption-2: fig-caption("fuentes"),
 )
 
 // ============================================================
-// DIAPOSITIVA 6: OBJETIVO 3 - FUENTES
+// RESULTADOS 2: EMPLEO (INTENSIDAD + ESTABILIDAD)
 // ============================================================
-= Objetivo 3 | Fuentes de financiamiento
+= Dinámica laboral: intensidad y estabilidad del empleo
 
-#slide-chart(
-  chart-fn: chart-fuentes(),
-  caption: fig-caption("fuentes"),
-  stat: [52.6% banca privada],
-  body: [La banca privada concentró la mayor proporción de créditos; las cooperativas ocuparon el segundo lugar (28.2%).],
+#slide-dual-chart(
+  icon-1: slide-icons.trending-up,
+  chart-fn-1: chart-intensidad(),
+  caption-1: fig-caption("intensidad"),
+  stat-1: [+171.6% en medianas y grandes],
+  body-1: [En fincas medianas y grandes con crédito, la intensidad mediana subió a 0.326 trab/Mz frente a 0.120 sin crédito (+33.3% en pequeñas), confirmando absorción laboral.],
+  icon-2: slide-icons.clock,
+  stat-2: [68.6% empleo estacional],
+  body-2: [El 68.6% de las fincas con crédito operó exclusivamente con mano de obra temporal. El crédito dinamizó picos de siembra y cosecha sin formalización contractual.],
+  chart-fn-2: chart-estabilidad(),
+  caption-2: fig-caption("estabilidad"),
 )
 
 // ============================================================
-// DIAPOSITIVA 7: OBJETIVO 1 - INTENSIDAD LABORAL
+// RESULTADOS 3: PRODUCCIÓN (COMPLEJIDAD + USO DE SUELO)
 // ============================================================
-= Objetivo 1 | Intensidad laboral
+= Reconfiguración productiva: diversificación y uso del suelo
 
-#slide-chart(
-  chart-fn: chart-intensidad(),
-  caption: fig-caption("intensidad"),
-  stat: [+171.6%],
-  body: [En fincas medianas y grandes con crédito: 0.326 #box[trabajadores/Mz] frente a 0.120 sin crédito.],
-)
-
-// ============================================================
-// DIAPOSITIVA 8: OBJETIVO 1 - ESTABILIDAD LABORAL
-// ============================================================
-= Objetivo 1 | Estabilidad laboral
-
-#slide-chart(
-  chart-fn: chart-estabilidad(),
-  caption: fig-caption("estabilidad"),
-  stat: [68.6% solo temporal],
-  body: [Entre las fincas financiadas prevaleció el empleo estacional; más contratación no implicó mayor estabilidad.],
-)
-
-// ============================================================
-// DIAPOSITIVA 9: OBJETIVO 2 - DIVERSIFICACIÓN
-// ============================================================
-= Objetivo 2 | Diversificación productiva
-
-#slide-chart(
-  chart-fn: chart-complejidad(),
-  caption: fig-caption("complejidad"),
-  stat: [De 2 a 3 rubros],
-  body: [La categoría más frecuente pasó de 2 rubros sin crédito a 3 con crédito. Promedios: 3.36 y 3.65.],
-)
-
-// ============================================================
-// DIAPOSITIVA 10: OBJETIVO 2 - USO DEL SUELO
-// ============================================================
-= Objetivo 2 | Uso del suelo
-
-#slide-chart(
-  chart-fn: chart-vocacion(),
-  caption: fig-caption("vocacion"),
-  stat: [22.9% en permanentes],
-  body: [Frente al 13.6% sin crédito. El ratio pasto-cultivo bajó de 4.18 a 2.71.],
+#slide-dual-chart(
+  icon-1: slide-icons.layers,
+  chart-fn-1: chart-complejidad(),
+  caption-1: fig-caption("complejidad"),
+  stat-1: [Pico modal en 3 rubros],
+  body-1: [El pico más frecuente pasó de 2 rubros sin crédito (25.1%) a 3 rubros con crédito (23.7%), elevando el promedio de 3.36 a 3.65 rubros por finca.],
+  icon-2: slide-icons.pie-chart,
+  stat-2: [22.9% en cultivos permanentes],
+  body-2: [Fincas con crédito destinaron 22.9% de su área a cultivos permanentes (vs. 13.6% sin crédito), reduciendo el ratio pasto-cultivo de 4.18 a 2.71 hacia la intensificación.],
+  chart-fn-2: chart-vocacion(),
+  caption-2: fig-caption("vocacion"),
 )
 
 // ============================================================

@@ -1,4 +1,5 @@
 #import "@preview/touying:0.8.0": *
+#import "@preview/ficons:0.1.0": make-icons
 
 // ==========================================
 // INSTITUTIONAL PALETTE & CONSTANTS
@@ -6,12 +7,16 @@
 #let color-title = rgb("#7030A0")
 #let color-body = rgb("#133454")
 #let color-accent = rgb("#1a4d8f")
-#let color-card-bg = rgb("#f8f7fc")
-#let color-card-stroke = rgb("#e0d7f0")
-#let color-badge-bg = rgb("#ede8f7")
+#let color-card-bg = rgb("#fbfafc")
+#let color-card-stroke = rgb("#d8d0e8")
+#let color-badge-bg = color-title
+#let color-badge-stroke = color-title
 
 #let font-heading = ("Montserrat", "Liberation Sans")
 #let font-body = ("Liberation Sans",)
+
+/// Feather icons configured with white stroke for badge containers
+#let slide-icons = make-icons(stroke: white, stroke-width: 2.3)
 
 // ==========================================
 // REUSABLE COMPONENTS
@@ -100,13 +105,13 @@
     place(
       top + left,
       dx: 66pt,
-      dy: 28.8pt,
+      dy: 20pt,
       block(
         width: 828pt,
-        height: 104.4pt,
+        height: 72pt,
         align(top + left, text(
           fill: color-title,
-          size: 40pt,
+          size: 27pt,
           weight: "semibold",
           font: font-heading,
           utils.display-current-heading(level: 1)
@@ -120,7 +125,7 @@
     config-page(
       background: place(top + left, image("images/presentation/background-content.png", width: 960pt, height: 540pt)),
       header: header,
-      margin: (left: 66pt, right: 66pt, top: 130pt, bottom: 35pt),
+      margin: (left: 66pt, right: 66pt, top: 98pt, bottom: 20pt),
     ),
   )
 
@@ -134,46 +139,104 @@
   )
 })
 
-/// High-level slide generator for the 6 chart slides
-#let slide-chart(
-  chart-fn: none,
-  caption: [],
+/// Analytical card with icon badge for dual-chart slides
+#let analytical-card(
+  icon: none,
   stat: [],
   body: [],
-  footnote: none,
+) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 9pt,
+    inset: (x: 13pt, y: 10pt),
+    width: 100%,
+    [
+      #grid(
+        columns: if icon != none { (26pt, 1fr) } else { (1fr,) },
+        gutter: 9pt,
+        align: (horizon + center, horizon + left),
+        if icon != none {
+          box(
+            fill: color-badge-bg,
+            stroke: 0.8pt + color-badge-stroke,
+            radius: 6pt,
+            width: 26pt,
+            height: 26pt,
+            align(center + horizon, box(width: 15pt, height: 15pt, icon))
+          )
+        },
+        [
+          #text(size: 15pt, weight: "bold", fill: color-title, font: font-heading, stat)
+        ]
+      )
+      #v(5pt)
+      #line(length: 100%, stroke: 0.6pt + rgb("#eee8f6"))
+      #v(5pt)
+      #par(leading: 0.52em)[#text(size: 11.2pt, fill: color-body, font: font-body, body)]
+    ]
+  )
+}
+
+/// High-level slide generator for 2 alternating charts per slide (zig-zag layout)
+#let slide-dual-chart(
+  // Chunk 1 (top): Graph Left, Info Right
+  chart-fn-1: none,
+  caption-1: [],
+  stat-1: [],
+  body-1: [],
+  icon-1: none,
+  // Chunk 2 (bottom): Info Left, Graph Right
+  chart-fn-2: none,
+  caption-2: [],
+  stat-2: [],
+  body-2: [],
+  icon-2: none,
 ) = {
   slide[
-    #align(horizon)[
-      #grid(
-        columns: (520pt, 1fr),
-        gutter: 28pt,
+    #set text(size: 10.5pt, font: font-body)
+    #grid(
+      rows: (1fr, 1fr),
+      row-gutter: 6pt,
+      // Fila 1: Gráfico a la izquierda, información a la derecha
+      grid(
+        columns: (490pt, 1fr),
+        gutter: 18pt,
         align: (center + horizon, horizon + left),
         [
           #block(width: 100%, align(center)[
-            #set text(size: 10pt, font: "Liberation Serif")
-            #chart-fn
-            #if caption != [] [
-              #v(0.6em)
-              #text(size: 10.5pt, font: "Liberation Serif", caption)
+            #set text(size: 10.5pt, font: font-body)
+            #chart-fn-1
+            #if caption-1 != [] [
+              #v(0.2em)
+              #text(size: 9.5pt, font: font-body, caption-1)
             ]
           ])
         ],
         [
-          #set par(leading: 0.5em)
-          #text(size: 26pt, weight: "bold", fill: color-title, font: font-heading, stat)
-          #v(0.7em)
-          #text(size: 17.5pt, fill: color-body, font: font-body, body)
+          #analytical-card(icon: icon-1, stat: stat-1, body: body-1)
+        ]
+      ),
+      // Fila 2: Información a la izquierda, gráfico a la derecha
+      grid(
+        columns: (1fr, 490pt),
+        gutter: 18pt,
+        align: (horizon + left, center + horizon),
+        [
+          #analytical-card(icon: icon-2, stat: stat-2, body: body-2)
+        ],
+        [
+          #block(width: 100%, align(center)[
+            #set text(size: 10.5pt, font: font-body)
+            #chart-fn-2
+            #if caption-2 != [] [
+              #v(0.2em)
+              #text(size: 9.5pt, font: font-body, caption-2)
+            ]
+          ])
         ]
       )
-    ]
-    #if footnote != none and footnote != [] [
-      #place(
-        top + left,
-        dx: 11.8pt,
-        dy: 320pt,
-        text(size: 10.5pt, fill: luma(100), font: font-body, footnote)
-      )
-    ]
+    )
   ]
 }
 
