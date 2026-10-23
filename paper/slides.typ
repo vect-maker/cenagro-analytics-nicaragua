@@ -758,4 +758,4 @@
 // ============================================================
 // DIAPOSITIVA: CIERRE
 // ============================================================
-#ending-slide(message: [Muchas gracias por su atención])
+#ending-slide()

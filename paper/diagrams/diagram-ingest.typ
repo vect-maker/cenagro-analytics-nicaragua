@@ -6,51 +6,43 @@
 #let font-heading = ("Montserrat", "Liberation Sans")
 #let font-body = ("Liberation Sans",)
 
-#let ingest-node(pos, logo: none, title: [], subtitle: none, tag: none, accent: color-title, fill: rgb("#fbfafc"), name: none) = {
+#let ingest-node(pos, logo: none, title: [], subtitle: none, accent: color-title, fill: rgb("#fbfafc"), name: none) = {
   node(
     pos,
     name: name,
     fill: fill,
     stroke: 1.1pt + accent.lighten(35%),
     corner-radius: 7pt,
-    inset: 6pt,
+    inset: 7pt,
     [
       #grid(
-        columns: if logo != none { (22pt, auto) } else { (auto,) },
-        gutter: 7pt,
+        columns: if logo != none { (24pt, auto) } else { (auto,) },
+        gutter: 8pt,
         align: horizon,
         if logo != none {
           box(
             fill: white,
             stroke: 0.6pt + rgb("#e0d8f0"),
-            radius: 4pt,
-            width: 22pt,
-            height: 22pt,
-            align(center + horizon, box(width: 16pt, height: 16pt, logo))
+            radius: 5pt,
+            width: 24pt,
+            height: 24pt,
+            align(center + horizon, box(width: 17pt, height: 17pt, logo))
           )
         },
-        align(left)[
-          #text(size: 10.5pt, weight: "bold", fill: accent, font: font-heading, title)
+        align(left + horizon)[
+          #text(size: 11pt, weight: "bold", fill: accent, font: font-heading, title)
           #if subtitle != none [
-            \ #text(size: 7.8pt, fill: rgb("#555555"), font: font-body, subtitle)
+            #v(1.5pt)
+            #text(size: 8.2pt, fill: rgb("#555555"), font: font-body, subtitle)
           ]
         ]
       )
-      #if tag != none [
-        #v(2.5pt)
-        #box(
-          fill: accent.lighten(88%),
-          radius: 3pt,
-          inset: (x: 5pt, y: 1.5pt),
-          text(size: 7pt, weight: "bold", fill: accent, font: font-heading, tag)
-        )
-      ]
     ]
   )
 }
 
 /// Diagrama de flujo de Ingesta y Desacoplamiento Censal (SPSS -> Python -> Parquet + Codebook)
-#let diagram-ingest(spacing: (36pt, 10pt)) = {
+#let diagram-ingest(spacing: (40pt, 14pt)) = {
   diagram(
     spacing: spacing,
     ingest-node(
@@ -58,7 +50,6 @@
       logo: image("../images/presentation/logos/spss.png"),
       title: [CENAGRO 2011],
       subtitle: [Microdato oficial (.sav)],
-      tag: [Fase 1: Universo Censal],
       accent: rgb("#8a4b08"),
       fill: rgb("#fffaf3"),
       name: <spss>,
@@ -68,7 +59,6 @@
       logo: image("../images/presentation/logos/python.svg"),
       title: [Python (pyreadstat)],
       subtitle: [Script de extracción e ingesta],
-      tag: [Fase 1: Motor de Ingesta],
       accent: color-title,
       fill: rgb("#fbfafc"),
       name: <py>,
@@ -78,7 +68,6 @@
       logo: image("../images/presentation/logos/parquet.svg"),
       title: [explotaciones & parcelas],
       subtitle: [Parquet crudo desacoplado],
-      tag: [Salida: Parquet Crudo ➔ Slide 5],
       accent: rgb("#198754"),
       fill: rgb("#f0faf3"),
       name: <raw_pq>,
@@ -88,7 +77,6 @@
       logo: box(fill: color-accent, radius: 4pt, width: 22pt, height: 22pt, align(center + horizon, text(size: 11pt, weight: "bold", fill: white, font: font-heading)[{ }])),
       title: [metadata.json],
       subtitle: [Diccionarios estructurados],
-      tag: [Semántica & Codebook],
       accent: color-accent,
       fill: rgb("#f5f8fc"),
       name: <meta>,

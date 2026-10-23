@@ -1,5 +1,6 @@
 #import "@preview/touying:0.8.0": *
 #import "@preview/ficons:0.1.0": make-icons
+#import "@preview/tiaoma:0.3.0": qrcode
 
 // ==========================================
 // INSTITUTIONAL PALETTE & CONSTANTS
@@ -800,9 +801,12 @@
   )
 })
 
-/// Ending / conclusion slide
+/// Ending / conclusion slide with twin QR cards for repository and BI portal
 #let ending-slide(
-  message: [Muchas gracias],
+  title: [¡Muchas gracias por su atención!],
+  subtitle: [Espacio para Preguntas, Discusión y Recursos Abiertos],
+  repo-url: "https://github.com/vect-maker/cenagro-analytics-nicaragua.git",
+  bi-url: "https://cenagro-analytics-ni.netlify.app",
   config: (:),
 ) = touying-slide-wrapper(self => {
   let self = utils.merge-dicts(
@@ -816,18 +820,89 @@
     ),
   )
 
+  let qr-card(url, card-title, desc, tag) = {
+    box(
+      fill: white,
+      stroke: 1.2pt + rgb("#d8d0e8"),
+      radius: 9pt,
+      inset: (x: 12pt, y: 9pt),
+      width: 320pt,
+      grid(
+        columns: (68pt, 1fr),
+        gutter: 11pt,
+        align: horizon,
+        box(
+          fill: rgb("#fbfafc"),
+          radius: 6pt,
+          stroke: 0.8pt + rgb("#d8d0e8"),
+          inset: 4pt,
+          qrcode(url, width: 60pt)
+        ),
+        align(left)[
+          #box(
+            fill: color-title.lighten(90%),
+            radius: 3pt,
+            inset: (x: 6pt, y: 2.5pt),
+            text(size: 8pt, weight: "bold", fill: color-title, font: font-heading, tag)
+          )
+          #v(3pt)
+          #text(size: 11.5pt, weight: "bold", fill: color-body, font: font-heading, card-title) \
+          #v(2pt)
+          #text(size: 8.5pt, fill: rgb("#555555"), font: font-body, desc)
+        ]
+      )
+    )
+  }
+
   touying-slide(
     self: self,
     config: config,
-    place(
-      top + left,
-      dx: 0pt,
-      dy: 385pt,
-      block(
-        width: 960pt,
-        align(center, text(fill: white, size: 36pt, weight: "bold", font: font-heading, message))
+    [
+      #place(
+        top + left,
+        dx: 0pt,
+        dy: 55pt,
+        block(
+          width: 960pt,
+          align(center,
+            stack(
+              spacing: 6pt,
+              text(fill: white, size: 30pt, weight: "bold", font: font-heading, title),
+              if subtitle != none [
+                #text(fill: rgb("#e0d8f0"), size: 15pt, font: font-body, subtitle)
+              ]
+            )
+          )
+        )
       )
-    )
+
+      #place(
+        top + left,
+        dx: 0pt,
+        dy: 360pt,
+        block(
+          width: 960pt,
+          align(center,
+            stack(
+              dir: ltr,
+              spacing: 30pt,
+              qr-card(
+                repo-url,
+                [Repositorio GitHub],
+                [Pipeline ETL, análisis SQL y generación de documentos Typst en un solo lugar.],
+                [CÓDIGO ABIERTO],
+              ),
+              qr-card(
+                bi-url,
+                [Portal BI Interactivo],
+                [Dashboard en Evidence.dev con microdatos censales y exploración en vivo.],
+                [DEMO EN VIVO],
+              ),
+            )
+          )
+        )
+      )
+    ]
   )
 })
 
