@@ -3,6 +3,9 @@
 #import "metadata.typ": *
 #import "content/objectives.typ": *
 #import "content/figures.typ": fig-caption, fig-ref
+#import "diagrams/diagram-ingest.typ": diagram-ingest
+#import "diagrams/diagram-etl.typ": diagram-etl
+#import "diagrams/diagram-warehouse.typ": diagram-warehouse
 
 #show: cenagro-theme.with()
 
@@ -383,47 +386,7 @@
 
 #speaker-marker("B")
 
-#grid(
-  columns: (1fr, 24pt, 1.15fr, 24pt, 1fr),
-  align: horizon,
-  pipeline-node(
-    logo: image("images/presentation/logos/spss.png"),
-    title: [CENAGRO 2011],
-    subtitle: [Microdato oficial (.sav)],
-    tag: [Universo Censal],
-    accent: rgb("#8a4b08"),
-    fill: rgb("#fffaf3"),
-  ),
-  flow-arrow,
-  pipeline-node(
-    logo: image("images/presentation/logos/python.svg"),
-    title: [Python (pyreadstat)],
-    subtitle: [Script de extracción e ingesta],
-    tag: [Motor de Ingesta],
-    accent: color-title,
-    fill: color-card-bg,
-  ),
-  flow-arrow,
-  stack(
-    spacing: 6pt,
-    pipeline-node(
-      logo: image("images/presentation/logos/parquet.svg"),
-      title: [raw_farms.parquet],
-      subtitle: [Datos columnares crudos],
-      tag: [Almacén Columnar],
-      accent: rgb("#198754"),
-      fill: rgb("#f0faf3"),
-    ),
-    pipeline-node(
-      logo: box(fill: color-accent, radius: 4pt, width: 22pt, height: 22pt, align(center + horizon, box(width: 14pt, height: 14pt, slide-icons.file-text))),
-      title: [metadata.json],
-      subtitle: [Diccionario censal estructurado],
-      tag: [Semántica & Codebook],
-      accent: color-accent,
-      fill: rgb("#f5f8fc"),
-    )
-  )
-)
+#align(center, diagram-ingest())
 
 #v(14pt)
 
@@ -492,36 +455,7 @@
 
 #speaker-marker("B")
 
-#grid(
-  columns: (1fr, 24pt, 1.25fr, 24pt, 1fr),
-  align: horizon,
-  pipeline-node(
-    logo: image("images/presentation/logos/parquet.svg"),
-    title: [Parquet Crudo],
-    subtitle: [Input desacoplado],
-    tag: [Microdato Base],
-    accent: rgb("#8a4b08"),
-    fill: rgb("#fffaf3"),
-  ),
-  flow-arrow,
-  pipeline-node(
-    logo: image("images/presentation/logos/rust.svg"),
-    title: [Rust + DataFusion],
-    subtitle: [Motor vectorizado Apache Arrow],
-    tag: [Transformación Zero-GC],
-    accent: color-title,
-    fill: color-card-bg,
-  ),
-  flow-arrow,
-  pipeline-node(
-    logo: image("images/presentation/logos/parquet.svg"),
-    title: [farms.parquet],
-    subtitle: [Compresión Snappy],
-    tag: [-90% Espacio en Disco],
-    accent: rgb("#198754"),
-    fill: rgb("#f0faf3"),
-  )
-)
+#align(center, diagram-etl())
 
 #v(14pt)
 
@@ -591,70 +525,7 @@
 
 #speaker-marker("B")
 
-#grid(
-  columns: (1fr, 22pt, 1.15fr, 22pt, 1.25fr),
-  align: horizon,
-  pipeline-node(
-    logo: image("images/presentation/logos/parquet.svg"),
-    title: [farms.parquet],
-    subtitle: [Artefacto canónico],
-    tag: [Almacén Inmutable],
-    accent: rgb("#198754"),
-    fill: rgb("#f0faf3"),
-  ),
-  flow-arrow,
-  pipeline-node(
-    logo: image("images/presentation/logos/duckdb-icon.svg"),
-    title: [DuckDB OLAP],
-    subtitle: [Motor analítico embebido],
-    tag: [Cálculo en Memoria],
-    accent: color-title,
-    fill: color-card-bg,
-  ),
-  flow-arrow,
-  stack(
-    spacing: 3pt,
-    pipeline-node(
-      logo: box(fill: rgb("#1F4E79"), radius: 3pt, width: 20pt, height: 20pt, align(center + horizon, box(width: 13pt, height: 13pt, slide-icons.terminal))),
-      title: [DuckDB CLI],
-      subtitle: [Exploración ad-hoc],
-      tag: [EDA Ágil],
-      accent: rgb("#1F4E79"),
-      fill: rgb("#f5f8fc"),
-      badge-size: 20pt,
-      title-size: 11pt,
-      subtitle-size: 8.5pt,
-      tag-size: 7.5pt,
-      inset: (x: 8pt, y: 4pt),
-    ),
-    pipeline-node(
-      logo: image("images/presentation/logos/evidence.svg"),
-      title: [Evidence.dev],
-      subtitle: [Portal BI interactivo],
-      tag: [Markdown + SQL],
-      accent: rgb("#7030A0"),
-      fill: rgb("#fbfafc"),
-      badge-size: 20pt,
-      title-size: 11pt,
-      subtitle-size: 8.5pt,
-      tag-size: 7.5pt,
-      inset: (x: 8pt, y: 4pt),
-    ),
-    pipeline-node(
-      logo: image("images/presentation/logos/typst.svg"),
-      title: [Typst + CeTZ],
-      subtitle: [Paper y diapositivas],
-      tag: [Paper-as-Code],
-      accent: rgb("#008080"),
-      fill: rgb("#f0faf8"),
-      badge-size: 20pt,
-      title-size: 11pt,
-      subtitle-size: 8.5pt,
-      tag-size: 7.5pt,
-      inset: (x: 8pt, y: 4pt),
-    ),
-  )
-)
+#align(center, diagram-warehouse())
 
 #v(10pt)
 
