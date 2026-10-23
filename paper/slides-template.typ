@@ -77,15 +77,63 @@
   )
 }
 
+/// Modern feature / contextual card with icon badge
+#let feature-card(
+  icon: none,
+  title: [],
+  subtitle: none,
+  body: [],
+  height: 330pt,
+) = {
+  block(
+    fill: color-card-bg,
+    stroke: 1pt + color-card-stroke,
+    radius: 10pt,
+    inset: (x: 13pt, y: 11pt),
+    width: 100%,
+    height: height,
+    [
+      #grid(
+        columns: if icon != none { (26pt, 1fr) } else { (1fr,) },
+        gutter: 8pt,
+        align: (horizon + center, horizon + left),
+        if icon != none {
+          box(
+            fill: color-badge-bg,
+            stroke: 0.8pt + color-badge-stroke,
+            radius: 6pt,
+            width: 26pt,
+            height: 26pt,
+            align(center + horizon, box(width: 15pt, height: 15pt, icon))
+          )
+        },
+        [
+          #text(size: 14.5pt, weight: "bold", fill: color-title, font: font-heading, title)
+          #if subtitle != none [
+            #v(0.12em)
+            #text(size: 9.5pt, fill: color-accent, font: font-body, subtitle)
+          ]
+        ]
+      )
+      #v(5pt)
+      #line(length: 100%, stroke: 0.6pt + rgb("#eee8f6"))
+      #v(3pt)
+      #set text(size: 10.3pt, fill: color-body, font: font-body)
+      #set par(leading: 0.46em)
+      #body
+    ]
+  )
+}
+
 /// Caution / disclaimer container
 #let caution-box(body) = {
   block(
-    fill: rgb("#fff9f0"),
-    stroke: 1pt + rgb("#f5d0a9"),
-    radius: 8pt,
-    inset: (x: 14pt, y: 10pt),
+    fill: rgb("#fffaf3"),
+    stroke: 1pt + rgb("#f5d5b5"),
+    radius: 7pt,
+    inset: (x: 12pt, y: 7pt),
     width: 100%,
-    text(fill: rgb("#8a4b08"), size: 13pt, font: font-body, body)
+    text(fill: rgb("#8a4b08"), size: 10.5pt, font: font-body, body)
   )
 }
 

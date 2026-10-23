@@ -21,36 +21,47 @@
 = Problema y contexto de la investigación
 
 #grid(
-  columns: (1fr, 220pt),
-  gutter: 24pt,
-  align: (top + left, center + horizon),
-  [
-    #v(0.2em)
-    #text(size: 21pt, weight: "bold", fill: color-title)[¿Qué cambia en las fincas cuando acceden a financiamiento?]
-    #v(0.6em)
-    #text(size: 17pt, fill: color-body)[
-      Se comparan unidades financiadas y no financiadas en tres dimensiones:
+  columns: (1fr, 1fr, 1fr),
+  gutter: 14pt,
+  feature-card(
+    icon: slide-icons.database,
+    title: [Contexto y Datos],
+    subtitle: [Pilar agrario y universo censal],
+    body: [
+      #list(
+        [*Pilar socioeconómico:* Base del empleo rural, divisas y seguridad alimentaria en Nicaragua.],
+        [*CENAGRO 2011:* 227,541 fincas consolidadas en *262,546 registros analíticos* (INIDE / MAGFOR).],
+        [*Coyuntura de fomento:* Transición post-crisis 2008-2009 e impulso de banca de desarrollo (*Banco Produzcamos*).],
+        [*Relevancia:* Pobreza multidimensional (*Sen*) y Plan Nacional de Lucha contra la Pobreza.],
+      )
     ]
-    #v(0.8em)
-    #list(
-      [*Acceso y fuentes de crédito*],
-      [*Intensidad y estabilidad del empleo*],
-      [*Diversificación de rubros y uso del suelo*],
-    )
-  ],
-  [
-    #block(
-      fill: color-badge-bg,
-      stroke: 1.5pt + color-card-stroke,
-      radius: 12pt,
-      inset: (x: 24pt, y: 28pt),
-      align(center, [
-        #text(size: 24pt, weight: "bold", fill: color-title, font: font-heading)[CENAGRO]
-        #v(0.4em)
-        #text(size: 32pt, weight: "bold", fill: color-accent, font: font-heading)[2011]
-      ])
-    )
-  ]
+  ),
+  feature-card(
+    icon: slide-icons.alert-circle,
+    title: [La Brecha Empírica],
+    subtitle: [Limitaciones del análisis previo],
+    body: [
+      #list(
+        [*Sesgo de agregación:* Literatura previa basada en encuestas muestrales acotadas que omitían la heterogeneidad de fincas.],
+        [*Supuesto de ventanilla:* Se atribuía la exclusión a denegación bancaria sin verificar la tasa real de postulación.],
+        [*Ingeniería de datos:* Necesidad de un *Modern Data Stack* (Rust + DuckDB) para procesar el microdato censal exhaustivo.],
+        [*Aporte analítico:* Comparación controlada con/sin crédito estratificada por escala de finca (`farm_size_class`).],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.help-circle,
+    title: [Preguntas Clave],
+    subtitle: [Paradojas a contrastar],
+    body: [
+      #list(
+        [*Acceso:* ¿Fricción en ventanilla bancaria o autoexclusión previa por riesgo y colateral? (*Boucher et al.*).],
+        [*Empleo:* ¿Multiplicador de empleo formal o financiamiento de picos temporales precarios?],
+        [*Producción:* ¿Rompe la trampa del pastoreo extensivo hacia cultivos perennes diversificados?],
+        [*Impacto:* Evidencia cuantitativa microeconómica para informar políticas de crédito rural focalizado.],
+      )
+    ]
+  )
 )
 
 // ============================================================
@@ -162,33 +173,109 @@
 )
 
 // ============================================================
-// DIAPOSITIVA 11: CONCLUSIONES
+// DIAPOSITIVA: CONCLUSIONES
 // ============================================================
-= Conclusiones vinculadas a los objetivos
+= Conclusiones científicas y respuestas al problema
 
-#v(0.1em)
-#stack(
-  spacing: 10pt,
-  card-numbered(
-    number: 1,
-    text-content: [El crédito se relaciona con mayor intensidad de empleo, pero predomina la temporalidad.]
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 14pt,
+  feature-card(
+    icon: slide-icons.credit-card,
+    title: [1. Acceso al Crédito],
+    subtitle: [Exclusión de entrada vs ventanilla],
+    height: 275pt,
+    body: [
+      #list(
+        [*Falla de entrada, no de ventanilla:* Tasa de aprobación bancaria de *92.6%* frente a *84.1%* que ni siquiera postula.],
+        [*Mecanismos de fricción:* Autoexclusión por aversión al riesgo de pérdida patrimonial y falta de garantías (*Boucher et al.*).],
+        [*Concentración institucional:* Dominio de la banca privada (*52.6%*), con banca estatal marginal (*1.7%*).],
+      )
+    ]
   ),
-  card-numbered(
-    number: 2,
-    text-content: [Las explotaciones financiadas muestran más cultivos permanentes y mayor diversificación.]
+  feature-card(
+    icon: slide-icons.trending-up,
+    title: [2. Dinámica Laboral],
+    subtitle: [Expansión y estacionalidad],
+    height: 275pt,
+    body: [
+      #list(
+        [*Multiplicador de jornales:* Fuerte alza de intensidad laboral (*+171.6%* medianas/grandes, *+33.3%* pequeñas); refuta mecanización excluyente.],
+        [*Paradoja de precariedad:* El *68.6%* de las fincas con crédito opera exclusivamente con mano de obra temporal.],
+        [*Destino del crédito:* Absorbe picos de zafra y siembra sin traducirse en formalización contractual fija.],
+      )
+    ]
   ),
-  card-numbered(
-    number: 3,
-    text-content: [La principal barrera aparece antes de solicitar: *84.1%* no llegó a tramitar crédito.]
-  ),
+  feature-card(
+    icon: slide-icons.layers,
+    title: [3. Uso del Suelo],
+    subtitle: [Intensificación y diversificación],
+    height: 275pt,
+    body: [
+      #list(
+        [*Ruptura de la trampa extensiva:* Aumento de cultivos permanentes al *22.9%* (vs 13.6%) y caída del ratio pasto/cultivo a *2.71* (vs 4.18).],
+        [*Diversificación modal:* Desplazamiento del pico modal de 2 a *3 rubros*, mejorando la resiliencia productiva.],
+        [*Intensificación:* Validación empírica de Boserup: el capital viabiliza reconversión hacia rubros perennes.],
+      )
+    ]
+  )
 )
 
-#v(14pt)
+#v(8pt)
 #caution-box[
-  #text(weight: "bold")[Nota metodológica:] Hallazgos descriptivos del CENAGRO 2011; no establecen causalidad por sí solos.
+  #text(weight: "bold")[Aporte metodológico y de Ciencia de Datos:] Análisis censal exhaustivo (262,546 microdatos) mediante arquitectura reproducible en Rust y DuckDB. Hallazgos descriptivos de corte transversal que no asumen causalidad contrafactual estricta.
 ]
 
 // ============================================================
-// DIAPOSITIVA 12: CIERRE
+// DIAPOSITIVA: RECOMENDACIONES Y PROYECCIONES
 // ============================================================
-#ending-slide(message: [Muchas gracias])
+= Recomendaciones de política pública y proyecciones
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 14pt,
+  feature-card(
+    icon: slide-icons.shield,
+    title: [1. Crédito Inclusivo],
+    subtitle: [Garantías y mitigación de riesgo],
+    height: 330pt,
+    body: [
+      #list(
+        [*Garantías recíprocas:* Fondos de aval solidario mediante Banco Produzcamos y cooperativas para mitigar la exigencia de hipotecas.],
+        [*Microseguros agrícolas:* Instrumentos de cobertura ante choques climáticos para atenuar la autoexclusión por riesgo patrimonial.],
+        [*Cobertura territorial:* Expandir ventanillas financieras en municipios de menor penetración bancaria.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.users,
+    title: [2. Empleo Digno],
+    subtitle: [Incentivos a la formalización],
+    height: 330pt,
+    body: [
+      #list(
+        [*Líneas preferenciales:* Bonificar tasas de interés para fincas que contraten mano de obra continua y estable.],
+        [*Seguridad social rural:* Vincular financiamiento productivo a esquemas simplificados de formalización laboral.],
+        [*Asistencia técnica:* Programas de capacitación especializada para el manejo de cultivos permanentes.],
+      )
+    ]
+  ),
+  feature-card(
+    icon: slide-icons.database,
+    title: [3. Datos & Transición],
+    subtitle: [Gestión pública y crédito verde],
+    height: 330pt,
+    body: [
+      #list(
+        [*Crédito verde:* Financiamiento condicionado a reconversión de pastos degradados a sistemas agroforestales.],
+        [*Modern Data Stack en el Estado:* Adoptar formatos abiertos (Parquet) y DuckDB en INIDE/MAG para auditar microdatos censales.],
+        [*Proyección analítica:* Modelado predictivo de riesgo crediticio con Machine Learning y seguimiento por paneles sintéticos.],
+      )
+    ]
+  )
+)
+
+// ============================================================
+// DIAPOSITIVA: CIERRE
+// ============================================================
+#ending-slide(message: [Muchas gracias por su atención])
