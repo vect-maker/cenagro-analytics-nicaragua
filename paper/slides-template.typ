@@ -142,6 +142,66 @@
 }
 
 // ==========================================
+// SPEAKER MARKER TEMPLATE
+// ==========================================
+
+/// Institutional speaker color palette presets
+#let speaker-colors = (
+  "A": rgb("#7030A0"), // Púrpura institucional UNAN
+  "B": rgb("#008080"), // Verde azulado / Teal
+  "C": rgb("#C05621"), // Ocre cálido / Ámbar
+  "D": rgb("#1F4E79"), // Azul marino profundo
+)
+
+/// Speaker marker box placed in a designated slide corner
+#let speaker-marker(
+  letter,
+  color: auto,
+  position: top + right,
+  dx: auto,
+  dy: auto,
+  size: 30pt,
+  radius: 6pt,
+) = {
+  let fill-color = if color == auto {
+    speaker-colors.at(str(letter), default: color-title)
+  } else {
+    color
+  }
+
+  let (offset-x, offset-y) = if dx != auto and dy != auto {
+    (dx, dy)
+  } else if position == top + right {
+    (if dx != auto { dx } else { 36pt }, if dy != auto { dy } else { -68pt })
+  } else if position == bottom + right {
+    (if dx != auto { dx } else { 36pt }, if dy != auto { dy } else { 10pt })
+  } else if position == top + left {
+    (if dx != auto { dx } else { -36pt }, if dy != auto { dy } else { -68pt })
+  } else {
+    (0pt, 0pt)
+  }
+
+  place(
+    position,
+    dx: offset-x,
+    dy: offset-y,
+    box(
+      fill: fill-color,
+      width: size,
+      height: size,
+      radius: radius,
+      align(center + horizon, text(
+        fill: white,
+        size: size * 0.52,
+        weight: "bold",
+        font: font-heading,
+        letter,
+      ))
+    )
+  )
+}
+
+// ==========================================
 // SLIDE FUNCTIONS (TOUYING 0.8.0)
 // ==========================================
 
@@ -244,8 +304,12 @@
   stat-2: [],
   body-2: [],
   icon-2: none,
+  speaker: none,
 ) = {
   slide[
+    #if speaker != none {
+      speaker-marker(speaker)
+    }
     #set text(size: 10.5pt, font: font-body)
     #grid(
       rows: (1fr, 1fr),

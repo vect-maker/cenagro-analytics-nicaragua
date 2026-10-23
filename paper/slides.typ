@@ -20,6 +20,8 @@
 // ============================================================
 = Problema y contexto de la investigación
 
+#speaker-marker("A")
+
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 14pt,
@@ -69,6 +71,8 @@
 // ============================================================
 = Objetivos de la investigación
 
+#speaker-marker("A")
+
 #v(0.1em)
 #block(
   fill: color-card-bg,
@@ -94,6 +98,8 @@
 // METODOLOGÍA 1: ARQUITECTURA DEL MODERN DATA STACK
 // ============================================================
 = Arquitectura del Modern Data Stack y reproducibilidad
+
+#speaker-marker("B")
 
 #align(center)[
   #image("images/presentation/diagram-architecture.png", width: 92%)
@@ -147,6 +153,8 @@
 // ============================================================
 = Pipeline ETL en Rust y optimización columnar
 
+#speaker-marker("B")
+
 #align(center)[
   #image("images/presentation/diagram-etl.png", width: 90%)
 ]
@@ -198,6 +206,8 @@
 // METODOLOGÍA 3: MODELADO DIMENSIONAL EN DUCKDB
 // ============================================================
 = Modelado dimensional en DuckDB y rigor analítico
+
+#speaker-marker("B")
 
 #grid(
   columns: (410pt, 1fr),
@@ -258,6 +268,7 @@
 = Ecosistema crediticio: acceso y fuentes de financiamiento
 
 #slide-dual-chart(
+  speaker: "C",
   icon-1: slide-icons.credit-card,
   chart-fn-1: chart-embudo(),
   caption-1: fig-caption("embudo"),
@@ -276,6 +287,7 @@
 = Dinámica laboral: intensidad y estabilidad del empleo
 
 #slide-dual-chart(
+  speaker: "C",
   icon-1: slide-icons.trending-up,
   chart-fn-1: chart-intensidad(),
   caption-1: fig-caption("intensidad"),
@@ -294,6 +306,7 @@
 = Reconfiguración productiva: diversificación y uso del suelo
 
 #slide-dual-chart(
+  speaker: "D",
   icon-1: slide-icons.layers,
   chart-fn-1: chart-complejidad(),
   caption-1: fig-caption("complejidad"),
@@ -310,6 +323,8 @@
 // DIAPOSITIVA: CONCLUSIONES
 // ============================================================
 = Conclusiones científicas y respuestas al problema
+
+#speaker-marker("D")
 
 #grid(
   columns: (1fr, 1fr, 1fr),
@@ -364,6 +379,8 @@
 // DIAPOSITIVA: RECOMENDACIONES Y PROYECCIONES
 // ============================================================
 = Recomendaciones de política pública y proyecciones
+
+#speaker-marker("D")
 
 #grid(
   columns: (1fr, 1fr, 1fr),
